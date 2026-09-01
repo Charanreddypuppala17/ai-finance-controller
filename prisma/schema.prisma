@@ -1,0 +1,94 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String              @id @default(uuid())
+  email        String              @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime            @default(now())
+  runs         ReconciliationRun[]
+  transactions ReconciledTransaction[]
+  auditLogs    AuditLog[]
+}
+
+model ReconciliationRun {
+  id                 String                  @id @default(uuid())
+  userId             String
+  name               String
+  status             String                  @default("COMPLETED")
+  totalRecords       Int                     @default(0)
+  matchedRecords     Int                     @default(0)
+  exceptionCount     Int                     @default(0)
+  matchRate          Float                   @default(0)
+  createdAt          DateTime                @default(now())
+  user               User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sourceRecords      SourceRecord[]
+  transactions       ReconciledTransaction[]
+  auditLogs          AuditLog[]
+
+  @@index([userId])
+}
+
+model SourceRecord {
+  id         String            @id @default(uuid())
+  runId      String
+  userId     String
+  sourceType String            // ERP | PAYMENT | BANK
+  rawJson    String            // JSON stringified record
+  createdAt  DateTime          @default(now())
+  run        ReconciliationRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId, sourceType])
+}
+
+model ReconciledTransaction {
+  id                 String            @id @default(uuid())
+  transactionId      String            // E.g. TXN-001 or invoice_id reference
+  runId              String
+  userId             String
+  invoiceId          String?
+  paymentId          String?
+  settlementId       String?
+  status             String            // MATCHED | EXCEPTION | UNRESOLVED
+  exceptionType      String            // NONE | FEE_MISMATCH | AMOUNT_MISMATCH | TIMING_LAG | MISSING_BANK_SETTLEMENT | MISSING_PAYMENT_RECORD | DUPLICATE_PAYMENT
+  erpAmount          Float             @default(0)
+  paymentAmount      Float             @default(0)
+  bankAmount         Float             @default(0)
+  feeAmount          Float             @default(0)
+  difference         Float             @default(0)
+  dateDifferenceDays Int               @default(0)
+  matchingMethod     String
+  evidenceJson       String            // JSON stringified MatchingEvidence
+  confidenceScore    Float             @default(1.0)
+  resolutionState    String            @default("OPEN") // OPEN | RESOLVED | KEPT_OPEN
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  run                ReconciliationRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([userId, runId])
+  @@index([transactionId])
+  @@index([exceptionType])
+  @@index([status])
+}
+
+model AuditLog {
+  id        String            @id @default(uuid())
+  userId    String
+  runId     String?
+  action    String
+  details   String
+  timestamp DateTime          @default(now())
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  run       ReconciliationRun? @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

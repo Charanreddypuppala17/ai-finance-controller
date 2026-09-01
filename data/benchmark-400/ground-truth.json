@@ -1,0 +1,3202 @@
+[
+  {
+    "event_id": 1,
+    "invoice_id": "INV-0001",
+    "payment_id": "PAY-0001",
+    "settlement_id": "SET-0001",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 2,
+    "invoice_id": "INV-0002",
+    "payment_id": "PAY-0002",
+    "settlement_id": "SET-0002",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 3,
+    "invoice_id": "INV-0003",
+    "payment_id": "PAY-0003",
+    "settlement_id": "SET-0003",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 4,
+    "invoice_id": "INV-0004",
+    "payment_id": "PAY-0004",
+    "settlement_id": "SET-0004",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 5,
+    "invoice_id": "INV-0005",
+    "payment_id": "PAY-0005",
+    "settlement_id": "SET-0005",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 6,
+    "invoice_id": "INV-0006",
+    "payment_id": "PAY-0006",
+    "settlement_id": "SET-0006",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 7,
+    "invoice_id": "INV-0007",
+    "payment_id": "PAY-0007",
+    "settlement_id": "SET-0007",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 8,
+    "invoice_id": "INV-0008",
+    "payment_id": "PAY-0008",
+    "settlement_id": "SET-0008",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 9,
+    "invoice_id": "INV-0009",
+    "payment_id": "PAY-0009",
+    "settlement_id": "SET-0009",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 10,
+    "invoice_id": "INV-0010",
+    "payment_id": "PAY-0010",
+    "settlement_id": "SET-0010",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 11,
+    "invoice_id": "INV-0011",
+    "payment_id": "PAY-0011",
+    "settlement_id": "SET-0011",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 12,
+    "invoice_id": "INV-0012",
+    "payment_id": "PAY-0012",
+    "settlement_id": "SET-0012",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 13,
+    "invoice_id": "INV-0013",
+    "payment_id": "PAY-0013",
+    "settlement_id": "SET-0013",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 14,
+    "invoice_id": "INV-0014",
+    "payment_id": "PAY-0014",
+    "settlement_id": "SET-0014",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 15,
+    "invoice_id": "INV-0015",
+    "payment_id": "PAY-0015",
+    "settlement_id": "SET-0015",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 16,
+    "invoice_id": "INV-0016",
+    "payment_id": "PAY-0016",
+    "settlement_id": "SET-0016",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 17,
+    "invoice_id": "INV-0017",
+    "payment_id": "PAY-0017",
+    "settlement_id": "SET-0017",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 18,
+    "invoice_id": "INV-0018",
+    "payment_id": "PAY-0018",
+    "settlement_id": "SET-0018",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 19,
+    "invoice_id": "INV-0019",
+    "payment_id": "PAY-0019",
+    "settlement_id": "SET-0019",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 20,
+    "invoice_id": "INV-0020",
+    "payment_id": "PAY-0020",
+    "settlement_id": "SET-0020",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 21,
+    "invoice_id": "INV-0021",
+    "payment_id": "PAY-0021",
+    "settlement_id": "SET-0021",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 22,
+    "invoice_id": "INV-0022",
+    "payment_id": "PAY-0022",
+    "settlement_id": "SET-0022",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 23,
+    "invoice_id": "INV-0023",
+    "payment_id": "PAY-0023",
+    "settlement_id": "SET-0023",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 24,
+    "invoice_id": "INV-0024",
+    "payment_id": "PAY-0024",
+    "settlement_id": "SET-0024",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 25,
+    "invoice_id": "INV-0025",
+    "payment_id": "PAY-0025",
+    "settlement_id": "SET-0025",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 26,
+    "invoice_id": "INV-0026",
+    "payment_id": "PAY-0026",
+    "settlement_id": "SET-0026",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 27,
+    "invoice_id": "INV-0027",
+    "payment_id": "PAY-0027",
+    "settlement_id": "SET-0027",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 28,
+    "invoice_id": "INV-0028",
+    "payment_id": "PAY-0028",
+    "settlement_id": "SET-0028",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 29,
+    "invoice_id": "INV-0029",
+    "payment_id": "PAY-0029",
+    "settlement_id": "SET-0029",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 30,
+    "invoice_id": "INV-0030",
+    "payment_id": "PAY-0030",
+    "settlement_id": "SET-0030",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 31,
+    "invoice_id": "INV-0031",
+    "payment_id": "PAY-0031",
+    "settlement_id": "SET-0031",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 32,
+    "invoice_id": "INV-0032",
+    "payment_id": "PAY-0032",
+    "settlement_id": "SET-0032",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 33,
+    "invoice_id": "INV-0033",
+    "payment_id": "PAY-0033",
+    "settlement_id": "SET-0033",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 34,
+    "invoice_id": "INV-0034",
+    "payment_id": "PAY-0034",
+    "settlement_id": "SET-0034",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 35,
+    "invoice_id": "INV-0035",
+    "payment_id": "PAY-0035",
+    "settlement_id": "SET-0035",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 36,
+    "invoice_id": "INV-0036",
+    "payment_id": "PAY-0036",
+    "settlement_id": "SET-0036",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 37,
+    "invoice_id": "INV-0037",
+    "payment_id": "PAY-0037",
+    "settlement_id": "SET-0037",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 38,
+    "invoice_id": "INV-0038",
+    "payment_id": "PAY-0038",
+    "settlement_id": "SET-0038",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 39,
+    "invoice_id": "INV-0039",
+    "payment_id": "PAY-0039",
+    "settlement_id": "SET-0039",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 40,
+    "invoice_id": "INV-0040",
+    "payment_id": "PAY-0040",
+    "settlement_id": "SET-0040",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 41,
+    "invoice_id": "INV-0041",
+    "payment_id": "PAY-0041",
+    "settlement_id": "SET-0041",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 42,
+    "invoice_id": "INV-0042",
+    "payment_id": "PAY-0042",
+    "settlement_id": "SET-0042",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 43,
+    "invoice_id": "INV-0043",
+    "payment_id": "PAY-0043",
+    "settlement_id": "SET-0043",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 44,
+    "invoice_id": "INV-0044",
+    "payment_id": "PAY-0044",
+    "settlement_id": "SET-0044",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 45,
+    "invoice_id": "INV-0045",
+    "payment_id": "PAY-0045",
+    "settlement_id": "SET-0045",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 46,
+    "invoice_id": "INV-0046",
+    "payment_id": "PAY-0046",
+    "settlement_id": "SET-0046",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 47,
+    "invoice_id": "INV-0047",
+    "payment_id": "PAY-0047",
+    "settlement_id": "SET-0047",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 48,
+    "invoice_id": "INV-0048",
+    "payment_id": "PAY-0048",
+    "settlement_id": "SET-0048",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 49,
+    "invoice_id": "INV-0049",
+    "payment_id": "PAY-0049",
+    "settlement_id": "SET-0049",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 50,
+    "invoice_id": "INV-0050",
+    "payment_id": "PAY-0050",
+    "settlement_id": "SET-0050",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 51,
+    "invoice_id": "INV-0051",
+    "payment_id": "PAY-0051",
+    "settlement_id": "SET-0051",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 52,
+    "invoice_id": "INV-0052",
+    "payment_id": "PAY-0052",
+    "settlement_id": "SET-0052",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 53,
+    "invoice_id": "INV-0053",
+    "payment_id": "PAY-0053",
+    "settlement_id": "SET-0053",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 54,
+    "invoice_id": "INV-0054",
+    "payment_id": "PAY-0054",
+    "settlement_id": "SET-0054",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 55,
+    "invoice_id": "INV-0055",
+    "payment_id": "PAY-0055",
+    "settlement_id": "SET-0055",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 56,
+    "invoice_id": "INV-0056",
+    "payment_id": "PAY-0056",
+    "settlement_id": "SET-0056",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 57,
+    "invoice_id": "INV-0057",
+    "payment_id": "PAY-0057",
+    "settlement_id": "SET-0057",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 58,
+    "invoice_id": "INV-0058",
+    "payment_id": "PAY-0058",
+    "settlement_id": "SET-0058",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 59,
+    "invoice_id": "INV-0059",
+    "payment_id": "PAY-0059",
+    "settlement_id": "SET-0059",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 60,
+    "invoice_id": "INV-0060",
+    "payment_id": "PAY-0060",
+    "settlement_id": "SET-0060",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 61,
+    "invoice_id": "INV-0061",
+    "payment_id": "PAY-0061",
+    "settlement_id": "SET-0061",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 62,
+    "invoice_id": "INV-0062",
+    "payment_id": "PAY-0062",
+    "settlement_id": "SET-0062",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 63,
+    "invoice_id": "INV-0063",
+    "payment_id": "PAY-0063",
+    "settlement_id": "SET-0063",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 64,
+    "invoice_id": "INV-0064",
+    "payment_id": "PAY-0064",
+    "settlement_id": "SET-0064",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 65,
+    "invoice_id": "INV-0065",
+    "payment_id": "PAY-0065",
+    "settlement_id": "SET-0065",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 66,
+    "invoice_id": "INV-0066",
+    "payment_id": "PAY-0066",
+    "settlement_id": "SET-0066",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 67,
+    "invoice_id": "INV-0067",
+    "payment_id": "PAY-0067",
+    "settlement_id": "SET-0067",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 68,
+    "invoice_id": "INV-0068",
+    "payment_id": "PAY-0068",
+    "settlement_id": "SET-0068",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 69,
+    "invoice_id": "INV-0069",
+    "payment_id": "PAY-0069",
+    "settlement_id": "SET-0069",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 70,
+    "invoice_id": "INV-0070",
+    "payment_id": "PAY-0070",
+    "settlement_id": "SET-0070",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 71,
+    "invoice_id": "INV-0071",
+    "payment_id": "PAY-0071",
+    "settlement_id": "SET-0071",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 72,
+    "invoice_id": "INV-0072",
+    "payment_id": "PAY-0072",
+    "settlement_id": "SET-0072",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 73,
+    "invoice_id": "INV-0073",
+    "payment_id": "PAY-0073",
+    "settlement_id": "SET-0073",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 74,
+    "invoice_id": "INV-0074",
+    "payment_id": "PAY-0074",
+    "settlement_id": "SET-0074",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 75,
+    "invoice_id": "INV-0075",
+    "payment_id": "PAY-0075",
+    "settlement_id": "SET-0075",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 76,
+    "invoice_id": "INV-0076",
+    "payment_id": "PAY-0076",
+    "settlement_id": "SET-0076",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 77,
+    "invoice_id": "INV-0077",
+    "payment_id": "PAY-0077",
+    "settlement_id": "SET-0077",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 78,
+    "invoice_id": "INV-0078",
+    "payment_id": "PAY-0078",
+    "settlement_id": "SET-0078",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 79,
+    "invoice_id": "INV-0079",
+    "payment_id": "PAY-0079",
+    "settlement_id": "SET-0079",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 80,
+    "invoice_id": "INV-0080",
+    "payment_id": "PAY-0080",
+    "settlement_id": "SET-0080",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 81,
+    "invoice_id": "INV-0081",
+    "payment_id": "PAY-0081",
+    "settlement_id": "SET-0081",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 82,
+    "invoice_id": "INV-0082",
+    "payment_id": "PAY-0082",
+    "settlement_id": "SET-0082",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 83,
+    "invoice_id": "INV-0083",
+    "payment_id": "PAY-0083",
+    "settlement_id": "SET-0083",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 84,
+    "invoice_id": "INV-0084",
+    "payment_id": "PAY-0084",
+    "settlement_id": "SET-0084",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 85,
+    "invoice_id": "INV-0085",
+    "payment_id": "PAY-0085",
+    "settlement_id": "SET-0085",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 86,
+    "invoice_id": "INV-0086",
+    "payment_id": "PAY-0086",
+    "settlement_id": "SET-0086",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 87,
+    "invoice_id": "INV-0087",
+    "payment_id": "PAY-0087",
+    "settlement_id": "SET-0087",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 88,
+    "invoice_id": "INV-0088",
+    "payment_id": "PAY-0088",
+    "settlement_id": "SET-0088",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 89,
+    "invoice_id": "INV-0089",
+    "payment_id": "PAY-0089",
+    "settlement_id": "SET-0089",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 90,
+    "invoice_id": "INV-0090",
+    "payment_id": "PAY-0090",
+    "settlement_id": "SET-0090",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 91,
+    "invoice_id": "INV-0091",
+    "payment_id": "PAY-0091",
+    "settlement_id": "SET-0091",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 92,
+    "invoice_id": "INV-0092",
+    "payment_id": "PAY-0092",
+    "settlement_id": "SET-0092",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 93,
+    "invoice_id": "INV-0093",
+    "payment_id": "PAY-0093",
+    "settlement_id": "SET-0093",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 94,
+    "invoice_id": "INV-0094",
+    "payment_id": "PAY-0094",
+    "settlement_id": "SET-0094",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 95,
+    "invoice_id": "INV-0095",
+    "payment_id": "PAY-0095",
+    "settlement_id": "SET-0095",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 96,
+    "invoice_id": "INV-0096",
+    "payment_id": "PAY-0096",
+    "settlement_id": "SET-0096",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 97,
+    "invoice_id": "INV-0097",
+    "payment_id": "PAY-0097",
+    "settlement_id": "SET-0097",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 98,
+    "invoice_id": "INV-0098",
+    "payment_id": "PAY-0098",
+    "settlement_id": "SET-0098",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 99,
+    "invoice_id": "INV-0099",
+    "payment_id": "PAY-0099",
+    "settlement_id": "SET-0099",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 100,
+    "invoice_id": "INV-0100",
+    "payment_id": "PAY-0100",
+    "settlement_id": "SET-0100",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 101,
+    "invoice_id": "INV-0101",
+    "payment_id": "PAY-0101",
+    "settlement_id": "SET-0101",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 102,
+    "invoice_id": "INV-0102",
+    "payment_id": "PAY-0102",
+    "settlement_id": "SET-0102",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 103,
+    "invoice_id": "INV-0103",
+    "payment_id": "PAY-0103",
+    "settlement_id": "SET-0103",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 104,
+    "invoice_id": "INV-0104",
+    "payment_id": "PAY-0104",
+    "settlement_id": "SET-0104",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 105,
+    "invoice_id": "INV-0105",
+    "payment_id": "PAY-0105",
+    "settlement_id": "SET-0105",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 106,
+    "invoice_id": "INV-0106",
+    "payment_id": "PAY-0106",
+    "settlement_id": "SET-0106",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 107,
+    "invoice_id": "INV-0107",
+    "payment_id": "PAY-0107",
+    "settlement_id": "SET-0107",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 108,
+    "invoice_id": "INV-0108",
+    "payment_id": "PAY-0108",
+    "settlement_id": "SET-0108",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 109,
+    "invoice_id": "INV-0109",
+    "payment_id": "PAY-0109",
+    "settlement_id": "SET-0109",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 110,
+    "invoice_id": "INV-0110",
+    "payment_id": "PAY-0110",
+    "settlement_id": "SET-0110",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 111,
+    "invoice_id": "INV-0111",
+    "payment_id": "PAY-0111",
+    "settlement_id": "SET-0111",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 112,
+    "invoice_id": "INV-0112",
+    "payment_id": "PAY-0112",
+    "settlement_id": "SET-0112",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 113,
+    "invoice_id": "INV-0113",
+    "payment_id": "PAY-0113",
+    "settlement_id": "SET-0113",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 114,
+    "invoice_id": "INV-0114",
+    "payment_id": "PAY-0114",
+    "settlement_id": "SET-0114",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 115,
+    "invoice_id": "INV-0115",
+    "payment_id": "PAY-0115",
+    "settlement_id": "SET-0115",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 116,
+    "invoice_id": "INV-0116",
+    "payment_id": "PAY-0116",
+    "settlement_id": "SET-0116",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 117,
+    "invoice_id": "INV-0117",
+    "payment_id": "PAY-0117",
+    "settlement_id": "SET-0117",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 118,
+    "invoice_id": "INV-0118",
+    "payment_id": "PAY-0118",
+    "settlement_id": "SET-0118",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 119,
+    "invoice_id": "INV-0119",
+    "payment_id": "PAY-0119",
+    "settlement_id": "SET-0119",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 120,
+    "invoice_id": "INV-0120",
+    "payment_id": "PAY-0120",
+    "settlement_id": "SET-0120",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 121,
+    "invoice_id": "INV-0121",
+    "payment_id": "PAY-0121",
+    "settlement_id": "SET-0121",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 122,
+    "invoice_id": "INV-0122",
+    "payment_id": "PAY-0122",
+    "settlement_id": "SET-0122",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 123,
+    "invoice_id": "INV-0123",
+    "payment_id": "PAY-0123",
+    "settlement_id": "SET-0123",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 124,
+    "invoice_id": "INV-0124",
+    "payment_id": "PAY-0124",
+    "settlement_id": "SET-0124",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 125,
+    "invoice_id": "INV-0125",
+    "payment_id": "PAY-0125",
+    "settlement_id": "SET-0125",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 126,
+    "invoice_id": "INV-0126",
+    "payment_id": "PAY-0126",
+    "settlement_id": "SET-0126",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 127,
+    "invoice_id": "INV-0127",
+    "payment_id": "PAY-0127",
+    "settlement_id": "SET-0127",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 128,
+    "invoice_id": "INV-0128",
+    "payment_id": "PAY-0128",
+    "settlement_id": "SET-0128",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 129,
+    "invoice_id": "INV-0129",
+    "payment_id": "PAY-0129",
+    "settlement_id": "SET-0129",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 130,
+    "invoice_id": "INV-0130",
+    "payment_id": "PAY-0130",
+    "settlement_id": "SET-0130",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 131,
+    "invoice_id": "INV-0131",
+    "payment_id": "PAY-0131",
+    "settlement_id": "SET-0131",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 132,
+    "invoice_id": "INV-0132",
+    "payment_id": "PAY-0132",
+    "settlement_id": "SET-0132",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 133,
+    "invoice_id": "INV-0133",
+    "payment_id": "PAY-0133",
+    "settlement_id": "SET-0133",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 134,
+    "invoice_id": "INV-0134",
+    "payment_id": "PAY-0134",
+    "settlement_id": "SET-0134",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 135,
+    "invoice_id": "INV-0135",
+    "payment_id": "PAY-0135",
+    "settlement_id": "SET-0135",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 136,
+    "invoice_id": "INV-0136",
+    "payment_id": "PAY-0136",
+    "settlement_id": "SET-0136",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 137,
+    "invoice_id": "INV-0137",
+    "payment_id": "PAY-0137",
+    "settlement_id": "SET-0137",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 138,
+    "invoice_id": "INV-0138",
+    "payment_id": "PAY-0138",
+    "settlement_id": "SET-0138",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 139,
+    "invoice_id": "INV-0139",
+    "payment_id": "PAY-0139",
+    "settlement_id": "SET-0139",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 140,
+    "invoice_id": "INV-0140",
+    "payment_id": "PAY-0140",
+    "settlement_id": "SET-0140",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 141,
+    "invoice_id": "INV-0141",
+    "payment_id": "PAY-0141",
+    "settlement_id": "SET-0141",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 142,
+    "invoice_id": "INV-0142",
+    "payment_id": "PAY-0142",
+    "settlement_id": "SET-0142",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 143,
+    "invoice_id": "INV-0143",
+    "payment_id": "PAY-0143",
+    "settlement_id": "SET-0143",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 144,
+    "invoice_id": "INV-0144",
+    "payment_id": "PAY-0144",
+    "settlement_id": "SET-0144",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 145,
+    "invoice_id": "INV-0145",
+    "payment_id": "PAY-0145",
+    "settlement_id": "SET-0145",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 146,
+    "invoice_id": "INV-0146",
+    "payment_id": "PAY-0146",
+    "settlement_id": "SET-0146",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 147,
+    "invoice_id": "INV-0147",
+    "payment_id": "PAY-0147",
+    "settlement_id": "SET-0147",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 148,
+    "invoice_id": "INV-0148",
+    "payment_id": "PAY-0148",
+    "settlement_id": "SET-0148",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 149,
+    "invoice_id": "INV-0149",
+    "payment_id": "PAY-0149",
+    "settlement_id": "SET-0149",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 150,
+    "invoice_id": "INV-0150",
+    "payment_id": "PAY-0150",
+    "settlement_id": "SET-0150",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 151,
+    "invoice_id": "INV-0151",
+    "payment_id": "PAY-0151",
+    "settlement_id": "SET-0151",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 152,
+    "invoice_id": "INV-0152",
+    "payment_id": "PAY-0152",
+    "settlement_id": "SET-0152",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 153,
+    "invoice_id": "INV-0153",
+    "payment_id": "PAY-0153",
+    "settlement_id": "SET-0153",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 154,
+    "invoice_id": "INV-0154",
+    "payment_id": "PAY-0154",
+    "settlement_id": "SET-0154",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 155,
+    "invoice_id": "INV-0155",
+    "payment_id": "PAY-0155",
+    "settlement_id": "SET-0155",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 156,
+    "invoice_id": "INV-0156",
+    "payment_id": "PAY-0156",
+    "settlement_id": "SET-0156",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 157,
+    "invoice_id": "INV-0157",
+    "payment_id": "PAY-0157",
+    "settlement_id": "SET-0157",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 158,
+    "invoice_id": "INV-0158",
+    "payment_id": "PAY-0158",
+    "settlement_id": "SET-0158",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 159,
+    "invoice_id": "INV-0159",
+    "payment_id": "PAY-0159",
+    "settlement_id": "SET-0159",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 160,
+    "invoice_id": "INV-0160",
+    "payment_id": "PAY-0160",
+    "settlement_id": "SET-0160",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 161,
+    "invoice_id": "INV-0161",
+    "payment_id": "PAY-0161",
+    "settlement_id": "SET-0161",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 162,
+    "invoice_id": "INV-0162",
+    "payment_id": "PAY-0162",
+    "settlement_id": "SET-0162",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 163,
+    "invoice_id": "INV-0163",
+    "payment_id": "PAY-0163",
+    "settlement_id": "SET-0163",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 164,
+    "invoice_id": "INV-0164",
+    "payment_id": "PAY-0164",
+    "settlement_id": "SET-0164",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 165,
+    "invoice_id": "INV-0165",
+    "payment_id": "PAY-0165",
+    "settlement_id": "SET-0165",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 166,
+    "invoice_id": "INV-0166",
+    "payment_id": "PAY-0166",
+    "settlement_id": "SET-0166",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 167,
+    "invoice_id": "INV-0167",
+    "payment_id": "PAY-0167",
+    "settlement_id": "SET-0167",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 168,
+    "invoice_id": "INV-0168",
+    "payment_id": "PAY-0168",
+    "settlement_id": "SET-0168",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 169,
+    "invoice_id": "INV-0169",
+    "payment_id": "PAY-0169",
+    "settlement_id": "SET-0169",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 170,
+    "invoice_id": "INV-0170",
+    "payment_id": "PAY-0170",
+    "settlement_id": "SET-0170",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 171,
+    "invoice_id": "INV-0171",
+    "payment_id": "PAY-0171",
+    "settlement_id": "SET-0171",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 172,
+    "invoice_id": "INV-0172",
+    "payment_id": "PAY-0172",
+    "settlement_id": "SET-0172",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 173,
+    "invoice_id": "INV-0173",
+    "payment_id": "PAY-0173",
+    "settlement_id": "SET-0173",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 174,
+    "invoice_id": "INV-0174",
+    "payment_id": "PAY-0174",
+    "settlement_id": "SET-0174",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 175,
+    "invoice_id": "INV-0175",
+    "payment_id": "PAY-0175",
+    "settlement_id": "SET-0175",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 176,
+    "invoice_id": "INV-0176",
+    "payment_id": "PAY-0176",
+    "settlement_id": "SET-0176",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 177,
+    "invoice_id": "INV-0177",
+    "payment_id": "PAY-0177",
+    "settlement_id": "SET-0177",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 178,
+    "invoice_id": "INV-0178",
+    "payment_id": "PAY-0178",
+    "settlement_id": "SET-0178",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 179,
+    "invoice_id": "INV-0179",
+    "payment_id": "PAY-0179",
+    "settlement_id": "SET-0179",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 180,
+    "invoice_id": "INV-0180",
+    "payment_id": "PAY-0180",
+    "settlement_id": "SET-0180",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 181,
+    "invoice_id": "INV-0181",
+    "payment_id": "PAY-0181",
+    "settlement_id": "SET-0181",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 182,
+    "invoice_id": "INV-0182",
+    "payment_id": "PAY-0182",
+    "settlement_id": "SET-0182",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 183,
+    "invoice_id": "INV-0183",
+    "payment_id": "PAY-0183",
+    "settlement_id": "SET-0183",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 184,
+    "invoice_id": "INV-0184",
+    "payment_id": "PAY-0184",
+    "settlement_id": "SET-0184",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 185,
+    "invoice_id": "INV-0185",
+    "payment_id": "PAY-0185",
+    "settlement_id": "SET-0185",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 186,
+    "invoice_id": "INV-0186",
+    "payment_id": "PAY-0186",
+    "settlement_id": "SET-0186",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 187,
+    "invoice_id": "INV-0187",
+    "payment_id": "PAY-0187",
+    "settlement_id": "SET-0187",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 188,
+    "invoice_id": "INV-0188",
+    "payment_id": "PAY-0188",
+    "settlement_id": "SET-0188",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 189,
+    "invoice_id": "INV-0189",
+    "payment_id": "PAY-0189",
+    "settlement_id": "SET-0189",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 190,
+    "invoice_id": "INV-0190",
+    "payment_id": "PAY-0190",
+    "settlement_id": "SET-0190",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 191,
+    "invoice_id": "INV-0191",
+    "payment_id": "PAY-0191",
+    "settlement_id": "SET-0191",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 192,
+    "invoice_id": "INV-0192",
+    "payment_id": "PAY-0192",
+    "settlement_id": "SET-0192",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 193,
+    "invoice_id": "INV-0193",
+    "payment_id": "PAY-0193",
+    "settlement_id": "SET-0193",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 194,
+    "invoice_id": "INV-0194",
+    "payment_id": "PAY-0194",
+    "settlement_id": "SET-0194",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 195,
+    "invoice_id": "INV-0195",
+    "payment_id": "PAY-0195",
+    "settlement_id": "SET-0195",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 196,
+    "invoice_id": "INV-0196",
+    "payment_id": "PAY-0196",
+    "settlement_id": "SET-0196",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 197,
+    "invoice_id": "INV-0197",
+    "payment_id": "PAY-0197",
+    "settlement_id": "SET-0197",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 198,
+    "invoice_id": "INV-0198",
+    "payment_id": "PAY-0198",
+    "settlement_id": "SET-0198",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 199,
+    "invoice_id": "INV-0199",
+    "payment_id": "PAY-0199",
+    "settlement_id": "SET-0199",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 200,
+    "invoice_id": "INV-0200",
+    "payment_id": "PAY-0200",
+    "settlement_id": "SET-0200",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 201,
+    "invoice_id": "INV-0201",
+    "payment_id": "PAY-0201",
+    "settlement_id": "SET-0201",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 202,
+    "invoice_id": "INV-0202",
+    "payment_id": "PAY-0202",
+    "settlement_id": "SET-0202",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 203,
+    "invoice_id": "INV-0203",
+    "payment_id": "PAY-0203",
+    "settlement_id": "SET-0203",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 204,
+    "invoice_id": "INV-0204",
+    "payment_id": "PAY-0204",
+    "settlement_id": "SET-0204",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 205,
+    "invoice_id": "INV-0205",
+    "payment_id": "PAY-0205",
+    "settlement_id": "SET-0205",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 206,
+    "invoice_id": "INV-0206",
+    "payment_id": "PAY-0206",
+    "settlement_id": "SET-0206",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 207,
+    "invoice_id": "INV-0207",
+    "payment_id": "PAY-0207",
+    "settlement_id": "SET-0207",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 208,
+    "invoice_id": "INV-0208",
+    "payment_id": "PAY-0208",
+    "settlement_id": "SET-0208",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 209,
+    "invoice_id": "INV-0209",
+    "payment_id": "PAY-0209",
+    "settlement_id": "SET-0209",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 210,
+    "invoice_id": "INV-0210",
+    "payment_id": "PAY-0210",
+    "settlement_id": "SET-0210",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 211,
+    "invoice_id": "INV-0211",
+    "payment_id": "PAY-0211",
+    "settlement_id": "SET-0211",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 212,
+    "invoice_id": "INV-0212",
+    "payment_id": "PAY-0212",
+    "settlement_id": "SET-0212",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 213,
+    "invoice_id": "INV-0213",
+    "payment_id": "PAY-0213",
+    "settlement_id": "SET-0213",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 214,
+    "invoice_id": "INV-0214",
+    "payment_id": "PAY-0214",
+    "settlement_id": "SET-0214",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 215,
+    "invoice_id": "INV-0215",
+    "payment_id": "PAY-0215",
+    "settlement_id": "SET-0215",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 216,
+    "invoice_id": "INV-0216",
+    "payment_id": "PAY-0216",
+    "settlement_id": "SET-0216",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 217,
+    "invoice_id": "INV-0217",
+    "payment_id": "PAY-0217",
+    "settlement_id": "SET-0217",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 218,
+    "invoice_id": "INV-0218",
+    "payment_id": "PAY-0218",
+    "settlement_id": "SET-0218",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 219,
+    "invoice_id": "INV-0219",
+    "payment_id": "PAY-0219",
+    "settlement_id": "SET-0219",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 220,
+    "invoice_id": "INV-0220",
+    "payment_id": "PAY-0220",
+    "settlement_id": "SET-0220",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 221,
+    "invoice_id": "INV-0221",
+    "payment_id": "PAY-0221",
+    "settlement_id": "SET-0221",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 222,
+    "invoice_id": "INV-0222",
+    "payment_id": "PAY-0222",
+    "settlement_id": "SET-0222",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 223,
+    "invoice_id": "INV-0223",
+    "payment_id": "PAY-0223",
+    "settlement_id": "SET-0223",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 224,
+    "invoice_id": "INV-0224",
+    "payment_id": "PAY-0224",
+    "settlement_id": "SET-0224",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 225,
+    "invoice_id": "INV-0225",
+    "payment_id": "PAY-0225",
+    "settlement_id": "SET-0225",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 226,
+    "invoice_id": "INV-0226",
+    "payment_id": "PAY-0226",
+    "settlement_id": "SET-0226",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 227,
+    "invoice_id": "INV-0227",
+    "payment_id": "PAY-0227",
+    "settlement_id": "SET-0227",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 228,
+    "invoice_id": "INV-0228",
+    "payment_id": "PAY-0228",
+    "settlement_id": "SET-0228",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 229,
+    "invoice_id": "INV-0229",
+    "payment_id": "PAY-0229",
+    "settlement_id": "SET-0229",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 230,
+    "invoice_id": "INV-0230",
+    "payment_id": "PAY-0230",
+    "settlement_id": "SET-0230",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 231,
+    "invoice_id": "INV-0231",
+    "payment_id": "PAY-0231",
+    "settlement_id": "SET-0231",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 232,
+    "invoice_id": "INV-0232",
+    "payment_id": "PAY-0232",
+    "settlement_id": "SET-0232",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 233,
+    "invoice_id": "INV-0233",
+    "payment_id": "PAY-0233",
+    "settlement_id": "SET-0233",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 234,
+    "invoice_id": "INV-0234",
+    "payment_id": "PAY-0234",
+    "settlement_id": "SET-0234",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 235,
+    "invoice_id": "INV-0235",
+    "payment_id": "PAY-0235",
+    "settlement_id": "SET-0235",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 236,
+    "invoice_id": "INV-0236",
+    "payment_id": "PAY-0236",
+    "settlement_id": "SET-0236",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 237,
+    "invoice_id": "INV-0237",
+    "payment_id": "PAY-0237",
+    "settlement_id": "SET-0237",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 238,
+    "invoice_id": "INV-0238",
+    "payment_id": "PAY-0238",
+    "settlement_id": "SET-0238",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 239,
+    "invoice_id": "INV-0239",
+    "payment_id": "PAY-0239",
+    "settlement_id": "SET-0239",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 240,
+    "invoice_id": "INV-0240",
+    "payment_id": "PAY-0240",
+    "settlement_id": "SET-0240",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 241,
+    "invoice_id": "INV-0241",
+    "payment_id": "PAY-0241",
+    "settlement_id": "SET-0241",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 242,
+    "invoice_id": "INV-0242",
+    "payment_id": "PAY-0242",
+    "settlement_id": "SET-0242",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 243,
+    "invoice_id": "INV-0243",
+    "payment_id": "PAY-0243",
+    "settlement_id": "SET-0243",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 244,
+    "invoice_id": "INV-0244",
+    "payment_id": "PAY-0244",
+    "settlement_id": "SET-0244",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 245,
+    "invoice_id": "INV-0245",
+    "payment_id": "PAY-0245",
+    "settlement_id": "SET-0245",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 246,
+    "invoice_id": "INV-0246",
+    "payment_id": "PAY-0246",
+    "settlement_id": "SET-0246",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 247,
+    "invoice_id": "INV-0247",
+    "payment_id": "PAY-0247",
+    "settlement_id": "SET-0247",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 248,
+    "invoice_id": "INV-0248",
+    "payment_id": "PAY-0248",
+    "settlement_id": "SET-0248",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 249,
+    "invoice_id": "INV-0249",
+    "payment_id": "PAY-0249",
+    "settlement_id": "SET-0249",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 250,
+    "invoice_id": "INV-0250",
+    "payment_id": "PAY-0250",
+    "settlement_id": "SET-0250",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 251,
+    "invoice_id": "INV-0251",
+    "payment_id": "PAY-0251",
+    "settlement_id": "SET-0251",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 252,
+    "invoice_id": "INV-0252",
+    "payment_id": "PAY-0252",
+    "settlement_id": "SET-0252",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 253,
+    "invoice_id": "INV-0253",
+    "payment_id": "PAY-0253",
+    "settlement_id": "SET-0253",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 254,
+    "invoice_id": "INV-0254",
+    "payment_id": "PAY-0254",
+    "settlement_id": "SET-0254",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 255,
+    "invoice_id": "INV-0255",
+    "payment_id": "PAY-0255",
+    "settlement_id": "SET-0255",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 256,
+    "invoice_id": "INV-0256",
+    "payment_id": "PAY-0256",
+    "settlement_id": "SET-0256",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 257,
+    "invoice_id": "INV-0257",
+    "payment_id": "PAY-0257",
+    "settlement_id": "SET-0257",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 258,
+    "invoice_id": "INV-0258",
+    "payment_id": "PAY-0258",
+    "settlement_id": "SET-0258",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 259,
+    "invoice_id": "INV-0259",
+    "payment_id": "PAY-0259",
+    "settlement_id": "SET-0259",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 260,
+    "invoice_id": "INV-0260",
+    "payment_id": "PAY-0260",
+    "settlement_id": "SET-0260",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 261,
+    "invoice_id": "INV-0261",
+    "payment_id": "PAY-0261",
+    "settlement_id": "SET-0261",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 262,
+    "invoice_id": "INV-0262",
+    "payment_id": "PAY-0262",
+    "settlement_id": "SET-0262",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 263,
+    "invoice_id": "INV-0263",
+    "payment_id": "PAY-0263",
+    "settlement_id": "SET-0263",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 264,
+    "invoice_id": "INV-0264",
+    "payment_id": "PAY-0264",
+    "settlement_id": "SET-0264",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 265,
+    "invoice_id": "INV-0265",
+    "payment_id": "PAY-0265",
+    "settlement_id": "SET-0265",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 266,
+    "invoice_id": "INV-0266",
+    "payment_id": "PAY-0266",
+    "settlement_id": "SET-0266",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 267,
+    "invoice_id": "INV-0267",
+    "payment_id": "PAY-0267",
+    "settlement_id": "SET-0267",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 268,
+    "invoice_id": "INV-0268",
+    "payment_id": "PAY-0268",
+    "settlement_id": "SET-0268",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 269,
+    "invoice_id": "INV-0269",
+    "payment_id": "PAY-0269",
+    "settlement_id": "SET-0269",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 270,
+    "invoice_id": "INV-0270",
+    "payment_id": "PAY-0270",
+    "settlement_id": "SET-0270",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 271,
+    "invoice_id": "INV-0271",
+    "payment_id": "PAY-0271",
+    "settlement_id": "SET-0271",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 272,
+    "invoice_id": "INV-0272",
+    "payment_id": "PAY-0272",
+    "settlement_id": "SET-0272",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 273,
+    "invoice_id": "INV-0273",
+    "payment_id": "PAY-0273",
+    "settlement_id": "SET-0273",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 274,
+    "invoice_id": "INV-0274",
+    "payment_id": "PAY-0274",
+    "settlement_id": "SET-0274",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 275,
+    "invoice_id": "INV-0275",
+    "payment_id": "PAY-0275",
+    "settlement_id": "SET-0275",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 276,
+    "invoice_id": "INV-0276",
+    "payment_id": "PAY-0276",
+    "settlement_id": "SET-0276",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 277,
+    "invoice_id": "INV-0277",
+    "payment_id": "PAY-0277",
+    "settlement_id": "SET-0277",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 278,
+    "invoice_id": "INV-0278",
+    "payment_id": "PAY-0278",
+    "settlement_id": "SET-0278",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 279,
+    "invoice_id": "INV-0279",
+    "payment_id": "PAY-0279",
+    "settlement_id": "SET-0279",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 280,
+    "invoice_id": "INV-0280",
+    "payment_id": "PAY-0280",
+    "settlement_id": "SET-0280",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 281,
+    "invoice_id": "INV-0281",
+    "payment_id": "PAY-0281",
+    "settlement_id": "SET-0281",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 282,
+    "invoice_id": "INV-0282",
+    "payment_id": "PAY-0282",
+    "settlement_id": "SET-0282",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 283,
+    "invoice_id": "INV-0283",
+    "payment_id": "PAY-0283",
+    "settlement_id": "SET-0283",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 284,
+    "invoice_id": "INV-0284",
+    "payment_id": "PAY-0284",
+    "settlement_id": "SET-0284",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 285,
+    "invoice_id": "INV-0285",
+    "payment_id": "PAY-0285",
+    "settlement_id": "SET-0285",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 286,
+    "invoice_id": "INV-0286",
+    "payment_id": "PAY-0286",
+    "settlement_id": "SET-0286",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 287,
+    "invoice_id": "INV-0287",
+    "payment_id": "PAY-0287",
+    "settlement_id": "SET-0287",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 288,
+    "invoice_id": "INV-0288",
+    "payment_id": "PAY-0288",
+    "settlement_id": "SET-0288",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 289,
+    "invoice_id": "INV-0289",
+    "payment_id": "PAY-0289",
+    "settlement_id": "SET-0289",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 290,
+    "invoice_id": "INV-0290",
+    "payment_id": "PAY-0290",
+    "settlement_id": "SET-0290",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 291,
+    "invoice_id": "INV-0291",
+    "payment_id": "PAY-0291",
+    "settlement_id": "SET-0291",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 292,
+    "invoice_id": "INV-0292",
+    "payment_id": "PAY-0292",
+    "settlement_id": "SET-0292",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 293,
+    "invoice_id": "INV-0293",
+    "payment_id": "PAY-0293",
+    "settlement_id": "SET-0293",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 294,
+    "invoice_id": "INV-0294",
+    "payment_id": "PAY-0294",
+    "settlement_id": "SET-0294",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 295,
+    "invoice_id": "INV-0295",
+    "payment_id": "PAY-0295",
+    "settlement_id": "SET-0295",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 296,
+    "invoice_id": "INV-0296",
+    "payment_id": "PAY-0296",
+    "settlement_id": "SET-0296",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 297,
+    "invoice_id": "INV-0297",
+    "payment_id": "PAY-0297",
+    "settlement_id": "SET-0297",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 298,
+    "invoice_id": "INV-0298",
+    "payment_id": "PAY-0298",
+    "settlement_id": "SET-0298",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 299,
+    "invoice_id": "INV-0299",
+    "payment_id": "PAY-0299",
+    "settlement_id": "SET-0299",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 300,
+    "invoice_id": "INV-0300",
+    "payment_id": "PAY-0300",
+    "settlement_id": "SET-0300",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 301,
+    "invoice_id": "INV-0301",
+    "payment_id": "PAY-0301",
+    "settlement_id": "SET-0301",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 302,
+    "invoice_id": "INV-0302",
+    "payment_id": "PAY-0302",
+    "settlement_id": "SET-0302",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 303,
+    "invoice_id": "INV-0303",
+    "payment_id": "PAY-0303",
+    "settlement_id": "SET-0303",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 304,
+    "invoice_id": "INV-0304",
+    "payment_id": "PAY-0304",
+    "settlement_id": "SET-0304",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 305,
+    "invoice_id": "INV-0305",
+    "payment_id": "PAY-0305",
+    "settlement_id": "SET-0305",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 306,
+    "invoice_id": "INV-0306",
+    "payment_id": "PAY-0306",
+    "settlement_id": "SET-0306",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 307,
+    "invoice_id": "INV-0307",
+    "payment_id": "PAY-0307",
+    "settlement_id": "SET-0307",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 308,
+    "invoice_id": "INV-0308",
+    "payment_id": "PAY-0308",
+    "settlement_id": "SET-0308",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 309,
+    "invoice_id": "INV-0309",
+    "payment_id": "PAY-0309",
+    "settlement_id": "SET-0309",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 310,
+    "invoice_id": "INV-0310",
+    "payment_id": "PAY-0310",
+    "settlement_id": "SET-0310",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 311,
+    "invoice_id": "INV-0311",
+    "payment_id": "PAY-0311",
+    "settlement_id": "SET-0311",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 312,
+    "invoice_id": "INV-0312",
+    "payment_id": "PAY-0312",
+    "settlement_id": "SET-0312",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 313,
+    "invoice_id": "INV-0313",
+    "payment_id": "PAY-0313",
+    "settlement_id": "SET-0313",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 314,
+    "invoice_id": "INV-0314",
+    "payment_id": "PAY-0314",
+    "settlement_id": "SET-0314",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 315,
+    "invoice_id": "INV-0315",
+    "payment_id": "PAY-0315",
+    "settlement_id": "SET-0315",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 316,
+    "invoice_id": "INV-0316",
+    "payment_id": "PAY-0316",
+    "settlement_id": "SET-0316",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 317,
+    "invoice_id": "INV-0317",
+    "payment_id": "PAY-0317",
+    "settlement_id": "SET-0317",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 318,
+    "invoice_id": "INV-0318",
+    "payment_id": "PAY-0318",
+    "settlement_id": "SET-0318",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 319,
+    "invoice_id": "INV-0319",
+    "payment_id": "PAY-0319",
+    "settlement_id": "SET-0319",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 320,
+    "invoice_id": "INV-0320",
+    "payment_id": "PAY-0320",
+    "settlement_id": "SET-0320",
+    "expected_status": "MATCHED",
+    "expected_exception_type": "NONE"
+  },
+  {
+    "event_id": 321,
+    "invoice_id": "INV-0321",
+    "payment_id": "PAY-0321",
+    "settlement_id": "SET-0321",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 322,
+    "invoice_id": "INV-0322",
+    "payment_id": "PAY-0322",
+    "settlement_id": "SET-0322",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 323,
+    "invoice_id": "INV-0323",
+    "payment_id": "PAY-0323",
+    "settlement_id": "SET-0323",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 324,
+    "invoice_id": "INV-0324",
+    "payment_id": "PAY-0324",
+    "settlement_id": "SET-0324",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 325,
+    "invoice_id": "INV-0325",
+    "payment_id": "PAY-0325",
+    "settlement_id": "SET-0325",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 326,
+    "invoice_id": "INV-0326",
+    "payment_id": "PAY-0326",
+    "settlement_id": "SET-0326",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 327,
+    "invoice_id": "INV-0327",
+    "payment_id": "PAY-0327",
+    "settlement_id": "SET-0327",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 328,
+    "invoice_id": "INV-0328",
+    "payment_id": "PAY-0328",
+    "settlement_id": "SET-0328",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 329,
+    "invoice_id": "INV-0329",
+    "payment_id": "PAY-0329",
+    "settlement_id": "SET-0329",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 330,
+    "invoice_id": "INV-0330",
+    "payment_id": "PAY-0330",
+    "settlement_id": "SET-0330",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 331,
+    "invoice_id": "INV-0331",
+    "payment_id": "PAY-0331",
+    "settlement_id": "SET-0331",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 332,
+    "invoice_id": "INV-0332",
+    "payment_id": "PAY-0332",
+    "settlement_id": "SET-0332",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 333,
+    "invoice_id": "INV-0333",
+    "payment_id": "PAY-0333",
+    "settlement_id": "SET-0333",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 334,
+    "invoice_id": "INV-0334",
+    "payment_id": "PAY-0334",
+    "settlement_id": "SET-0334",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 335,
+    "invoice_id": "INV-0335",
+    "payment_id": "PAY-0335",
+    "settlement_id": "SET-0335",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 336,
+    "invoice_id": "INV-0336",
+    "payment_id": "PAY-0336",
+    "settlement_id": "SET-0336",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 337,
+    "invoice_id": "INV-0337",
+    "payment_id": "PAY-0337",
+    "settlement_id": "SET-0337",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 338,
+    "invoice_id": "INV-0338",
+    "payment_id": "PAY-0338",
+    "settlement_id": "SET-0338",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 339,
+    "invoice_id": "INV-0339",
+    "payment_id": "PAY-0339",
+    "settlement_id": "SET-0339",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 340,
+    "invoice_id": "INV-0340",
+    "payment_id": "PAY-0340",
+    "settlement_id": "SET-0340",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 341,
+    "invoice_id": "INV-0341",
+    "payment_id": "PAY-0341",
+    "settlement_id": "SET-0341",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 342,
+    "invoice_id": "INV-0342",
+    "payment_id": "PAY-0342",
+    "settlement_id": "SET-0342",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 343,
+    "invoice_id": "INV-0343",
+    "payment_id": "PAY-0343",
+    "settlement_id": "SET-0343",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 344,
+    "invoice_id": "INV-0344",
+    "payment_id": "PAY-0344",
+    "settlement_id": "SET-0344",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 345,
+    "invoice_id": "INV-0345",
+    "payment_id": "PAY-0345",
+    "settlement_id": "SET-0345",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "FEE_MISMATCH"
+  },
+  {
+    "event_id": 346,
+    "invoice_id": "INV-0346",
+    "payment_id": "PAY-0346",
+    "settlement_id": "SET-0346",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 347,
+    "invoice_id": "INV-0347",
+    "payment_id": "PAY-0347",
+    "settlement_id": "SET-0347",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 348,
+    "invoice_id": "INV-0348",
+    "payment_id": "PAY-0348",
+    "settlement_id": "SET-0348",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 349,
+    "invoice_id": "INV-0349",
+    "payment_id": "PAY-0349",
+    "settlement_id": "SET-0349",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 350,
+    "invoice_id": "INV-0350",
+    "payment_id": "PAY-0350",
+    "settlement_id": "SET-0350",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 351,
+    "invoice_id": "INV-0351",
+    "payment_id": "PAY-0351",
+    "settlement_id": "SET-0351",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 352,
+    "invoice_id": "INV-0352",
+    "payment_id": "PAY-0352",
+    "settlement_id": "SET-0352",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 353,
+    "invoice_id": "INV-0353",
+    "payment_id": "PAY-0353",
+    "settlement_id": "SET-0353",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 354,
+    "invoice_id": "INV-0354",
+    "payment_id": "PAY-0354",
+    "settlement_id": "SET-0354",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 355,
+    "invoice_id": "INV-0355",
+    "payment_id": "PAY-0355",
+    "settlement_id": "SET-0355",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 356,
+    "invoice_id": "INV-0356",
+    "payment_id": "PAY-0356",
+    "settlement_id": "SET-0356",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 357,
+    "invoice_id": "INV-0357",
+    "payment_id": "PAY-0357",
+    "settlement_id": "SET-0357",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 358,
+    "invoice_id": "INV-0358",
+    "payment_id": "PAY-0358",
+    "settlement_id": "SET-0358",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 359,
+    "invoice_id": "INV-0359",
+    "payment_id": "PAY-0359",
+    "settlement_id": "SET-0359",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 360,
+    "invoice_id": "INV-0360",
+    "payment_id": "PAY-0360",
+    "settlement_id": "SET-0360",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 361,
+    "invoice_id": "INV-0361",
+    "payment_id": "PAY-0361",
+    "settlement_id": "SET-0361",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 362,
+    "invoice_id": "INV-0362",
+    "payment_id": "PAY-0362",
+    "settlement_id": "SET-0362",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 363,
+    "invoice_id": "INV-0363",
+    "payment_id": "PAY-0363",
+    "settlement_id": "SET-0363",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 364,
+    "invoice_id": "INV-0364",
+    "payment_id": "PAY-0364",
+    "settlement_id": "SET-0364",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 365,
+    "invoice_id": "INV-0365",
+    "payment_id": "PAY-0365",
+    "settlement_id": "SET-0365",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "TIMING_LAG"
+  },
+  {
+    "event_id": 366,
+    "invoice_id": "INV-0366",
+    "payment_id": "PAY-0366",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 367,
+    "invoice_id": "INV-0367",
+    "payment_id": "PAY-0367",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 368,
+    "invoice_id": "INV-0368",
+    "payment_id": "PAY-0368",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 369,
+    "invoice_id": "INV-0369",
+    "payment_id": "PAY-0369",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 370,
+    "invoice_id": "INV-0370",
+    "payment_id": "PAY-0370",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 371,
+    "invoice_id": "INV-0371",
+    "payment_id": "PAY-0371",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 372,
+    "invoice_id": "INV-0372",
+    "payment_id": "PAY-0372",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 373,
+    "invoice_id": "INV-0373",
+    "payment_id": "PAY-0373",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 374,
+    "invoice_id": "INV-0374",
+    "payment_id": "PAY-0374",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 375,
+    "invoice_id": "INV-0375",
+    "payment_id": "PAY-0375",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 376,
+    "invoice_id": "INV-0376",
+    "payment_id": "PAY-0376",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 377,
+    "invoice_id": "INV-0377",
+    "payment_id": "PAY-0377",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 378,
+    "invoice_id": "INV-0378",
+    "payment_id": "PAY-0378",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 379,
+    "invoice_id": "INV-0379",
+    "payment_id": "PAY-0379",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 380,
+    "invoice_id": "INV-0380",
+    "payment_id": "PAY-0380",
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_BANK_SETTLEMENT"
+  },
+  {
+    "event_id": 381,
+    "invoice_id": "INV-0381",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 382,
+    "invoice_id": "INV-0382",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 383,
+    "invoice_id": "INV-0383",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 384,
+    "invoice_id": "INV-0384",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 385,
+    "invoice_id": "INV-0385",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 386,
+    "invoice_id": "INV-0386",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 387,
+    "invoice_id": "INV-0387",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 388,
+    "invoice_id": "INV-0388",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 389,
+    "invoice_id": "INV-0389",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 390,
+    "invoice_id": "INV-0390",
+    "payment_id": null,
+    "settlement_id": null,
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "MISSING_PAYMENT_RECORD"
+  },
+  {
+    "event_id": 391,
+    "invoice_id": "INV-0391",
+    "payment_id": "PAY-0391",
+    "settlement_id": "SET-0391",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 392,
+    "invoice_id": "INV-0392",
+    "payment_id": "PAY-0392",
+    "settlement_id": "SET-0392",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 393,
+    "invoice_id": "INV-0393",
+    "payment_id": "PAY-0393",
+    "settlement_id": "SET-0393",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 394,
+    "invoice_id": "INV-0394",
+    "payment_id": "PAY-0394",
+    "settlement_id": "SET-0394",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 395,
+    "invoice_id": "INV-0395",
+    "payment_id": "PAY-0395",
+    "settlement_id": "SET-0395",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 396,
+    "invoice_id": "INV-0396",
+    "payment_id": "PAY-0396",
+    "settlement_id": "SET-0396",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 397,
+    "invoice_id": "INV-0397",
+    "payment_id": "PAY-0397",
+    "settlement_id": "SET-0397",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 398,
+    "invoice_id": "INV-0398",
+    "payment_id": "PAY-0398",
+    "settlement_id": "SET-0398",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 399,
+    "invoice_id": "INV-0399",
+    "payment_id": "PAY-0399",
+    "settlement_id": "SET-0399",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  },
+  {
+    "event_id": 400,
+    "invoice_id": "INV-0400",
+    "payment_id": "PAY-0400",
+    "settlement_id": "SET-0400",
+    "expected_status": "EXCEPTION",
+    "expected_exception_type": "DUPLICATE_PAYMENT"
+  }
+]
