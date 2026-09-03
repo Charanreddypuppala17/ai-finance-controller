@@ -1,32 +1,34 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from '@/components/Logo';
 import {
-  ShieldCheck,
   Zap,
   Bot,
   Database,
   ArrowRight,
   CheckCircle2,
-  AlertOctagon,
   AlertTriangle,
-  FileCheck,
   TrendingUp,
   Scale,
   Building2,
   Lock,
+  Menu,
+  X,
+  Layers,
+  FileCheck,
 } from 'lucide-react';
 
-// Interactive 3D Card Tilt Component
+// Interactive 3D Card Tilt Component (desktop tilt, smooth flat on mobile)
 function TiltCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const cardRef = React.useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = React.useState(0);
   const [rotateY, setRotateY] = React.useState(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return; // disable on mobile
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
@@ -34,9 +36,8 @@ function TiltCard({ children, className = '' }: { children: React.ReactNode; cla
     const height = rect.height;
     const mouseX = e.clientX - rect.left - width / 2;
     const mouseY = e.clientY - rect.top - height / 2;
-    // Scale rotation to -12 to 12 degrees
-    const rX = -(mouseY / (height / 2)) * 12;
-    const rY = (mouseX / (width / 2)) * 12;
+    const rX = -(mouseY / (height / 2)) * 10;
+    const rY = (mouseX / (width / 2)) * 10;
     setRotateX(rX);
     setRotateY(rY);
   };
@@ -53,7 +54,7 @@ function TiltCard({ children, className = '' }: { children: React.ReactNode; cla
       onMouseLeave={handleMouseLeave}
       className={`perspective-1000 transition-all duration-300 ease-out ${className}`}
       style={{
-        transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
+        transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
         transformStyle: 'preserve-3d',
       }}
     >
@@ -62,7 +63,7 @@ function TiltCard({ children, className = '' }: { children: React.ReactNode; cla
   );
 }
 
-// 3D Canvas Particles Network
+// 3D Canvas Particles Network (responsive & light on mobile)
 function ParticleCanvas() {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
@@ -77,19 +78,21 @@ function ParticleCanvas() {
     let height = (canvas.height = window.innerHeight);
 
     const handleResize = () => {
+      if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
     window.addEventListener('resize', handleResize);
 
-    const particleCount = 120;
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 40 : 100;
     const particles: Array<{ x: number; y: number; z: number; size: number; color: string }> = [];
     for (let i = 0; i < particleCount; i++) {
       particles.push({
-        x: (Math.random() - 0.5) * 1200,
-        y: (Math.random() - 0.5) * 1200,
-        z: Math.random() * 1000,
-        size: Math.random() * 2 + 1.2,
+        x: (Math.random() - 0.5) * (isMobile ? 600 : 1200),
+        y: (Math.random() - 0.5) * (isMobile ? 600 : 1200),
+        z: Math.random() * 800,
+        size: Math.random() * 1.8 + 1,
         color: i % 3 === 0 ? 'rgba(99, 102, 241, 0.45)' : i % 3 === 1 ? 'rgba(192, 132, 252, 0.45)' : 'rgba(56, 189, 248, 0.45)',
       });
     }
@@ -143,19 +146,21 @@ function ParticleCanvas() {
 
       projected.sort((a, b) => b.z - a.z);
 
-      ctx.lineWidth = 0.6;
-      for (let i = 0; i < projected.length; i++) {
-        for (let j = i + 1; j < projected.length; j++) {
-          const dx = projected[i].x - projected[j].x;
-          const dy = projected[i].y - projected[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.18;
-            ctx.strokeStyle = `rgba(129, 140, 248, ${alpha})`;
-            ctx.beginPath();
-            ctx.moveTo(projected[i].x, projected[i].y);
-            ctx.lineTo(projected[j].x, projected[j].y);
-            ctx.stroke();
+      if (!isMobile) {
+        ctx.lineWidth = 0.6;
+        for (let i = 0; i < projected.length; i++) {
+          for (let j = i + 1; j < projected.length; j++) {
+            const dx = projected[i].x - projected[j].x;
+            const dy = projected[i].y - projected[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 110) {
+              const alpha = (1 - dist / 110) * 0.15;
+              ctx.strokeStyle = `rgba(129, 140, 248, ${alpha})`;
+              ctx.beginPath();
+              ctx.moveTo(projected[i].x, projected[i].y);
+              ctx.lineTo(projected[j].x, projected[j].y);
+              ctx.stroke();
+            }
           }
         }
       }
@@ -179,139 +184,89 @@ function ParticleCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-50 z-0" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-40 z-0" />;
 }
 
-// Static Explanation Pipeline Flow for Landing Page
+// Explanation Pipeline Flow for Landing Page (Fully Responsive)
 function ReconciliationPipelineFlow() {
   return (
-    <div className="glass-panel rounded-2xl p-8 border border-slate-800 shadow-xl overflow-hidden relative max-w-4xl mx-auto mt-16 animate-fade-in z-10">
+    <div className="glass-panel rounded-2xl p-5 sm:p-8 border border-slate-800 shadow-xl overflow-hidden relative max-w-4xl mx-auto mt-12 sm:mt-16 animate-fade-in z-10">
       <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-      <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
+      <h3 className="text-xs sm:text-sm font-bold text-white mb-6 flex items-center gap-2">
         <Zap className="w-4 h-4 text-indigo-400 animate-pulse" />
         <span>How Revalto Processes Financial Data</span>
       </h3>
 
-      <div className="relative flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-12">
-        {/* SVG connection lines behind panels */}
-        <div className="absolute inset-0 pointer-events-none hidden md:block z-0">
-          <svg className="w-full h-full" viewBox="0 0 800 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Line 1: Left Top to Middle */}
-            <path
-              d="M 220 30 Q 300 30, 340 60"
-              fill="none"
-              stroke="url(#line-grad-indigo)"
-              strokeWidth="2"
-              className="animate-flow-dash"
-            />
-            {/* Line 2: Left Middle to Middle */}
-            <path
-              d="M 220 80 L 340 80"
-              fill="none"
-              stroke="url(#line-grad-indigo)"
-              strokeWidth="2"
-              className="animate-flow-dash"
-            />
-            {/* Line 3: Left Bottom to Middle */}
-            <path
-              d="M 220 130 Q 300 130, 340 100"
-              fill="none"
-              stroke="url(#line-grad-indigo)"
-              strokeWidth="2"
-              className="animate-flow-dash"
-            />
-            {/* Line 4: Middle to Right Top */}
-            <path
-              d="M 480 70 Q 560 50, 600 50"
-              fill="none"
-              stroke="url(#line-grad-emerald)"
-              strokeWidth="2.5"
-              className="animate-flow-dash"
-            />
-            {/* Line 5: Middle to Right Bottom */}
-            <path
-              d="M 480 90 Q 560 110, 600 110"
-              fill="none"
-              stroke="url(#line-grad-rose)"
-              strokeWidth="2.5"
-              className="animate-flow-dash"
-            />
-
-            <defs>
-              <linearGradient id="line-grad-indigo" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#4338ca" stopOpacity="0.4" />
-                <stop offset="50%" stopColor="#6366f1" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#818cf8" stopOpacity="0.4" />
-              </linearGradient>
-              <linearGradient id="line-grad-emerald" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#6366f1" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#10b981" stopOpacity="0.9" />
-              </linearGradient>
-              <linearGradient id="line-grad-rose" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#6366f1" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#f43f5e" stopOpacity="0.9" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-
+      <div className="relative flex flex-col md:flex-row items-stretch justify-between gap-5 md:gap-8">
         {/* Column 1: Source Datasets */}
-        <div className="flex-1 min-w-[200px] z-10 space-y-3">
-          <div className="text-center font-bold text-[10px] uppercase tracking-wider text-slate-500 mb-2">Ingestion Layer</div>
+        <div className="flex-1 min-w-0 z-10 space-y-2.5">
+          <div className="text-center md:text-left font-bold text-[10px] uppercase tracking-wider text-slate-500 mb-2">
+            1. Ingestion Layer
+          </div>
           
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm hover:border-indigo-500/30 transition-all hover:-translate-y-0.5">
-            <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-pulse" />
-              <span className="text-xs font-semibold text-slate-200">ERP Ledger</span>
+          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-pulse flex-shrink-0" />
+              <span className="text-xs font-semibold text-slate-200 truncate">ERP Ledger</span>
             </div>
-            <span className="text-xs font-bold text-slate-300 bg-slate-950 px-2.5 py-0.5 rounded border border-slate-800">300 rows</span>
+            <span className="text-[11px] font-bold text-slate-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800 flex-shrink-0">
+              300 rows
+            </span>
           </div>
 
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm hover:border-indigo-500/30 transition-all hover:-translate-y-0.5">
-            <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)] animate-pulse" />
-              <span className="text-xs font-semibold text-slate-200">Payment Gateway</span>
+          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)] animate-pulse flex-shrink-0" />
+              <span className="text-xs font-semibold text-slate-200 truncate">Payment Gateway</span>
             </div>
-            <span className="text-xs font-bold text-slate-300 bg-slate-950 px-2.5 py-0.5 rounded border border-slate-800">290 rows</span>
+            <span className="text-[11px] font-bold text-slate-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800 flex-shrink-0">
+              290 rows
+            </span>
           </div>
 
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm hover:border-indigo-500/30 transition-all hover:-translate-y-0.5">
-            <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-sky-500 shadow-[0_0_8px_rgba(56,189,248,0.6)] animate-pulse" />
-              <span className="text-xs font-semibold text-slate-200">Bank Statement</span>
+          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="w-2.5 h-2.5 rounded-full bg-sky-500 shadow-[0_0_8px_rgba(56,189,248,0.6)] animate-pulse flex-shrink-0" />
+              <span className="text-xs font-semibold text-slate-200 truncate">Bank Statement</span>
             </div>
-            <span className="text-xs font-bold text-slate-300 bg-slate-950 px-2.5 py-0.5 rounded border border-slate-800">275 rows</span>
+            <span className="text-[11px] font-bold text-slate-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800 flex-shrink-0">
+              275 rows
+            </span>
           </div>
         </div>
 
         {/* Column 2: 5-Level Matching Engine */}
-        <div className="flex-1 min-w-[200px] z-10 flex flex-col justify-center">
-          <div className="text-center font-bold text-[10px] uppercase tracking-wider text-slate-500 mb-2">Processing Engine</div>
+        <div className="flex-1 min-w-0 z-10 flex flex-col justify-center">
+          <div className="text-center font-bold text-[10px] uppercase tracking-wider text-slate-500 mb-2">
+            2. Processing Engine
+          </div>
           
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-950/80 to-purple-950/80 border border-indigo-500/40 shadow-lg text-center relative pulse-border-glow">
+          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-indigo-950/80 to-purple-950/80 border border-indigo-500/40 shadow-lg text-center relative pulse-border-glow">
             <div className="absolute top-2 right-2 flex items-center justify-center">
               <Bot className="w-4 h-4 text-indigo-400 animate-bounce" />
             </div>
             <span className="text-xs font-extrabold text-indigo-300 block mb-1">5-Level Matcher</span>
             <p className="text-[10px] text-indigo-200/90 leading-relaxed mb-3">
-              Performs deterministic cascading matching based on reference links, gateway fees, and timing tolerances.
+              Deterministic matching based on reference links, gateway fees, and timing tolerances.
             </p>
             <div className="flex flex-wrap justify-center gap-1.5 text-[9px] font-mono text-indigo-200">
               <span className="px-1.5 py-0.5 bg-indigo-900/40 rounded border border-indigo-500/20">Exact ID</span>
               <span className="px-1.5 py-0.5 bg-indigo-900/40 rounded border border-indigo-500/20">Ref Link</span>
-              <span className="px-1.5 py-0.5 bg-indigo-900/40 rounded border border-indigo-500/20">Fee Calc</span>
+              <span className="px-1.5 py-0.5 bg-indigo-900/40 rounded border border-indigo-500/20">Fee Math</span>
               <span className="px-1.5 py-0.5 bg-indigo-900/40 rounded border border-indigo-500/20">Date Tol</span>
             </div>
           </div>
         </div>
 
         {/* Column 3: Outcomes / Targets */}
-        <div className="flex-1 min-w-[200px] z-10 space-y-3 flex flex-col justify-center">
-          <div className="text-center font-bold text-[10px] uppercase tracking-wider text-slate-500 mb-2">Outcome Classifier</div>
+        <div className="flex-1 min-w-0 z-10 space-y-2.5 flex flex-col justify-center">
+          <div className="text-center md:text-left font-bold text-[10px] uppercase tracking-wider text-slate-500 mb-2">
+            3. Outcome Classifier
+          </div>
 
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/25 shadow-sm hover:border-emerald-500/40 transition-all">
-            <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="flex items-center justify-between p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/25 shadow-sm">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
               <span className="text-xs font-bold text-emerald-200">Matched Clean</span>
             </div>
             <span className="text-xs font-extrabold text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
@@ -319,9 +274,9 @@ function ReconciliationPipelineFlow() {
             </span>
           </div>
 
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-rose-950/40 border border-rose-500/25 shadow-sm hover:border-rose-500/40 transition-all">
-            <div className="flex items-center gap-2.5">
-              <AlertTriangle className="w-4 h-4 text-rose-400" />
+          <div className="flex items-center justify-between p-3 rounded-xl bg-rose-950/40 border border-rose-500/25 shadow-sm">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-rose-400 flex-shrink-0" />
               <span className="text-xs font-bold text-rose-200">Exceptions</span>
             </div>
             <span className="text-xs font-extrabold text-rose-300 bg-rose-950/80 px-2 py-0.5 rounded border border-rose-500/30">
@@ -335,89 +290,144 @@ function ReconciliationPipelineFlow() {
 }
 
 export default function LandingPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#070b12] text-slate-100 selection:bg-indigo-500 selection:text-white">
       {/* Header Navigation */}
-      <header className="border-b border-slate-800/60 bg-slate-950/60 backdrop-blur-md fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Logo size={40} />
-            <div>
-              <span className="font-bold text-lg tracking-tight text-white">Revalto</span>
-              <span className="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
-                MVP 1.0
+      <header className="border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3">
+            <Logo size={34} />
+            <div className="flex items-center">
+              <span className="font-bold text-base sm:text-lg tracking-tight text-white">Revalto</span>
+              <span className="ml-2 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                AI Controller
               </span>
             </div>
-          </div>
+          </Link>
 
-          <div className="flex items-center gap-6">
-            <Link href="#features" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link href="#features" className="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors">
               Features
             </Link>
-            <Link href="#architecture" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+            <Link href="#architecture" className="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors">
               How It Works
             </Link>
-            <Link href="#audience" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+            <Link href="#audience" className="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors">
               For Whom
             </Link>
             <Link
               href="/login"
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 flex items-center gap-2"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-xs sm:text-sm hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 flex items-center gap-2"
             >
-              <span>Judge / Demo Login</span>
+              <span>Demo Login</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
+
+          {/* Mobile Hamburger Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 md:hidden transition-colors"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Navigation Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-xl px-4 pt-3 pb-5 space-y-3"
+            >
+              <Link
+                href="#features"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors"
+              >
+                Features
+              </Link>
+              <Link
+                href="#architecture"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors"
+              >
+                How It Works
+              </Link>
+              <Link
+                href="#audience"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors"
+              >
+                For Whom
+              </Link>
+              <Link
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-sm text-center flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30"
+              >
+                <span>Launch Demo Dashboard</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Hero Section */}
-      <section className="pt-36 pb-24 relative overflow-hidden">
+      <section className="pt-28 sm:pt-36 pb-16 sm:pb-24 relative overflow-hidden">
         <ParticleCanvas />
-        {/* Animated Background Mesh Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-indigo-600/20 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-1/3 left-1/3 w-[400px] h-[300px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[700px] h-[260px] sm:h-[400px] bg-indigo-600/15 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/3 left-1/3 w-[240px] sm:w-[400px] h-[180px] sm:h-[300px] bg-purple-600/15 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-950/80 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-6 shadow-inner">
-              <Zap className="w-4 h-4 text-indigo-400" />
-              <span>Multi-Source Financial Reconciliation Engine + Evidence-Based AI</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-950/80 border border-indigo-500/30 text-indigo-300 text-[11px] sm:text-xs font-semibold mb-5 sm:mb-6 shadow-inner">
+              <Zap className="w-3.5 h-3.5 text-indigo-400" />
+              <span>3-Way Reconciliation Engine + Evidence-Based AI Copilot</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
-              Deterministic Truth for Your <br />
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight sm:leading-tight">
+              Deterministic Truth for Your <br className="hidden sm:inline" />
               <span className="gradient-text">Financial Reconciliations</span>
             </h1>
 
-            <p className="mt-6 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed">
-              Reconcile ERP Invoices, Payment Gateways, and Bank Settlements in seconds. Code determines financial accuracy, database preserves exact evidence, and AI retrieves & explains root causes.
+            <p className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed px-2">
+              Reconcile ERP Invoices, Payment Gateways, and Bank Settlements in seconds. Code determines financial accuracy, database preserves exact evidence, and AI explains root causes.
             </p>
 
-            <div className="mt-10 flex items-center justify-center gap-4">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
               <Link
                 href="/login"
-                className="px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base transition-all shadow-xl shadow-indigo-600/30 flex items-center gap-3"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm sm:text-base transition-all shadow-xl shadow-indigo-600/30 flex items-center justify-center gap-2 sm:gap-3"
               >
                 <span>Try Instant Demo Account</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
               </Link>
               <Link
                 href="#features"
-                className="px-8 py-4 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-base border border-slate-700 transition-all"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-semibold text-sm sm:text-base border border-slate-700 transition-all text-center"
               >
                 Explore Product Architecture
               </Link>
             </div>
           </motion.div>
 
-          {/* Interactive Core Principle Card */}
-          <div className="mt-16 max-w-4xl mx-auto glass-panel rounded-2xl p-8 border border-slate-800 shadow-2xl">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+          {/* Core Principle Cards Grid */}
+          <div className="mt-12 sm:mt-16 max-w-4xl mx-auto glass-panel rounded-2xl p-4 sm:p-8 border border-slate-800 shadow-2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-left">
               <TiltCard className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
                 <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-3">
                   <Zap className="w-4 h-4" />
@@ -455,44 +465,44 @@ export default function LandingPage() {
       </section>
 
       {/* Interactive Flow Architecture */}
-      <section id="architecture" className="py-20 border-t border-slate-800/80 bg-slate-950/40">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+      <section id="architecture" className="py-12 sm:py-20 border-t border-slate-800/80 bg-slate-950/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
               Complete End-to-End Product Flow
             </h2>
-            <p className="text-slate-400 mt-4 text-base">
+            <p className="text-slate-400 mt-2 sm:mt-4 text-xs sm:text-base">
               From multi-source CSV uploads to automated exception classification and AI investigation.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TiltCard className="glass-card rounded-2xl p-6 border border-slate-800">
-              <div className="w-12 h-12 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold text-lg mb-4 border border-indigo-500/30">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
+            <TiltCard className="glass-card rounded-2xl p-5 sm:p-6 border border-slate-800">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold text-base sm:text-lg mb-4 border border-indigo-500/30">
                 01
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Upload & Source Detection</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2">Upload & Source Detection</h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 Upload ERP/Ledger, Payment Gateway, and Bank Settlement CSV files. System automatically identifies file types and validates schemas using Zod.
               </p>
             </TiltCard>
 
-            <TiltCard className="glass-card rounded-2xl p-6 border border-slate-800">
-              <div className="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center font-bold text-lg mb-4 border border-purple-500/30">
+            <TiltCard className="glass-card rounded-2xl p-5 sm:p-6 border border-slate-800">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center font-bold text-base sm:text-lg mb-4 border border-purple-500/30">
                 02
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">5-Level Match Engine</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2">5-Level Match Engine</h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 Deterministic matching checks exact IDs, linked references, gateway fee math, timing lags, and duplicate payments with 100% precision.
               </p>
             </TiltCard>
 
-            <TiltCard className="glass-card rounded-2xl p-6 border border-slate-800">
-              <div className="w-12 h-12 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold text-lg mb-4 border border-emerald-500/30">
+            <TiltCard className="glass-card rounded-2xl p-5 sm:p-6 border border-slate-800">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold text-base sm:text-lg mb-4 border border-emerald-500/30">
                 03
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">AI Copilot & Resolution</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2">AI Copilot & Resolution</h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 Ask questions like <em>"Why is transaction #17 mismatched?"</em>. The AI queries exact DB evidence and provides clear audit explanations.
               </p>
             </TiltCard>
@@ -503,43 +513,43 @@ export default function LandingPage() {
       </section>
 
       {/* For Whom Section */}
-      <section id="audience" className="py-20 border-t border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+      <section id="audience" className="py-12 sm:py-20 border-t border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
               Designed For Financial Teams & Auditors
             </h2>
-            <p className="text-slate-400 mt-4 text-base">
+            <p className="text-slate-400 mt-2 sm:mt-4 text-xs sm:text-base">
               Eliminate manual Excel VLOOKUP matching, fee confusion, and unexplainable discrepancies.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
-              <Building2 className="w-8 h-8 text-indigo-400 flex-shrink-0 mt-1" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
+            <div className="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
+              <Building2 className="w-7 sm:w-8 h-7 sm:h-8 text-indigo-400 flex-shrink-0 mt-1" />
               <div>
-                <h4 className="font-bold text-slate-200 text-base">CFOs & Finance Controllers</h4>
-                <p className="text-sm text-slate-400 mt-2">
+                <h4 className="font-bold text-slate-200 text-sm sm:text-base">CFOs & Finance Controllers</h4>
+                <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
                   Gain instant visibility into monthly match rates, uncollected settlements, and gateway fee drains across all payment channels.
                 </p>
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
-              <Scale className="w-8 h-8 text-purple-400 flex-shrink-0 mt-1" />
+            <div className="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
+              <Scale className="w-7 sm:w-8 h-7 sm:h-8 text-purple-400 flex-shrink-0 mt-1" />
               <div>
-                <h4 className="font-bold text-slate-200 text-base">Auditors & Compliance</h4>
-                <p className="text-sm text-slate-400 mt-2">
+                <h4 className="font-bold text-slate-200 text-sm sm:text-base">Auditors & Compliance</h4>
+                <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
                   Complete audit-trail logs with exact line-by-line matching evidence and PDF/CSV compliance report generation.
                 </p>
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
-              <Lock className="w-8 h-8 text-emerald-400 flex-shrink-0 mt-1" />
+            <div className="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
+              <Lock className="w-7 sm:w-8 h-7 sm:h-8 text-emerald-400 flex-shrink-0 mt-1" />
               <div>
-                <h4 className="font-bold text-slate-200 text-base">Fintech & E-Commerce</h4>
-                <p className="text-sm text-slate-400 mt-2">
+                <h4 className="font-bold text-slate-200 text-sm sm:text-base">Fintech & E-Commerce</h4>
+                <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
                   Reconcile millions of payment events against bank settlements with deterministic multi-tenant security isolation.
                 </p>
               </div>
@@ -549,23 +559,23 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Footer */}
-      <footer className="py-16 border-t border-slate-800/80 bg-slate-950 text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl font-extrabold text-white">Experience Revalto</h2>
-          <p className="text-slate-400 mt-3 text-sm">
+      <footer className="py-12 sm:py-16 border-t border-slate-800/80 bg-slate-950 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Experience Revalto</h2>
+          <p className="text-slate-400 mt-2 sm:mt-3 text-xs sm:text-sm">
             Sign in with the preloaded demo account <code>demo@aifinance.com</code> to explore the 150-event reconciliation.
           </p>
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <Link
               href="/login"
-              className="px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-base transition-all shadow-xl shadow-indigo-600/30 inline-flex items-center gap-3"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm sm:text-base transition-all shadow-xl shadow-indigo-600/30 inline-flex items-center gap-2 sm:gap-3"
             >
               <span>Launch Demo Dashboard</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 h-5" />
             </Link>
           </div>
-          <p className="text-xs text-slate-600 mt-12">
-            © 2026 Revalto MVP. Built with Next.js 14, Tailwind CSS & Prisma.
+          <p className="text-[11px] sm:text-xs text-slate-600 mt-10 sm:mt-12">
+            © 2026 Revalto. Built with Next.js 14, Tailwind CSS, Supabase & Google Gemini.
           </p>
         </div>
       </footer>

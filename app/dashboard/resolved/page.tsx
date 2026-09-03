@@ -88,24 +88,24 @@ export default function ResolvedExceptionsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Resolved Exceptions Archive</h1>
-          <p className="text-xs text-slate-400 mt-1">Audit log of resolved discrepancies for this reconciliation run</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Resolved Exceptions Archive</h1>
+          <p className="text-xs text-slate-400 mt-0.5">Audit log of resolved discrepancies for this reconciliation run</p>
         </div>
         <span className="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4" />
+          <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
           <span>{resolvedExceptions.length} Resolved Exceptions</span>
         </span>
       </div>
 
       {/* Category Tabs */}
-      <div className="flex flex-wrap gap-2 glass-panel p-2 rounded-xl border border-slate-800">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 glass-panel p-2 rounded-xl border border-slate-800 touch-scroll">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-all ${
               activeCategory === cat
                 ? 'bg-indigo-600/25 text-indigo-300 border border-indigo-500/30 shadow-sm'
                 : 'text-slate-400 hover:bg-slate-800'
@@ -117,7 +117,7 @@ export default function ResolvedExceptionsPage() {
       </div>
 
       {/* Exception Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {loading ? (
           <p className="text-xs text-slate-500 col-span-2 text-center py-12">Loading resolved records...</p>
         ) : resolvedExceptions.length === 0 ? (
@@ -195,16 +195,16 @@ export default function ResolvedExceptionsPage() {
       {/* Exception Evidence Slide-over Drawer */}
       {selectedException && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
-          <div className="w-full max-w-lg bg-[#0d1322] h-full p-8 overflow-y-auto border-l border-slate-800 shadow-2xl flex flex-col justify-between">
+          <div className="w-full sm:max-w-md lg:max-w-lg bg-[#0d1322] h-full p-4 sm:p-8 overflow-y-auto touch-scroll border-l border-slate-800 shadow-2xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-                <div>
+                <div className="min-w-0">
                   <span className="text-xs text-indigo-400 font-mono font-bold">{selectedException.transactionId}</span>
-                  <h3 className="text-xl font-bold text-white">Exception Evidence Detail</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-white truncate">Exception Evidence Detail</h3>
                 </div>
                 <button
                   onClick={() => setSelectedException(null)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors flex-shrink-0"
                 >
                   <X className="w-5 h-5" />
                 </button>

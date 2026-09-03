@@ -104,47 +104,47 @@ Ask me questions such as:
   };
 
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+    <div className="h-[calc(100dvh-6rem)] sm:h-[calc(100vh-8rem)] flex flex-col glass-panel rounded-2xl border border-slate-800 overflow-hidden">
       {/* Header */}
-      <div className="p-4 border-b border-slate-800 bg-slate-950/80 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center shadow-md">
-            <Bot className="w-5 h-5 text-white" />
+      <div className="p-3.5 sm:p-4 border-b border-slate-800 bg-slate-950/80 flex items-center justify-between">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center shadow-md flex-shrink-0">
+            <Bot className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
           </div>
-          <div>
-            <h2 className="text-sm font-bold text-white flex items-center gap-2">
-              <span>AI Finance Copilot</span>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">
-                Tool Calling Active
+          <div className="min-w-0">
+            <h2 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+              <span className="truncate">AI Finance Copilot</span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[9px] sm:text-[10px] font-semibold flex-shrink-0">
+                Gemini 2.5 Flash
               </span>
             </h2>
-            <p className="text-[11px] text-slate-400">Evidence-based query engine for active reconciliation data</p>
+            <p className="text-[10px] sm:text-[11px] text-slate-400 truncate">Evidence-based query engine for active reconciliation data</p>
           </div>
         </div>
       </div>
 
       {/* Message History */}
-      <div className="flex-1 p-6 overflow-y-auto space-y-6">
+      <div className="flex-1 p-3.5 sm:p-6 overflow-y-auto touch-scroll space-y-4 sm:space-y-6">
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`flex gap-4 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex gap-2.5 sm:gap-4 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             {msg.sender === 'assistant' && (
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0 border border-indigo-400/30 shadow-md">
-                <Bot className="w-5 h-5 text-white" />
+              <div className="w-7 sm:w-9 h-7 sm:h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0 border border-indigo-400/30 shadow-md">
+                <Bot className="w-3.5 sm:w-5 h-3.5 sm:h-5 text-white" />
               </div>
             )}
 
-            <div className={`max-w-3xl space-y-1.5 flex-1 ${msg.sender === 'user' ? 'flex flex-col items-end' : ''}`}>
+            <div className={`max-w-3xl space-y-1.5 flex-1 min-w-0 ${msg.sender === 'user' ? 'flex flex-col items-end' : ''}`}>
               {msg.sender === 'assistant' && msg.toolExecutions && msg.toolExecutions.length > 0 && (
                 <div className="mb-2 space-y-1">
                   {msg.toolExecutions.map((t, idx) => (
                     <div
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-950/60 border border-slate-900 text-[10px] text-slate-400 font-mono"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-950/60 border border-slate-900 text-[10px] text-slate-400 font-mono flex-wrap"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
                       <span>
                         Verified database context via <strong>{t.toolName}</strong>
                       </span>
@@ -154,7 +154,7 @@ Ask me questions such as:
               )}
 
               <div
-                className={`p-4 rounded-2xl text-xs leading-relaxed group transition-all duration-300 relative ${
+                className={`p-3.5 sm:p-4 rounded-2xl text-xs leading-relaxed group transition-all duration-300 relative ${
                   msg.sender === 'user'
                     ? 'bg-indigo-600/10 border border-indigo-500/20 text-slate-100 rounded-tr-none max-w-xl'
                     : 'bg-slate-900/60 border border-slate-800/80 rounded-tl-none shadow-xl hover:border-slate-700/80 w-full'
@@ -167,7 +167,7 @@ Ask me questions such as:
                     <MarkdownMessage text={msg.text} />
                     
                     {/* Action Bar */}
-                    <div className="flex items-center gap-3 mt-4 pt-3 border-t border-slate-800/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="flex items-center gap-3 mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-slate-800/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                       <button
                         onClick={() => handleCopy(msg.id, msg.text)}
                         className="px-2 py-1 rounded bg-slate-950/60 border border-slate-800/60 text-[10px] text-slate-400 hover:text-white hover:bg-slate-900 transition-all flex items-center gap-1"
@@ -200,7 +200,7 @@ Ask me questions such as:
             </div>
 
             {msg.sender === 'user' && (
-              <div className="w-9 h-9 rounded-xl bg-slate-800/80 text-slate-350 flex items-center justify-center flex-shrink-0 border border-slate-700 font-bold text-xs shadow-sm">
+              <div className="w-7 sm:w-9 h-7 sm:h-9 rounded-xl bg-slate-800/80 text-slate-300 flex items-center justify-center flex-shrink-0 border border-slate-700 font-bold text-xs shadow-sm">
                 U
               </div>
             )}
@@ -208,8 +208,8 @@ Ask me questions such as:
         ))}
 
         {loading && (
-          <div className="flex items-center gap-3 text-xs text-indigo-400 animate-pulse">
-            <Wrench className="w-4 h-4 animate-spin" />
+          <div className="flex items-center gap-2.5 sm:gap-3 text-xs text-indigo-400 animate-pulse">
+            <Wrench className="w-4 h-4 animate-spin flex-shrink-0" />
             <span>Querying financial database & verifying matching evidence...</span>
           </div>
         )}
@@ -218,30 +218,30 @@ Ask me questions such as:
       </div>
 
       {/* Input Box */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/80">
+      <div className="p-3 sm:p-4 border-t border-slate-800 bg-slate-950/80">
         {/* Suggestion Chips */}
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2.5 sm:mb-3">
           <button
             type="button"
             disabled={loading}
             onClick={() => handleSend("Investigate transaction TXN-150")}
-            className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800/80 hover:border-indigo-500/30 text-[10px] text-indigo-300 font-semibold transition-all shadow-sm"
+            className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800/80 hover:border-indigo-500/30 text-[10px] text-indigo-300 font-semibold transition-all shadow-sm truncate"
           >
-            🔍 Investigate TXN-150
+            🔍 TXN-150
           </button>
           <button
             type="button"
             disabled={loading}
             onClick={() => handleSend("Show reconciliation summary")}
-            className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800/80 hover:border-indigo-500/30 text-[10px] text-indigo-300 font-semibold transition-all shadow-sm"
+            className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800/80 hover:border-indigo-500/30 text-[10px] text-indigo-300 font-semibold transition-all shadow-sm truncate"
           >
-            📊 Reconcile Summary
+            📊 Summary
           </button>
           <button
             type="button"
             disabled={loading}
             onClick={() => handleSend("List high priority exceptions")}
-            className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800/80 hover:border-indigo-500/30 text-[10px] text-indigo-300 font-semibold transition-all shadow-sm"
+            className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800/80 hover:border-indigo-500/30 text-[10px] text-indigo-300 font-semibold transition-all shadow-sm truncate"
           >
             ⚠️ High Exceptions
           </button>
@@ -252,21 +252,21 @@ Ask me questions such as:
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-center gap-3"
+          className="flex items-center gap-2 sm:gap-3"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask AI Copilot about any transaction, fee mismatch, or reconciliation summary..."
-            className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+            placeholder="Ask AI Copilot about any transaction or mismatch..."
+            className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 min-w-0"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/20 disabled:opacity-50 flex items-center gap-2"
+            className="px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/20 disabled:opacity-50 flex items-center gap-1.5 sm:gap-2 flex-shrink-0"
           >
-            <span>Send Query</span>
+            <span className="hidden sm:inline">Send</span>
             <Send className="w-3.5 h-3.5" />
           </button>
         </form>

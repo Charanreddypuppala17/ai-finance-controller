@@ -98,42 +98,42 @@ export default function NewReconciliationPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">New Multi-Source Reconciliation</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">New Multi-Source Reconciliation</h1>
         <p className="text-xs text-slate-400 mt-1">
           Upload ERP, Payment Gateway, and Bank Settlement CSV records to run 5-level deterministic matching.
         </p>
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-medium flex items-center gap-2">
+        <div className="p-3.5 sm:p-4 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-medium flex items-center gap-2">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
         {/* Run Configuration Card */}
-        <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-4">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <Sliders className="w-4 h-4 text-indigo-400" />
+        <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800 space-y-4">
+          <h3 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-indigo-400 flex-shrink-0" />
             <span>Run Parameters & Tolerance Settings</span>
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Reconciliation Run Name</label>
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5">Reconciliation Run Name</label>
               <input
                 type="text"
                 value={runName}
                 onChange={(e) => setRunName(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:border-indigo-500"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:border-indigo-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                 Settlement Date Lag Tolerance ({dateTolerance} days)
               </label>
               <input
@@ -144,19 +144,19 @@ export default function NewReconciliationPage() {
                 onChange={(e) => setDateTolerance(Number(e.target.value))}
                 className="w-full accent-indigo-500 mt-2"
               />
-              <span className="text-[10px] text-slate-500">Flag settlement delays exceeding {dateTolerance} days as timing lag exceptions.</span>
+              <span className="text-[10px] text-slate-500 block mt-1">Flag settlement delays exceeding {dateTolerance} days as timing lag exceptions.</span>
             </div>
           </div>
         </div>
 
         {/* 3-CSV Upload Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {/* Source 1: ERP */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+          <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <span className="text-xs font-bold text-indigo-400">1. ERP / Ledger</span>
-                {erpText && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                {erpText && <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />}
               </div>
               <p className="text-xs text-slate-400 mb-4">
                 Invoices with <code>invoice_id</code>, <code>amount</code>, <code>invoice_date</code>.
@@ -164,8 +164,8 @@ export default function NewReconciliationPage() {
             </div>
 
             <label className="cursor-pointer py-4 border-2 border-dashed border-slate-800 hover:border-indigo-500/50 rounded-xl flex flex-col items-center justify-center transition-colors">
-              <Upload className="w-6 h-6 text-slate-500 mb-2" />
-              <span className="text-xs text-slate-300 font-semibold">
+              <Upload className="w-5 sm:w-6 h-5 sm:h-6 text-slate-500 mb-1.5 sm:mb-2" />
+              <span className="text-xs text-slate-300 font-semibold text-center px-2 truncate max-w-full">
                 {erpFile ? erpFile.name : 'Select ERP CSV'}
               </span>
               <input
@@ -178,11 +178,11 @@ export default function NewReconciliationPage() {
           </div>
 
           {/* Source 2: Payment Gateway */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+          <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <span className="text-xs font-bold text-indigo-400">2. Payment Gateway</span>
-                {paymentText && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                {paymentText && <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />}
               </div>
               <p className="text-xs text-slate-400 mb-4">
                 Gateway transactions with <code>payment_id</code>, <code>fee</code>, <code>invoice_id</code>.
@@ -190,8 +190,8 @@ export default function NewReconciliationPage() {
             </div>
 
             <label className="cursor-pointer py-4 border-2 border-dashed border-slate-800 hover:border-indigo-500/50 rounded-xl flex flex-col items-center justify-center transition-colors">
-              <Upload className="w-6 h-6 text-slate-500 mb-2" />
-              <span className="text-xs text-slate-300 font-semibold">
+              <Upload className="w-5 sm:w-6 h-5 sm:h-6 text-slate-500 mb-1.5 sm:mb-2" />
+              <span className="text-xs text-slate-300 font-semibold text-center px-2 truncate max-w-full">
                 {paymentFile ? paymentFile.name : 'Select Payment CSV'}
               </span>
               <input
@@ -204,11 +204,11 @@ export default function NewReconciliationPage() {
           </div>
 
           {/* Source 3: Bank Settlement */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+          <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <span className="text-xs font-bold text-indigo-400">3. Bank Settlement</span>
-                {bankText && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                {bankText && <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />}
               </div>
               <p className="text-xs text-slate-400 mb-4">
                 Bank payouts with <code>settlement_id</code>, <code>payment_id</code>, <code>amount</code>.
@@ -216,8 +216,8 @@ export default function NewReconciliationPage() {
             </div>
 
             <label className="cursor-pointer py-4 border-2 border-dashed border-slate-800 hover:border-indigo-500/50 rounded-xl flex flex-col items-center justify-center transition-colors">
-              <Upload className="w-6 h-6 text-slate-500 mb-2" />
-              <span className="text-xs text-slate-300 font-semibold">
+              <Upload className="w-5 sm:w-6 h-5 sm:h-6 text-slate-500 mb-1.5 sm:mb-2" />
+              <span className="text-xs text-slate-300 font-semibold text-center px-2 truncate max-w-full">
                 {bankFile ? bankFile.name : 'Select Bank CSV'}
               </span>
               <input
@@ -231,11 +231,11 @@ export default function NewReconciliationPage() {
         </div>
 
         {/* Submit Actions */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-slate-800">
           <button
             type="button"
             onClick={handleLoadSampleData}
-            className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 underline"
+            className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 underline text-center sm:text-left py-1"
           >
             Or pre-fill with Demo CSV Datasets
           </button>
@@ -243,10 +243,10 @@ export default function NewReconciliationPage() {
           <button
             type="submit"
             disabled={loading}
-            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-600/20 flex items-center gap-2 disabled:opacity-50"
+            className="px-6 sm:px-8 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
-              <span>Running Reconciliation Pipeline...</span>
+              <span>Running Pipeline...</span>
             ) : (
               <>
                 <RefreshCw className="w-4 h-4" />
@@ -259,3 +259,4 @@ export default function NewReconciliationPage() {
     </div>
   );
 }
+

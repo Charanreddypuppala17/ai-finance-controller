@@ -94,13 +94,13 @@ export default function TransactionsPage() {
   return (
     <div className="space-y-6 relative">
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">Reconciled Transactions Explorer</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Reconciled Transactions Explorer</h1>
         <p className="text-xs text-slate-400 mt-1">Search, filter, and inspect line-by-line financial evidence</p>
       </div>
 
       {/* Filter Bar */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-center glass-panel p-4 rounded-xl border border-slate-800">
-        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto items-stretch sm:items-center">
+      <div className="flex flex-col md:flex-row gap-3 sm:gap-4 justify-between items-stretch md:items-center glass-panel p-3.5 sm:p-4 rounded-xl border border-slate-800">
+        <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full md:w-auto items-stretch sm:items-center">
           {/* Search Input */}
           <div className="relative w-full sm:w-80">
             <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
@@ -137,12 +137,12 @@ export default function TransactionsPage() {
         </div>
 
         {/* Status Filters */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           {['ALL', 'MATCHED', 'EXCEPTION'].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-center ${
                 statusFilter === st
                   ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
                   : 'text-slate-400 hover:bg-slate-800'
@@ -156,8 +156,8 @@ export default function TransactionsPage() {
 
       {/* Transactions Table */}
       <div className="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="table-responsive">
+          <table className="w-full text-left text-xs min-w-[700px]">
             <thead className="bg-slate-900/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
               <tr>
                 <th className="px-4 py-3">Txn ID</th>
@@ -310,16 +310,16 @@ export default function TransactionsPage() {
       {/* Transaction Detail Slide-over Drawer */}
       {selectedTxn && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
-          <div className="w-full max-w-lg bg-[#0d1322] h-full p-8 overflow-y-auto border-l border-slate-800 shadow-2xl flex flex-col justify-between">
+          <div className="w-full sm:max-w-md lg:max-w-lg bg-[#0d1322] h-full p-4 sm:p-8 overflow-y-auto touch-scroll border-l border-slate-800 shadow-2xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-                <div>
+                <div className="min-w-0">
                   <span className="text-xs text-indigo-400 font-mono font-bold">{selectedTxn.transactionId}</span>
-                  <h3 className="text-xl font-bold text-white">Transaction Evidence Detail</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-white truncate">Transaction Evidence Detail</h3>
                 </div>
                 <button
                   onClick={() => setSelectedTxn(null)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 flex-shrink-0"
                 >
                   <X className="w-5 h-5" />
                 </button>

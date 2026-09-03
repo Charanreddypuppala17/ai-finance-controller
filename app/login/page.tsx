@@ -108,15 +108,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070b12] flex items-center justify-center p-6 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none" />
+    <div className="min-h-screen bg-[#070b12] flex items-center justify-center p-3.5 sm:p-6 lg:p-8 relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[240px] sm:h-[400px] bg-indigo-600/15 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
 
-      <div className="w-full max-w-md glass-panel rounded-2xl p-8 border border-slate-800 shadow-2xl relative z-10 animate-fade-in">
-        <div className="text-center mb-6 flex flex-col items-center justify-center">
-          <Link href="/" className="inline-flex items-center gap-2 mb-4">
-            <Logo size={48} />
+      <div className="w-full max-w-md glass-panel rounded-2xl p-5 sm:p-8 border border-slate-800 shadow-2xl relative z-10 animate-fade-in my-4">
+        <div className="text-center mb-5 sm:mb-6 flex flex-col items-center justify-center">
+          <Link href="/" className="inline-flex items-center gap-2 mb-3 sm:mb-4">
+            <Logo size={42} />
           </Link>
-          <h1 className="text-2xl font-bold text-white tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
             {mode === 'login' ? 'Sign In to Revalto' : 'Create Your Account'}
           </h1>
           <p className="text-xs text-slate-400 mt-1">
@@ -125,7 +125,7 @@ export default function LoginPage() {
         </div>
 
         {/* Mode Toggle Tabs */}
-        <div className="grid grid-cols-2 p-1 bg-slate-950/60 border border-slate-850 rounded-xl mb-6">
+        <div className="grid grid-cols-2 p-1 bg-slate-950/60 border border-slate-850 rounded-xl mb-5 sm:mb-6">
           <button
             type="button"
             onClick={() => { setMode('login'); setError(''); }}

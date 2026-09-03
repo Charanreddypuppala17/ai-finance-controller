@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Bell, Search, Bot, Database } from 'lucide-react';
+import { Bell, Bot, Database, Menu } from 'lucide-react';
 
 export function Navbar() {
   const [userId, setUserId] = useState('demo-user-001');
@@ -73,42 +73,58 @@ export function Navbar() {
     }
   };
 
+  const toggleMobileSidebar = () => {
+    window.dispatchEvent(new CustomEvent('revalto-toggle-sidebar'));
+  };
+
   return (
-    <header className="h-16 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-20 px-8 flex items-center justify-between">
-      {/* Active Workspace Selector */}
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-medium text-slate-300">
-          <Database className="w-3.5 h-3.5 text-indigo-400" />
+    <header className="h-16 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-20 px-3.5 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+      {/* Left: Mobile Hamburger & Active Workspace Selector */}
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        {/* Mobile Sidebar Hamburger Toggle */}
+        <button
+          type="button"
+          onClick={toggleMobileSidebar}
+          className="p-2 -ml-1 rounded-xl text-slate-400 hover:text-white hover:bg-slate-850 lg:hidden transition-colors flex-shrink-0"
+          aria-label="Open menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        {/* Active Run Selector */}
+        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-medium text-slate-300 min-w-0 max-w-[200px] sm:max-w-[320px] md:max-w-md">
+          <Database className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0" />
           {runs.length > 0 ? (
             <select
               value={selectedRunId}
               onChange={handleRunChange}
-              className="bg-transparent text-slate-300 border-none outline-none text-xs font-semibold pr-2 cursor-pointer focus:ring-0 max-w-[280px]"
+              className="bg-transparent text-slate-300 border-none outline-none text-[11px] sm:text-xs font-semibold pr-1 sm:pr-2 cursor-pointer focus:ring-0 truncate w-full"
             >
               {runs.map(r => (
                 <option key={r.id} value={r.id} className="bg-slate-950 text-slate-300">
-                  {r.name.length > 30 ? `${r.name.slice(0, 30)}...` : r.name} ({r.totalRecords} events)
+                  {r.name.length > 24 ? `${r.name.slice(0, 24)}...` : r.name} ({r.totalRecords} ev)
                 </option>
               ))}
             </select>
           ) : (
-            <span>No Active Run</span>
+            <span className="text-[11px] sm:text-xs truncate">No Active Run</span>
           )}
         </div>
       </div>
 
       {/* Right Controls */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
         <Link
           href="/dashboard/copilot"
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 text-xs font-semibold hover:bg-indigo-600/30 transition-all"
+          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 text-xs font-semibold hover:bg-indigo-600/30 transition-all"
         >
-          <Bot className="w-4 h-4 text-indigo-400" />
-          <span>Ask AI Copilot</span>
+          <Bot className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+          <span className="hidden sm:inline">Ask AI Copilot</span>
+          <span className="sm:hidden text-[11px]">Copilot</span>
         </Link>
-        <button className="p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-800 transition-colors relative">
+        <button className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-850 transition-colors relative">
           <Bell className="w-4 h-4" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+          <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
         </button>
       </div>
     </header>

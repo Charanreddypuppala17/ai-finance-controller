@@ -16,7 +16,7 @@ import {
   Layers,
   Zap,
 } from 'lucide-react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 function LedgerCashFlowSummary({ stats, summary }: { stats: any; summary: any }) {
   const erpSum = stats?.erpSum ?? 1485200;
@@ -29,12 +29,12 @@ function LedgerCashFlowSummary({ stats, summary }: { stats: any; summary: any })
   const matchRate = summary?.matchRate ?? 59.3;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
       {/* Financial Ledger Matching Summary */}
-      <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+      <div className="lg:col-span-2 glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800 relative overflow-hidden flex flex-col justify-between">
         <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
         <div>
-          <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
+          <h3 className="text-xs sm:text-sm font-bold text-white mb-4 flex items-center gap-2">
             <Layers className="w-4 h-4 text-indigo-400" />
             <span>Ledger Cash Flow & Balance Matching Summary</span>
           </h3>
@@ -42,12 +42,12 @@ function LedgerCashFlowSummary({ stats, summary }: { stats: any; summary: any })
           <div className="space-y-4">
             {/* ERP Ledger */}
             <div>
-              <div className="flex justify-between text-xs mb-1.5">
+              <div className="flex flex-wrap items-center justify-between text-xs mb-1.5 gap-1">
                 <span className="text-slate-400 font-semibold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                  <span className="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0" />
                   1. ERP Ledger (Invoiced)
                 </span>
-                <span className="font-extrabold text-white">₹{erpSum.toLocaleString()}</span>
+                <span className="font-extrabold text-white tabular-nums">₹{erpSum.toLocaleString()}</span>
               </div>
               <div className="w-full bg-slate-900 rounded-full h-2 border border-slate-800">
                 <div className="bg-indigo-500 h-2 rounded-full" style={{ width: '100%' }} />
@@ -56,12 +56,12 @@ function LedgerCashFlowSummary({ stats, summary }: { stats: any; summary: any })
 
             {/* Payment Gateway */}
             <div>
-              <div className="flex justify-between text-xs mb-1.5">
+              <div className="flex flex-wrap items-center justify-between text-xs mb-1.5 gap-1">
                 <span className="text-slate-400 font-semibold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-purple-500" />
+                  <span className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" />
                   2. Payment Gateway (Collected)
                 </span>
-                <span className="font-extrabold text-slate-200">
+                <span className="font-extrabold text-slate-200 tabular-nums">
                   ₹{paymentSum.toLocaleString()}
                   <span className="text-[10px] text-slate-500 font-normal ml-1">(Fee: ₹{feeSum.toLocaleString()})</span>
                 </span>
@@ -73,12 +73,12 @@ function LedgerCashFlowSummary({ stats, summary }: { stats: any; summary: any })
 
             {/* Bank Statement */}
             <div>
-              <div className="flex justify-between text-xs mb-1.5">
+              <div className="flex flex-wrap items-center justify-between text-xs mb-1.5 gap-1">
                 <span className="text-slate-400 font-semibold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-sky-500" />
+                  <span className="w-2 h-2 rounded-full bg-sky-500 flex-shrink-0" />
                   3. Bank Statement (Settled)
                 </span>
-                <span className="font-extrabold text-slate-200">₹{bankSum.toLocaleString()}</span>
+                <span className="font-extrabold text-slate-200 tabular-nums">₹{bankSum.toLocaleString()}</span>
               </div>
               <div className="w-full bg-slate-900 rounded-full h-2 border border-slate-800">
                 <div className="bg-sky-500 h-2 rounded-full" style={{ width: `${(bankSum / erpSum * 100) || 97}%` }} />
@@ -88,14 +88,14 @@ function LedgerCashFlowSummary({ stats, summary }: { stats: any; summary: any })
         </div>
 
         {/* Differences Grid */}
-        <div className="grid grid-cols-2 gap-4 mt-6 pt-5 border-t border-slate-800/60 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-6 pt-5 border-t border-slate-800/60 text-xs">
           <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-850">
             <span className="text-slate-500 block font-medium mb-1">Cash in Transit (Unsettled)</span>
-            <span className="text-sm font-extrabold text-indigo-400">₹{cashInTransit.toLocaleString()}</span>
+            <span className="text-sm font-extrabold text-indigo-400 tabular-nums">₹{cashInTransit.toLocaleString()}</span>
           </div>
           <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-850">
             <span className="text-slate-500 block font-medium mb-1">Unreconciled Difference</span>
-            <span className={`text-sm font-extrabold ${unreconciledDiff > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+            <span className={`text-sm font-extrabold tabular-nums ${unreconciledDiff > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
               ₹{unreconciledDiff.toLocaleString()}
             </span>
           </div>
@@ -103,10 +103,10 @@ function LedgerCashFlowSummary({ stats, summary }: { stats: any; summary: any })
       </div>
 
       {/* Audit & Verification Checklist */}
-      <div className="glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+      <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between">
         <div>
-          <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <h3 className="text-xs sm:text-sm font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
             <span>Audit & Verification Checklist</span>
           </h3>
           <p className="text-[11px] text-slate-400 mb-4 leading-relaxed">
@@ -252,11 +252,6 @@ export default function OverviewDashboard() {
     fetchData();
   }, [activeRunId]);
 
-  const chartData = [
-    { name: 'Matched', value: summary?.matchedRecords ?? 89, color: '#10b981' },
-    { name: 'Exceptions', value: summary?.exceptionCount ?? 61, color: '#f43f5e' },
-  ];
-
   const formatExceptionName = (type: string) => {
     switch (type) {
       case 'FEE_MISMATCH': return 'Fee Mismatch';
@@ -294,23 +289,23 @@ export default function OverviewDashboard() {
 
   if (loading) {
     return (
-      <div className="space-y-8 animate-pulse">
+      <div className="space-y-6 sm:space-y-8 animate-pulse">
         {/* Header Banner Skeleton */}
-        <div className="flex items-center justify-between">
-          <div className="space-y-2.5">
-            <div className="h-7 w-56 bg-slate-800/80 rounded-lg" />
-            <div className="h-3.5 w-80 bg-slate-800/40 rounded-md" />
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="space-y-2">
+            <div className="h-7 w-48 sm:w-56 bg-slate-800/80 rounded-lg" />
+            <div className="h-3.5 w-64 sm:w-80 bg-slate-800/40 rounded-md" />
           </div>
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-36 bg-slate-800/80 rounded-xl" />
-            <div className="h-10 w-28 bg-slate-800/50 rounded-xl" />
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="h-10 flex-1 sm:w-36 bg-slate-800/80 rounded-xl" />
+            <div className="h-10 flex-1 sm:w-28 bg-slate-800/50 rounded-xl" />
           </div>
         </div>
 
         {/* Health Cards Grid Skeleton */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-6">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="glass-panel rounded-2xl p-6 border border-slate-800/80 space-y-4">
+            <div key={i} className="glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800/80 space-y-4">
               <div className="flex items-center justify-between">
                 <div className="h-3 w-28 bg-slate-800/80 rounded" />
                 <div className="w-8 h-8 rounded-lg bg-slate-800/60" />
@@ -319,41 +314,8 @@ export default function OverviewDashboard() {
                 <div className="h-8 w-16 bg-slate-800 rounded-lg" />
                 <div className="h-3 w-24 bg-slate-800/60 rounded" />
               </div>
-              <div className="h-2.5 w-32 bg-slate-800/40 rounded mt-2" />
             </div>
           ))}
-        </div>
-
-        {/* Balance Matching & Verification Checklist Skeleton */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
-            <div className="h-4 w-60 bg-slate-800/80 rounded" />
-            <div className="space-y-4">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="space-y-2">
-                  <div className="flex justify-between">
-                    <div className="h-3 w-40 bg-slate-800/60 rounded" />
-                    <div className="h-3 w-16 bg-slate-800/60 rounded" />
-                  </div>
-                  <div className="h-2 w-full bg-slate-850 rounded-full" />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-4">
-            <div className="h-4 w-44 bg-slate-800/80 rounded" />
-            <div className="space-y-3 pt-2">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="flex gap-3">
-                  <div className="w-5 h-5 rounded-full bg-slate-800/60 flex-shrink-0" />
-                  <div className="space-y-1.5 flex-1">
-                    <div className="h-3 w-24 bg-slate-800/70 rounded" />
-                    <div className="h-2.5 w-36 bg-slate-800/40 rounded" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -361,38 +323,35 @@ export default function OverviewDashboard() {
 
   if (!loading && !isDemo && hasNoData) {
     return (
-      <div className="space-y-8 animate-fade-in">
+      <div className="space-y-6 sm:space-y-8 animate-fade-in">
         {/* Header Banner */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Reconciliation Overview</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Reconciliation Overview</h1>
             <p className="text-xs text-slate-400 mt-1">Get started by running a multi-source reconciliation ledger match</p>
           </div>
         </div>
 
         {/* Empty State Hero */}
-        <div className="glass-panel rounded-2xl p-12 border border-slate-800 flex flex-col items-center justify-center text-center max-w-2xl mx-auto mt-12 shadow-2xl relative overflow-hidden">
-          <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="w-16 h-16 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 shadow-inner">
-            <RefreshCw className="w-8 h-8 animate-spin-slow" />
+        <div className="glass-panel rounded-2xl p-6 sm:p-12 border border-slate-800 flex flex-col items-center justify-center text-center max-w-2xl mx-auto mt-8 sm:mt-12 shadow-2xl relative overflow-hidden">
+          <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5 sm:mb-6 shadow-inner">
+            <RefreshCw className="w-7 sm:w-8 h-7 sm:h-8 animate-spin-slow" />
           </div>
 
-          <h2 className="text-xl font-bold text-white mb-2">No Active Reconciliation Runs</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-white mb-2">No Active Reconciliation Runs</h2>
           <p className="text-xs text-slate-400 max-w-sm mb-4 leading-relaxed">
             Revalto isolates financial data per session. To populate your ledger analytics, upload your ERP, Payment Gateway, and Bank Statement CSV logs.
           </p>
 
           {userEmail && (
-            <div className="mb-6 px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-[10px] font-mono text-slate-400">
+            <div className="mb-5 px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-[10px] font-mono text-slate-400">
               Active Session: <span className="text-indigo-400 font-bold">{userEmail}</span>
             </div>
           )}
 
           <Link
             href="/dashboard/reconciliation"
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs transition-all shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2"
           >
             <RefreshCw className="w-4 h-4" />
             <span>Upload Files & Run Reconciliation</span>
@@ -403,138 +362,139 @@ export default function OverviewDashboard() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header Banner */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Reconciliation Overview</h1>
-          <p className="text-xs text-slate-400 mt-1">Multi-source financial health report for active run <strong>{summary?.id || 'DEMO-RUN-001'}</strong></p>
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Reconciliation Overview</h1>
+          <p className="text-xs text-slate-400 mt-0.5">
+            Multi-source financial health report for active run <strong>{summary?.id || 'DEMO-RUN-001'}</strong>
+          </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <Link
             href="/dashboard/reconciliation"
-            className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-all shadow-lg shadow-indigo-600/20 flex items-center gap-2"
+            className="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-all shadow-lg shadow-indigo-600/20 flex items-center justify-center gap-2"
           >
-            <RefreshCw className="w-4 h-4" />
-            <span>New Reconciliation</span>
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>New Reconcile</span>
           </Link>
           <Link
             href="/dashboard/reports"
-            className="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-200 font-semibold text-xs transition-colors flex items-center gap-2"
+            className="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-200 font-semibold text-xs transition-colors flex items-center justify-center gap-2"
           >
-            <FileText className="w-4 h-4 text-slate-400" />
+            <FileText className="w-3.5 h-3.5 text-slate-400" />
             <span>Export Report</span>
           </Link>
         </div>
       </div>
 
       {/* Reconciliation Health Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-         {/* Match Health Score Card */}
-         <div className="glass-card rounded-2xl p-6 border border-slate-800/80 hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-emerald-500/5">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-all pointer-events-none" />
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400">Match Health Score</span>
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4" />
-              </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-6">
+        {/* Match Health Score Card */}
+        <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800/80 hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400">Match Health Score</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+              <CheckCircle2 className="w-4 h-4" />
             </div>
-            <div className="mt-4 flex items-baseline gap-2">
-              <span className="text-4xl font-extrabold text-white">{(summary?.matchRate ?? 59.3).toFixed(1)}%</span>
-              <span className="text-xs font-bold text-emerald-400 flex items-center">
-                <TrendingUp className="w-3.5 h-3.5 mr-0.5" /> High Precision
-              </span>
-            </div>
-            <p className="text-xs text-slate-500 mt-2">
-              {summary?.matchedRecords ?? 89} of {summary?.totalRecords ?? 150} records matched
-            </p>
-         </div>
+          </div>
+          <div className="mt-3 sm:mt-4 flex items-baseline gap-2">
+            <span className="text-3xl sm:text-4xl font-extrabold text-white tabular-nums">
+              {(summary?.matchRate ?? 59.3).toFixed(1)}%
+            </span>
+            <span className="text-[11px] sm:text-xs font-bold text-emerald-400 flex items-center">
+              <TrendingUp className="w-3.5 h-3.5 mr-0.5" /> High Precision
+            </span>
+          </div>
+          <p className="text-[11px] sm:text-xs text-slate-500 mt-1 sm:mt-2">
+            {summary?.matchedRecords ?? 89} of {summary?.totalRecords ?? 150} records matched
+          </p>
+        </div>
 
-         {/* Total Events */}
-         <div className="glass-card rounded-2xl p-6 border border-slate-800/80 hover:border-indigo-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-indigo-500/5">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl group-hover:bg-indigo-500/10 transition-all pointer-events-none" />
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400">Total Financial Events</span>
-              <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
-                <Layers className="w-4 h-4" />
-              </div>
+        {/* Total Events */}
+        <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800/80 hover:border-indigo-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400">Total Financial Events</span>
+            <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center flex-shrink-0">
+              <Layers className="w-4 h-4" />
             </div>
-            <div className="mt-4">
-              <span className="text-3xl font-extrabold text-white">{summary?.totalRecords ?? 150}</span>
-              <span className="text-[10px] text-indigo-400 block font-bold mt-1">
-                Total Amt: ₹{(stats?.erpSum ?? 1485200).toLocaleString()}
-              </span>
-            </div>
-            <p className="text-xs text-slate-500 mt-2">Across ERP, Gateway & Bank</p>
-         </div>
+          </div>
+          <div className="mt-3 sm:mt-4">
+            <span className="text-2xl sm:text-3xl font-extrabold text-white tabular-nums">{summary?.totalRecords ?? 150}</span>
+            <span className="text-[10px] text-indigo-400 block font-bold mt-0.5 tabular-nums">
+              Total Amt: ₹{(stats?.erpSum ?? 1485200).toLocaleString()}
+            </span>
+          </div>
+          <p className="text-[11px] sm:text-xs text-slate-500 mt-1 sm:mt-2">Across ERP, Gateway & Bank</p>
+        </div>
 
-         {/* Matched Records */}
-         <div className="glass-card rounded-2xl p-6 border border-slate-800/80 hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-emerald-500/5">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-all pointer-events-none" />
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400">Matched Records</span>
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4" />
-              </div>
+        {/* Matched Records */}
+        <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800/80 hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400">Matched Records</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+              <CheckCircle2 className="w-4 h-4" />
             </div>
-            <div className="mt-4">
-              <span className="text-3xl font-extrabold text-emerald-400">{summary?.matchedRecords ?? 89}</span>
-              <span className="text-[10px] text-emerald-400 block font-bold mt-1">
-                Matched: ₹{(stats?.matchedSum ?? 1218500).toLocaleString()}
-              </span>
-            </div>
-            <p className="text-xs text-slate-500 mt-2">100% Exact 3-way verified</p>
-         </div>
+          </div>
+          <div className="mt-3 sm:mt-4">
+            <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tabular-nums">{summary?.matchedRecords ?? 89}</span>
+            <span className="text-[10px] text-emerald-400 block font-bold mt-0.5 tabular-nums">
+              Matched: ₹{(stats?.matchedSum ?? 1218500).toLocaleString()}
+            </span>
+          </div>
+          <p className="text-[11px] sm:text-xs text-slate-500 mt-1 sm:mt-2">100% Exact 3-way verified</p>
+        </div>
 
-         {/* Exceptions Count */}
-         <div className="glass-card rounded-2xl p-6 border border-slate-800/80 hover:border-rose-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-rose-500/5">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/5 rounded-full blur-2xl group-hover:bg-rose-500/10 transition-all pointer-events-none" />
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400">Unresolved Exceptions</span>
-              <div className="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center">
-                <AlertTriangle className="w-4 h-4" />
-              </div>
+        {/* Exceptions Count */}
+        <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800/80 hover:border-rose-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400">Unresolved Exceptions</span>
+            <div className="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center flex-shrink-0">
+              <AlertTriangle className="w-4 h-4" />
             </div>
-            <div className="mt-4">
-              <span className="text-3xl font-extrabold text-rose-400">{summary?.exceptionCount ?? 61}</span>
-              <span className="text-[10px] text-rose-400 block font-bold mt-1">
-                Discrepancy: ₹{(stats?.discrepancySum ?? 1887500).toLocaleString()}
-              </span>
-            </div>
-            <p className="text-xs text-slate-500 mt-2">Fees, timing & missing items</p>
-         </div>
+          </div>
+          <div className="mt-3 sm:mt-4">
+            <span className="text-2xl sm:text-3xl font-extrabold text-rose-400 tabular-nums">{summary?.exceptionCount ?? 61}</span>
+            <span className="text-[10px] text-rose-400 block font-bold mt-0.5 tabular-nums">
+              Discrepancy: ₹{(stats?.discrepancySum ?? 1887500).toLocaleString()}
+            </span>
+          </div>
+          <p className="text-[11px] sm:text-xs text-slate-500 mt-1 sm:mt-2">Fees, timing & missing items</p>
+        </div>
 
-         {/* Resolved Exceptions */}
-         <div className="glass-card rounded-2xl p-6 border border-slate-800/80 hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg hover:shadow-emerald-500/5">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-all pointer-events-none" />
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400">Resolved Exceptions</span>
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4" />
-              </div>
+        {/* Resolved Exceptions */}
+        <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800/80 hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden group shadow-lg">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400">Resolved Exceptions</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+              <CheckCircle2 className="w-4 h-4" />
             </div>
-            <div className="mt-4">
-              <span className="text-3xl font-extrabold text-emerald-400">{summary?.resolvedCount ?? stats?.resolvedCount ?? 0}</span>
-              <span className="text-[10px] text-emerald-400 block font-bold mt-1">
-                Resolved: ₹{(stats?.resolvedSum ?? 0).toLocaleString()}
-              </span>
-            </div>
-            <p className="text-xs text-slate-500 mt-2">Manually verified & cleared</p>
-         </div>
+          </div>
+          <div className="mt-3 sm:mt-4">
+            <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tabular-nums">
+              {summary?.resolvedCount ?? stats?.resolvedCount ?? 0}
+            </span>
+            <span className="text-[10px] text-emerald-400 block font-bold mt-0.5 tabular-nums">
+              Resolved: ₹{(stats?.resolvedSum ?? 0).toLocaleString()}
+            </span>
+          </div>
+          <p className="text-[11px] sm:text-xs text-slate-500 mt-1 sm:mt-2">Manually verified & cleared</p>
+        </div>
       </div>
 
       {/* Balance Matching & Verification Checklist */}
       <LedgerCashFlowSummary stats={stats} summary={summary} />
 
       {/* Exception Breakdown & Quick Copilot Widget */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
         {/* Exception Chart */}
-        <div className="md:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between select-none">
+        <div className="lg:col-span-2 glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between select-none">
           <div>
-            <h3 className="text-sm font-bold text-white mb-4">Exception Categories Breakdown</h3>
-            <div className="flex flex-col sm:flex-row items-center justify-around gap-6 h-64">
+            <h3 className="text-xs sm:text-sm font-bold text-white mb-4">Exception Categories Breakdown</h3>
+            <div className="flex flex-col sm:flex-row items-center justify-around gap-6 min-h-64 py-2">
               {/* Donut Chart */}
-              <div className="w-48 h-48 relative flex-shrink-0">
+              <div className="w-44 sm:w-48 h-44 sm:h-48 relative flex-shrink-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -543,8 +503,8 @@ export default function OverviewDashboard() {
                       dataKey="count"
                       cx="50%"
                       cy="50%"
-                      innerRadius={55}
-                      outerRadius={80}
+                      innerRadius={50}
+                      outerRadius={75}
                       paddingAngle={3}
                       animationDuration={800}
                       onMouseEnter={(_, index) => setActiveIndex(index)}
@@ -566,18 +526,18 @@ export default function OverviewDashboard() {
                   </PieChart>
                 </ResponsiveContainer>
                 
-                {/* Center text overlay (Static, showing total errors) */}
+                {/* Center text overlay */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
-                  <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Total Errors</span>
-                  <span className="text-2xl font-black text-rose-400">
+                  <span className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-500 tracking-wider">Total Errors</span>
+                  <span className="text-xl sm:text-2xl font-black text-rose-400 tabular-nums">
                     {categoryData.reduce((acc: number, curr: any) => acc + curr.count, 0)}
                   </span>
                 </div>
               </div>
 
-              {/* Custom Legend & Selected Category Details Column */}
-              <div className="flex flex-col justify-between h-full min-w-[200px] sm:w-[220px] py-1 space-y-3">
-                <div className="space-y-1.5 max-h-[160px] overflow-y-auto pr-1">
+              {/* Custom Legend & Details */}
+              <div className="flex flex-col justify-between w-full sm:w-[220px] py-1 space-y-3">
+                <div className="space-y-1.5 max-h-[160px] overflow-y-auto touch-scroll pr-1">
                   {categoryData.filter((d: any) => d.count > 0).map((entry: any, index: number) => (
                     <div 
                       key={entry.name} 
@@ -587,25 +547,20 @@ export default function OverviewDashboard() {
                       onMouseEnter={() => setActiveIndex(index)}
                       onMouseLeave={() => setActiveIndex(null)}
                     >
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
                         <span 
                           className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                           style={{ backgroundColor: PIE_COLORS[index % PIE_COLORS.length] }}
                         />
-                        <span className="text-slate-400 font-medium truncate max-w-[125px]">{entry.name}</span>
+                        <span className="text-slate-400 font-medium truncate max-w-[130px]">{entry.name}</span>
                       </div>
-                      <span className="font-extrabold text-slate-200">{entry.count}</span>
+                      <span className="font-extrabold text-slate-200 tabular-nums">{entry.count}</span>
                     </div>
                   ))}
-                  {categoryData.filter((d: any) => d.count > 0).length === 0 && (
-                    <div className="text-slate-500 text-center text-xs py-8">
-                      No exceptions present.
-                    </div>
-                  )}
                 </div>
 
                 {/* Side Detail Card */}
-                <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-850 min-h-[56px] flex flex-col justify-center transition-all duration-300">
+                <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-850 min-h-[50px] flex flex-col justify-center">
                   {activeIndex !== null && categoryData.filter((d: any) => d.count > 0)[activeIndex] ? (
                     <div className="animate-fade-in flex items-center justify-between">
                       <div className="flex items-center gap-1.5 truncate max-w-[130px]">
@@ -626,7 +581,7 @@ export default function OverviewDashboard() {
                     </div>
                   ) : (
                     <div className="text-center text-[10px] text-slate-500 italic">
-                      Hover slice/legend to inspect
+                      Hover or tap slice to inspect
                     </div>
                   )}
                 </div>
@@ -636,13 +591,13 @@ export default function OverviewDashboard() {
         </div>
 
         {/* Quick Copilot Prompter Widget */}
-        <div className="glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+        <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600/20 text-indigo-400 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-indigo-600/20 text-indigo-400 flex items-center justify-center flex-shrink-0">
                 <Bot className="w-4 h-4" />
               </div>
-              <h3 className="text-sm font-bold text-white">AI Finance Copilot</h3>
+              <h3 className="text-xs sm:text-sm font-bold text-white">AI Finance Copilot</h3>
             </div>
             <p className="text-xs text-slate-400 mb-4">
               Ask evidence-backed questions about transaction root causes.
@@ -666,7 +621,7 @@ export default function OverviewDashboard() {
 
           <Link
             href="/dashboard/copilot"
-            className="mt-6 w-full py-2.5 rounded-xl bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold hover:bg-indigo-600/30 transition-all text-center flex items-center justify-center gap-2"
+            className="mt-5 w-full py-2.5 rounded-xl bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold hover:bg-indigo-600/30 transition-all text-center flex items-center justify-center gap-2"
           >
             <span>Open AI Chat Workspace</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -675,10 +630,10 @@ export default function OverviewDashboard() {
       </div>
 
       {/* Needs Attention Table */}
-      <div className="glass-panel rounded-2xl p-6 border border-slate-800">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4 text-amber-400" />
+      <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2">
+          <h3 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0" />
             <span>Needs Attention — High Discrepancy Exceptions</span>
           </h3>
           <Link href="/dashboard/exceptions" className="text-xs text-indigo-400 hover:underline font-semibold">
@@ -686,8 +641,8 @@ export default function OverviewDashboard() {
           </Link>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="table-responsive rounded-xl border border-slate-800/80">
+          <table className="w-full text-left text-xs min-w-[620px]">
             <thead className="bg-slate-900/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
               <tr>
                 <th className="px-4 py-3">Txn ID</th>
@@ -706,18 +661,18 @@ export default function OverviewDashboard() {
                   <td className="px-4 py-3 font-semibold text-indigo-400">{txn.transactionId}</td>
                   <td className="px-4 py-3 font-mono">{txn.invoiceId || 'N/A'}</td>
                   <td className="px-4 py-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-500/10 text-rose-400 border border-rose-500/20 whitespace-nowrap">
                       {formatExceptionName(txn.exceptionType)}
                     </span>
                   </td>
-                  <td className="px-4 py-3">₹{txn.erpAmount.toLocaleString()}</td>
-                  <td className="px-4 py-3">₹{txn.paymentAmount.toLocaleString()}</td>
-                  <td className="px-4 py-3">₹{txn.bankAmount.toLocaleString()}</td>
-                  <td className="px-4 py-3 font-bold text-rose-400">₹{txn.difference.toLocaleString()}</td>
+                  <td className="px-4 py-3 tabular-nums">₹{txn.erpAmount.toLocaleString()}</td>
+                  <td className="px-4 py-3 tabular-nums">₹{txn.paymentAmount.toLocaleString()}</td>
+                  <td className="px-4 py-3 tabular-nums">₹{txn.bankAmount.toLocaleString()}</td>
+                  <td className="px-4 py-3 font-bold text-rose-400 tabular-nums">₹{txn.difference.toLocaleString()}</td>
                   <td className="px-4 py-3">
                     <Link
                       href={`/dashboard/copilot?q=Investigate+transaction+${txn.transactionId}`}
-                      className="px-2.5 py-1 rounded bg-indigo-600/10 border border-indigo-500/20 text-[11px] font-bold text-indigo-400 hover:bg-indigo-600/20 hover:border-indigo-500/40 transition-all inline-flex items-center gap-1"
+                      className="px-2.5 py-1 rounded bg-indigo-600/10 border border-indigo-500/20 text-[11px] font-bold text-indigo-400 hover:bg-indigo-600/20 hover:border-indigo-500/40 transition-all inline-flex items-center gap-1 whitespace-nowrap"
                     >
                       <Bot className="w-3 h-3" />
                       <span>Investigate</span>

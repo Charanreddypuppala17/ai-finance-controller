@@ -17,12 +17,12 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">Platform Settings</h1>
-        <p className="text-xs text-slate-400 mt-1">Configure default reconciliation tolerances and account controls</p>
+        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Platform Settings</h1>
+        <p className="text-xs text-slate-400 mt-0.5">Configure default reconciliation tolerances and account controls</p>
       </div>
 
       <form onSubmit={handleSave} className="space-y-6">
-        <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-4">
+        <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800 space-y-4">
           <h3 className="text-sm font-bold text-white flex items-center gap-2">
             <Sliders className="w-4 h-4 text-indigo-400" />
             <span>Default Engine Tolerances</span>
