@@ -295,13 +295,13 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#070b12] text-slate-100 selection:bg-indigo-500 selection:text-white">
       {/* Header Navigation */}
-      <header className="border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3">
-            <Logo size={34} />
+      <header className="border-b border-slate-800/60 bg-slate-950/90 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
+        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <Logo size={32} />
             <div className="flex items-center">
               <span className="font-bold text-base sm:text-lg tracking-tight text-white">Revalto</span>
-              <span className="ml-2 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+              <span className="ml-1.5 sm:ml-2 text-[9px] sm:text-xs font-semibold px-1.5 sm:px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
                 AI Controller
               </span>
             </div>
@@ -327,15 +327,25 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          {/* Mobile Hamburger Toggle Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 md:hidden transition-colors"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Actions: Quick Demo Button + Hamburger Toggle */}
+          <div className="flex md:hidden items-center gap-2">
+            <Link
+              href="/login"
+              className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-xs shadow-md shadow-indigo-600/20 flex items-center gap-1"
+            >
+              <span>Demo</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/80 bg-slate-900 border border-slate-800 transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Dropdown Navigation Menu */}
@@ -346,33 +356,33 @@ export default function LandingPage() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-xl px-4 pt-3 pb-5 space-y-3"
+              className="md:hidden border-b border-slate-800/80 bg-slate-950/98 backdrop-blur-2xl px-4 pt-3 pb-5 space-y-3 shadow-2xl"
             >
               <Link
                 href="#features"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors"
+                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors border-b border-slate-900"
               >
                 Features
               </Link>
               <Link
                 href="#architecture"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors"
+                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors border-b border-slate-900"
               >
                 How It Works
               </Link>
               <Link
                 href="#audience"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors"
+                className="block py-2 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors border-b border-slate-900"
               >
                 For Whom
               </Link>
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-sm text-center flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-sm text-center flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 mt-2"
               >
                 <span>Launch Demo Dashboard</span>
                 <ArrowRight className="w-4 h-4" />
