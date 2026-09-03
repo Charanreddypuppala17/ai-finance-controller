@@ -10,7 +10,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-[Live Demo](https://ai-finance-controller-psi.vercel.app) · [Documentation](SETUP_GUIDE.md) · [Architecture](#%EF%B8%8F-architecture) · [Reconciliation Engine](#-how-the-3-way-reconciliation-engine-works) · [AI Copilot](#-evidence-grounded-ai-copilot) · [Ground Truth Benchmark](#-testing--ground-truth-benchmarks) · [Report Bug](https://github.com/Charanreddypuppala17/ai-finance-controller/issues)
+[Live Demo](https://revalto-ai.vercel.app/) · [Documentation](SETUP_GUIDE.md) · [Architecture](#%EF%B8%8F-architecture) · [Reconciliation Engine](#-how-the-3-way-reconciliation-engine-works) · [AI Copilot](#-evidence-grounded-ai-copilot) · [Ground Truth Benchmark](#-testing--ground-truth-benchmarks) · [Report Bug](https://github.com/Charanreddypuppala17/ai-finance-controller/issues)
 
 ---
 

@@ -90,7 +90,8 @@ To enable Google Sign-In in your Revalto local app, you need a **Google Client I
 2. Click **+ Create Credentials** at the top and select **OAuth client ID**.
 3. Set the **Application type** to **Web application**.
 4. In **Authorized JavaScript origins**, click **+ Add URI** and enter:
-   - `http://localhost:3000`
+    - `http://localhost:3000`
+    - `https://revalto-ai.vercel.app`
 5. Click **Create** and copy your generated **Client ID** (it will look like `your-id.apps.googleusercontent.com`).
 
 ### 3. Add to your `.env` file
