@@ -1,7 +1,8 @@
-const { prisma } = require('../lib/db/prisma');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 async function inspectRun() {
-  const runId = 'RUN-1787939627981';
+  const runId = process.argv[2] || 'RUN-1788515319801';
   const run = await prisma.reconciliationRun.findUnique({
     where: { id: runId }
   });

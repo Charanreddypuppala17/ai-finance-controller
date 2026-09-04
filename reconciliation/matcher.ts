@@ -4,13 +4,12 @@ import {
   BankRecord,
   ReconciledTransactionResult,
   ReconciliationToleranceOptions,
-  MatchingEvidence,
   ExceptionType,
   MatchingMethod,
   TransactionStatus,
 } from './types';
 import { ReconciliationIndexes } from './indexer';
-import { calculateDateDiffDays } from './normalizer';
+import { calculateDateDiffDays, extractCoreIdentifier } from './normalizer';
 
 export function matchAndClassifyTransactions(
   erpRecords: ErpRecord[],
@@ -28,10 +27,70 @@ export function matchAndClassifyTransactions(
 
   let txnIndex = 1;
 
+  // Helper to find linked payments for an ERP invoice
+  function findPaymentsForErp(erp: ErpRecord): PaymentRecord[] {
+    const invId = erp.invoice_id;
+    // 1. Exact invoice_id
+    let pays = indexes.paymentsByInvoiceId.get(invId);
+    if (pays && pays.length > 0) return pays;
+
+    // 2. Exact payment_id matches invoice_id
+    const paySingle = indexes.paymentsByPaymentId.get(invId);
+    if (paySingle) return [paySingle];
+
+    // 3. Core identifier match (e.g. TXN00305 inside ERP-TXN00305 / GW-TXN00305)
+    const core = extractCoreIdentifier(invId);
+    if (core) {
+      pays = indexes.paymentsByCoreId.get(core);
+      if (pays && pays.length > 0) return pays;
+    }
+
+    return [];
+  }
+
+  // Helper to find linked bank records for a payment / ERP invoice
+  function findBankForPayment(pay: PaymentRecord, erp: ErpRecord): BankRecord[] {
+    // 1. Direct payment_id
+    let banks = indexes.bankByPaymentId.get(pay.payment_id);
+    if (banks && banks.length > 0) return banks;
+
+    // 2. Direct invoice_id
+    banks = indexes.bankByPaymentId.get(pay.invoice_id);
+    if (banks && banks.length > 0) return banks;
+
+    // 3. Settlement ID matches payment_id or invoice_id
+    const bankSingleByPay = indexes.bankBySettlementId.get(pay.payment_id);
+    if (bankSingleByPay) return [bankSingleByPay];
+
+    const bankSingleByInv = indexes.bankBySettlementId.get(pay.invoice_id);
+    if (bankSingleByInv) return [bankSingleByInv];
+
+    // 4. Core ID matching
+    const corePay = extractCoreIdentifier(pay.payment_id);
+    if (corePay) {
+      banks = indexes.bankByCoreId.get(corePay);
+      if (banks && banks.length > 0) return banks;
+    }
+
+    const coreInv = extractCoreIdentifier(pay.invoice_id);
+    if (coreInv && coreInv !== corePay) {
+      banks = indexes.bankByCoreId.get(coreInv);
+      if (banks && banks.length > 0) return banks;
+    }
+
+    const coreErp = extractCoreIdentifier(erp.invoice_id);
+    if (coreErp && coreErp !== corePay && coreErp !== coreInv) {
+      banks = indexes.bankByCoreId.get(coreErp);
+      if (banks && banks.length > 0) return banks;
+    }
+
+    return [];
+  }
+
   // Primary Loop: Process all ERP Invoices
   for (const erp of erpRecords) {
     const invId = erp.invoice_id;
-    const linkedPayments = indexes.paymentsByInvoiceId.get(invId) || [];
+    const linkedPayments = findPaymentsForErp(erp);
 
     if (linkedPayments.length === 0) {
       // Missing Payment Record
@@ -67,7 +126,7 @@ export function matchAndClassifyTransactions(
             netBankDifference: erp.amount,
           },
           dates: { invoiceDate: erp.invoice_date },
-          summary: `ERP invoice ${invId} (₹${erp.amount}) has no corresponding payment gateway transaction.`,
+          summary: `ERP invoice ${invId} (₹${erp.amount.toLocaleString()}) has no corresponding payment gateway transaction.`,
         },
       });
       continue;
@@ -78,7 +137,7 @@ export function matchAndClassifyTransactions(
       const totalPayAmt = linkedPayments.reduce((acc, p) => acc + p.amount, 0);
       for (const p of linkedPayments) {
         processedPayIds.add(p.payment_id);
-        const linkedBankForP = indexes.bankByPaymentId.get(p.payment_id) || [];
+        const linkedBankForP = findBankForPayment(p, erp);
         for (const b of linkedBankForP) processedBankIds.add(b.settlement_id);
       }
 
@@ -124,7 +183,7 @@ export function matchAndClassifyTransactions(
     const pay = linkedPayments[0];
     processedPayIds.add(pay.payment_id);
 
-    const linkedBank = indexes.bankByPaymentId.get(pay.payment_id) || indexes.bankByPaymentId.get(pay.invoice_id) || [];
+    const linkedBank = findBankForPayment(pay, erp);
 
     if (linkedBank.length === 0) {
       // Missing Bank Settlement
@@ -220,7 +279,7 @@ export function matchAndClassifyTransactions(
     const bank = linkedBank[0];
     processedBankIds.add(bank.settlement_id);
 
-    // Now evaluate full 3-source matching
+    // Evaluate full 3-source matching
     const dateDiffDays = calculateDateDiffDays(pay.payment_date, bank.settlement_date);
     const erpVsPayDiff = Math.abs(erp.amount - pay.amount);
     const bankDiff = Math.abs(pay.amount - bank.amount);
@@ -230,12 +289,12 @@ export function matchAndClassifyTransactions(
     let matchingMethod: MatchingMethod = 'LEVEL_1_EXACT_IDENTIFIER';
     let summaryText = `Exact match across ERP invoice ${invId}, Payment ${pay.payment_id}, and Bank Settlement ${bank.settlement_id}.`;
 
-    // Check 1: ERP amount vs Payment amount
+    // Check 1: ERP amount vs Payment amount discrepancy
     if (erpVsPayDiff > amountTolerance) {
       status = 'EXCEPTION';
       exceptionType = 'AMOUNT_MISMATCH';
       matchingMethod = 'LEVEL_3_AMOUNT_COMPARISON';
-      summaryText = `Payment amount (₹${pay.amount}) differs from ERP invoice amount (₹${erp.amount}) by ₹${erpVsPayDiff.toFixed(2)}.`;
+      summaryText = `Payment amount (₹${pay.amount.toLocaleString()}) differs from ERP invoice amount (₹${erp.amount.toLocaleString()}) by ₹${erpVsPayDiff.toFixed(2)}.`;
     }
     // Check 2: Settlement Timing Lag
     else if (dateDiffDays > dateToleranceDays) {
@@ -251,12 +310,12 @@ export function matchAndClassifyTransactions(
         status = 'EXCEPTION';
         exceptionType = 'FEE_MISMATCH';
         matchingMethod = 'LEVEL_3_AMOUNT_COMPARISON';
-        summaryText = `Bank settlement (₹${bank.amount}) is ₹${bankDiff.toFixed(2)} lower than payment amount (₹${pay.amount}) due to gateway fee (₹${pay.fee}).`;
+        summaryText = `Bank settlement (₹${bank.amount.toLocaleString()}) is ₹${bankDiff.toFixed(2)} lower than payment amount (₹${pay.amount.toLocaleString()}) due to gateway fee (₹${pay.fee.toLocaleString()}).`;
       } else {
         status = 'EXCEPTION';
         exceptionType = 'AMOUNT_MISMATCH';
         matchingMethod = 'LEVEL_3_AMOUNT_COMPARISON';
-        summaryText = `Bank settlement amount (₹${bank.amount}) differs from payment amount (₹${pay.amount}) by ₹${bankDiff.toFixed(2)} (unexplained by fee of ₹${pay.fee}).`;
+        summaryText = `Bank settlement amount (₹${bank.amount.toLocaleString()}) differs from payment amount (₹${pay.amount.toLocaleString()}) by ₹${bankDiff.toFixed(2)} (unexplained by fee of ₹${pay.fee.toLocaleString()}).`;
       }
     }
 
@@ -348,7 +407,7 @@ export function matchAndClassifyTransactions(
             netBankDifference: bank.amount,
           },
           dates: { settlementDate: bank.settlement_date },
-          summary: `Bank settlement ${bank.settlement_id} (₹${bank.amount}) has no corresponding payment or ERP invoice record.`,
+          summary: `Bank settlement ${bank.settlement_id} (₹${bank.amount.toLocaleString()}) has no corresponding payment or ERP invoice record.`,
         },
       });
     }

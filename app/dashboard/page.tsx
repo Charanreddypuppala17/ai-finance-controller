@@ -227,6 +227,10 @@ export default function OverviewDashboard() {
             ? runData.runs.find((r: any) => r.id === activeRunId) || runData.runs[0]
             : runData.runs[0];
           setSummary(currentRun);
+          if (typeof window !== 'undefined' && currentRun) {
+            localStorage.setItem('active_run_id', currentRun.id);
+            localStorage.setItem('active_run_total', String(currentRun.totalRecords));
+          }
         } else {
           setSummary(null);
         }

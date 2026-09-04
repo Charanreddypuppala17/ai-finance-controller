@@ -21,9 +21,27 @@ export function reconcileDatasets(
   const errors: string[] = [];
 
   // Step 1: Parse CSVs
-  const parsedErp = parseCsvString(erpCsv);
-  const parsedPayment = parseCsvString(paymentCsv);
-  const parsedBank = parseCsvString(bankCsv);
+  let parsed1 = parseCsvString(erpCsv);
+  let parsed2 = parseCsvString(paymentCsv);
+  let parsed3 = parseCsvString(bankCsv);
+
+  // Auto-detection & Swapping Protection
+  // If files were uploaded into different card slots, detect and re-route
+  const inputs = [
+    { parsed: parsed1, type: parsed1.detectedType, original: 'erp' },
+    { parsed: parsed2, type: parsed2.detectedType, original: 'payment' },
+    { parsed: parsed3, type: parsed3.detectedType, original: 'bank' },
+  ];
+
+  const erpCandidate = inputs.find(i => i.type === 'ERP') || inputs[0];
+  const paymentCandidate = inputs.find(i => i !== erpCandidate && i.type === 'PAYMENT') || 
+                           inputs.find(i => i !== erpCandidate && i.original === 'payment') || 
+                           inputs[1];
+  const bankCandidate = inputs.find(i => i !== erpCandidate && i !== paymentCandidate) || inputs[2];
+
+  const parsedErp = erpCandidate.parsed;
+  const parsedPayment = paymentCandidate.parsed;
+  const parsedBank = bankCandidate.parsed;
 
   errors.push(...parsedErp.errors, ...parsedPayment.errors, ...parsedBank.errors);
 
@@ -37,7 +55,7 @@ export function reconcileDatasets(
   const normalizedPayment = validPayment.valid.map(normalizePaymentRecord);
   const normalizedBank = validBank.valid.map(normalizeBankRecord);
 
-  // Step 4: Build Hash Indexes
+  // Step 4: Build Hash & Multi-Key Indexes
   const indexes = buildReconciliationIndexes(normalizedErp, normalizedPayment, normalizedBank);
 
   // Step 5: Execute 5-Level Matching & Exception Classification
