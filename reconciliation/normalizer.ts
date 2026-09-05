@@ -57,12 +57,17 @@ export function parseCleanDate(val: any): string {
 export function extractCoreIdentifier(id?: string): string {
   if (!id) return '';
   let clean = String(id).trim().toUpperCase();
-  clean = clean.replace(/[-_:]+(DUP|B)$/i, '');
+  
+  // Remove trailing duplicate indicators (e.g., -DUP, -B, -COPY, -DUP2)
+  clean = clean.replace(/[-_:]+(DUP\d*|COPY\d*|B)$/i, '');
+  clean = clean.replace(/^[#\s]+/, '');
+
   let prev = '';
   while (clean !== prev) {
     prev = clean;
-    clean = clean.replace(/^(ERP|GW|BNK|BANK|SET|INV|PAY|TXN)[-_:]*/i, '');
+    clean = clean.replace(/^(ERP|GW|BNK|BANK|SET|INV|PAY|TXN|ORDER|ORD|BILL|DOC|VOUCHER|CHALLAN|CR|DR|DEP|TR|RF)[-_:\s]*/i, '');
   }
+
   return clean || String(id).trim().toUpperCase();
 }
 
@@ -104,12 +109,17 @@ export function normalizePaymentRecord(rec: PaymentRecord): PaymentRecord {
 export function normalizeBankRecord(rec: BankRecord): BankRecord {
   const setId = (rec.settlement_id || '').trim().toUpperCase();
   const payId = (rec.payment_id || setId).trim().toUpperCase();
+  const rawAmount = rec.amount || (rec.raw ? rec.raw['bank_amount'] || rec.raw['credit_amount'] || rec.raw['deposit_amount'] || rec.raw['deposit'] || rec.raw['credit'] : 0);
+  const narration = rec.narration || rec.description || (rec.raw ? rec.raw['narration'] || rec.raw['description'] || rec.raw['particulars'] || rec.raw['remarks'] : '') || '';
+
   return {
     ...rec,
     settlement_id: setId,
     payment_id: payId,
-    amount: Math.round(parseCleanAmount(rec.amount) * 100) / 100,
+    amount: Math.round(parseCleanAmount(rawAmount) * 100) / 100,
     settlement_date: parseCleanDate(rec.settlement_date),
     status: (rec.status || 'SETTLED').trim().toUpperCase(),
+    narration: String(narration).trim(),
+    description: String(narration).trim(),
   };
 }

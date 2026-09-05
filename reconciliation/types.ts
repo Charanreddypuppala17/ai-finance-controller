@@ -25,6 +25,8 @@ export interface BankRecord {
   amount: number;
   settlement_date: string;
   status: string;
+  narration?: string;
+  description?: string;
   raw?: Record<string, any>;
 }
 

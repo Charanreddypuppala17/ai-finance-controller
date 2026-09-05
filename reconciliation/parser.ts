@@ -25,13 +25,15 @@ export function detectSourceType(headers: string[]): SourceType {
   let bankScore = 0;
 
   for (const h of cleaned) {
-    if (['invoice_id', 'invoice_no', 'customer_id', 'erp_reference', 'billed_amount', 'bill_no', 'invoice_date', 'customer_name'].includes(h)) erpScore += 3;
-    if (['fee', 'gateway_fee', 'gateway_reference', 'gateway_id', 'charge_id', 'captured', 'payment_status', 'payment_date'].includes(h)) payScore += 3;
-    if (['settlement_id', 'settlement_date', 'bank_reference', 'credit_amount', 'value_date', 'utr', 'rrn', 'payout_id', 'transaction_type', 'statement_id'].includes(h)) bankScore += 3;
+    // High-confidence exact matches
+    if (['invoice_id', 'invoice_no', 'customer_id', 'erp_reference', 'billed_amount', 'bill_no', 'invoice_date', 'customer_name', 'order_id', 'voucher_no', 'challan_no', 'doc_no'].includes(h)) erpScore += 4;
+    if (['fee', 'gateway_fee', 'gateway_reference', 'gateway_id', 'charge_id', 'captured', 'payment_status', 'payment_date', 'processing_fee', 'commission', 'mdr', 'auth_code'].includes(h)) payScore += 4;
+    if (['settlement_id', 'settlement_date', 'bank_reference', 'credit_amount', 'value_date', 'utr', 'rrn', 'payout_id', 'transaction_type', 'statement_id', 'narration', 'deposit', 'withdrawal', 'balance'].includes(h)) bankScore += 4;
 
-    if (h.includes('invoice') || h.includes('cust') || h.includes('bill')) erpScore += 1;
-    if (h.includes('gateway') || h.includes('pay') || h.includes('fee') || h.includes('charge')) payScore += 1;
-    if (h.includes('bank') || h.includes('settle') || h.includes('payout') || h.includes('credit') || h.includes('utr')) bankScore += 1;
+    // Keyword inclusions
+    if (h.includes('invoice') || h.includes('cust') || h.includes('bill') || h.includes('order') || h.includes('voucher') || h.includes('challan') || h.includes('receivable')) erpScore += 1;
+    if (h.includes('gateway') || h.includes('pay') || h.includes('fee') || h.includes('charge') || h.includes('captured') || h.includes('stripe') || h.includes('razorpay')) payScore += 1;
+    if (h.includes('bank') || h.includes('settle') || h.includes('payout') || h.includes('credit') || h.includes('debit') || h.includes('utr') || h.includes('rrn') || h.includes('statement') || h.includes('narrat') || h.includes('deposit')) bankScore += 1;
   }
 
   if (bankScore > payScore && bankScore > erpScore) return 'BANK';
@@ -50,7 +52,41 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
     normalized[key] = value;
   }
 
-  // 1. ERP mappings
+  // 1. Universal Amount mapping
+  if (!normalized['amount']) {
+    const fallback =
+      normalized['amount'] ??
+      normalized['invoice_amount'] ??
+      normalized['inv_amount'] ??
+      normalized['invoice_amt'] ??
+      normalized['payment_amount'] ??
+      normalized['pay_amount'] ??
+      normalized['captured_amount'] ??
+      normalized['credit_amount'] ??
+      normalized['credit_amt'] ??
+      normalized['credit'] ??
+      normalized['deposit_amount'] ??
+      normalized['deposit_amt'] ??
+      normalized['deposit'] ??
+      normalized['settlement_amount'] ??
+      normalized['payout_amount'] ??
+      normalized['total_amount'] ??
+      normalized['total_amt'] ??
+      normalized['total'] ??
+      normalized['gross_amount'] ??
+      normalized['gross_amt'] ??
+      normalized['gross'] ??
+      normalized['billed_amount'] ??
+      normalized['billed_amt'] ??
+      normalized['net_amount'] ??
+      normalized['net_amt'] ??
+      normalized['price'] ??
+      normalized['val'] ??
+      normalized['value'];
+    if (fallback !== undefined) normalized['amount'] = fallback;
+  }
+
+  // 2. ERP mappings
   if (!normalized['invoice_id']) {
     const fallback =
       normalized['invoice_id'] ??
@@ -59,23 +95,40 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['invoiceno'] ??
       normalized['invoice_number'] ??
       normalized['invoice_num'] ??
+      normalized['invoice'] ??
+      normalized['inv'] ??
+      normalized['inv_no'] ??
       normalized['bill_no'] ??
       normalized['bill_number'] ??
       normalized['bill_id'] ??
+      normalized['bill'] ??
       normalized['order_id'] ??
       normalized['orderno'] ??
       normalized['order_number'] ??
       normalized['order_no'] ??
+      normalized['order'] ??
+      normalized['ord_id'] ??
+      normalized['ord_no'] ??
       normalized['transaction_id'] ??
       normalized['txn_id'] ??
       normalized['txnid'] ??
+      normalized['txn_no'] ??
+      normalized['txn'] ??
       normalized['erp_reference'] ??
       normalized['erp_ref'] ??
       normalized['reference_id'] ??
       normalized['ref_id'] ??
+      normalized['ref_no'] ??
       normalized['reference_no'] ??
+      normalized['reference'] ??
+      normalized['ref'] ??
       normalized['doc_no'] ??
+      normalized['doc_number'] ??
+      normalized['doc_id'] ??
       normalized['voucher_no'] ??
+      normalized['voucher_number'] ??
+      normalized['voucher_id'] ??
+      normalized['challan_no'] ??
       normalized['id'];
     if (fallback !== undefined) normalized['invoice_id'] = String(fallback).trim();
   }
@@ -90,13 +143,20 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['customer'] ??
       normalized['cust_id'] ??
       normalized['cust_no'] ??
+      normalized['cust_name'] ??
+      normalized['cust'] ??
       normalized['client_id'] ??
       normalized['client_name'] ??
+      normalized['client'] ??
       normalized['account_id'] ??
       normalized['account_no'] ??
+      normalized['account_name'] ??
+      normalized['account'] ??
       normalized['user_id'] ??
       normalized['payer_id'] ??
-      normalized['party_name'];
+      normalized['payer_name'] ??
+      normalized['party_name'] ??
+      normalized['party_id'];
     if (fallback !== undefined) normalized['customer_id'] = String(fallback).trim();
   }
 
@@ -104,37 +164,21 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
     const fallback =
       normalized['invoice_date'] ??
       normalized['inv_date'] ??
+      normalized['bill_date'] ??
+      normalized['order_date'] ??
+      normalized['doc_date'] ??
       normalized['transaction_date'] ??
       normalized['txn_date'] ??
       normalized['tx_date'] ??
       normalized['posting_date'] ??
       normalized['posted_date'] ??
       normalized['date'] ??
-      normalized['bill_date'] ??
       normalized['created_at'] ??
+      normalized['created_date'] ??
       normalized['timestamp'] ??
       normalized['datetime'] ??
       normalized['time'];
     if (fallback !== undefined) normalized['invoice_date'] = String(fallback).trim();
-  }
-
-  if (!normalized['amount']) {
-    const fallback =
-      normalized['amount'] ??
-      normalized['invoice_amount'] ??
-      normalized['inv_amount'] ??
-      normalized['invoice_amt'] ??
-      normalized['total_amount'] ??
-      normalized['total_amt'] ??
-      normalized['total'] ??
-      normalized['gross_amount'] ??
-      normalized['gross_amt'] ??
-      normalized['billed_amount'] ??
-      normalized['net_amount'] ??
-      normalized['net_amt'] ??
-      normalized['price'] ??
-      normalized['val'];
-    if (fallback !== undefined) normalized['amount'] = fallback;
   }
 
   if (!normalized['status']) {
@@ -143,11 +187,12 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['payment_status'] ??
       normalized['invoice_status'] ??
       normalized['state'] ??
-      normalized['record_status'];
+      normalized['record_status'] ??
+      normalized['doc_status'];
     if (fallback !== undefined) normalized['status'] = String(fallback).trim();
   }
 
-  // 2. Payment mappings
+  // 3. Payment mappings
   if (!normalized['payment_id']) {
     const fallback =
       normalized['payment_id'] ??
@@ -156,10 +201,12 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['payment_number'] ??
       normalized['payment_no'] ??
       normalized['paymentno'] ??
+      normalized['payment'] ??
       normalized['gateway_reference'] ??
       normalized['gateway_ref'] ??
       normalized['gateway_id'] ??
       normalized['gw_ref'] ??
+      normalized['gw_id'] ??
       normalized['charge_id'] ??
       normalized['ch_id'] ??
       normalized['payment_reference'] ??
@@ -168,38 +215,19 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['ref_id'] ??
       normalized['ref_no'] ??
       normalized['reference_no'] ??
+      normalized['reference'] ??
+      normalized['ref'] ??
       normalized['transaction_id'] ??
       normalized['txn_id'] ??
       normalized['txnid'] ??
-      normalized['order_id'] ??
-      normalized['orderid'] ??
-      normalized['id'];
-    if (fallback !== undefined) normalized['payment_id'] = String(fallback).trim();
-  }
-
-  if (!normalized['invoice_id']) {
-    const fallback =
-      normalized['invoice_id'] ??
-      normalized['inv_id'] ??
-      normalized['invoice_no'] ??
-      normalized['invoiceno'] ??
-      normalized['invoice_reference'] ??
-      normalized['invoice_ref'] ??
+      normalized['txn_no'] ??
+      normalized['txn'] ??
       normalized['order_id'] ??
       normalized['orderid'] ??
       normalized['order_no'] ??
       normalized['orderno'] ??
-      normalized['order_reference'] ??
-      normalized['order_ref'] ??
-      normalized['merchant_reference'] ??
-      normalized['merchant_ref'] ??
-      normalized['merchant_order_id'] ??
-      normalized['reference'] ??
-      normalized['ref_id'] ??
-      normalized['transaction_id'] ??
-      normalized['txn_id'] ??
-      normalized['txnid'];
-    if (fallback !== undefined) normalized['invoice_id'] = String(fallback).trim();
+      normalized['id'];
+    if (fallback !== undefined) normalized['payment_id'] = String(fallback).trim();
   }
 
   if (!normalized['payment_date']) {
@@ -237,7 +265,7 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
     if (fallback !== undefined) normalized['fee'] = fallback;
   }
 
-  // 3. Bank mappings
+  // 4. Bank mappings
   if (!normalized['settlement_id']) {
     const fallback =
       normalized['settlement_id'] ??
@@ -249,18 +277,24 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['payout_id'] ??
       normalized['payout_no'] ??
       normalized['payout_reference'] ??
-      normalized['utr'] ??
       normalized['utr_number'] ??
       normalized['utr_no'] ??
+      normalized['utr'] ??
+      normalized['rrn_no'] ??
       normalized['rrn'] ??
+      normalized['journal_id'] ??
+      normalized['journal_no'] ??
+      normalized['statement_id'] ??
+      normalized['statement_no'] ??
       normalized['ref_no'] ??
       normalized['reference_no'] ??
       normalized['reference_number'] ??
-      normalized['journal_id'] ??
-      normalized['statement_id'] ??
+      normalized['reference'] ??
+      normalized['ref'] ??
       normalized['transaction_id'] ??
       normalized['txn_id'] ??
       normalized['txnid'] ??
+      normalized['txn_no'] ??
       normalized['id'];
     if (fallback !== undefined) normalized['settlement_id'] = String(fallback).trim();
   }
@@ -285,7 +319,10 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['bank_ref'] ??
       normalized['narration'] ??
       normalized['description'] ??
-      normalized['remarks'];
+      normalized['remarks'] ??
+      normalized['details'] ??
+      normalized['particulars'] ??
+      normalized['memo'];
     if (fallback !== undefined) normalized['payment_id'] = String(fallback).trim();
   }
 
@@ -293,9 +330,6 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
     const fallback =
       normalized['settlement_date'] ??
       normalized['payout_date'] ??
-      normalized['transaction_date'] ??
-      normalized['txn_date'] ??
-      normalized['tx_date'] ??
       normalized['value_date'] ??
       normalized['val_date'] ??
       normalized['booking_date'] ??
@@ -303,12 +337,47 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['posted_date'] ??
       normalized['clearing_date'] ??
       normalized['statement_date'] ??
+      normalized['transaction_date'] ??
+      normalized['txn_date'] ??
+      normalized['tx_date'] ??
       normalized['created_at'] ??
       normalized['timestamp'] ??
       normalized['date'] ??
       normalized['datetime'] ??
       normalized['time'];
     if (fallback !== undefined) normalized['settlement_date'] = String(fallback).trim();
+  }
+
+  // Bank amounts: Prioritize Credit / Deposit / Settlement Amount / Net Amount
+  const bankAmountFallback =
+    normalized['credit_amount'] ??
+    normalized['credit_amt'] ??
+    normalized['credit'] ??
+    normalized['deposit_amount'] ??
+    normalized['deposit_amt'] ??
+    normalized['deposit'] ??
+    normalized['settlement_amount'] ??
+    normalized['payout_amount'] ??
+    normalized['net_amount'] ??
+    normalized['net_amt'] ??
+    normalized['amount'];
+  if (bankAmountFallback !== undefined) {
+    normalized['bank_amount'] = bankAmountFallback;
+  }
+
+  // Preserve Narration & Description
+  const narrationFallback =
+    normalized['narration'] ??
+    normalized['particulars'] ??
+    normalized['description'] ??
+    normalized['remarks'] ??
+    normalized['details'] ??
+    normalized['memo'] ??
+    normalized['statement_description'] ??
+    normalized['bank_reference'];
+  if (narrationFallback !== undefined) {
+    normalized['narration'] = String(narrationFallback).trim();
+    normalized['description'] = String(narrationFallback).trim();
   }
 
   return normalized;

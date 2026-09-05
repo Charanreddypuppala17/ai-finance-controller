@@ -7,9 +7,14 @@ export interface ReconciliationIndexes {
   paymentsByInvoiceId: Map<string, PaymentRecord[]>;
   paymentsByPaymentId: Map<string, PaymentRecord>;
   paymentsByCoreId: Map<string, PaymentRecord[]>;
+  paymentsByAmount: Map<number, PaymentRecord[]>;
+  paymentsByCustomerAndAmount: Map<string, PaymentRecord[]>;
   bankByPaymentId: Map<string, BankRecord[]>;
   bankBySettlementId: Map<string, BankRecord>;
   bankByCoreId: Map<string, BankRecord[]>;
+  bankByAmount: Map<number, BankRecord[]>;
+  bankByCustomerAndAmount: Map<string, BankRecord[]>;
+  bankWithNarration: BankRecord[];
 }
 
 export function buildReconciliationIndexes(
@@ -22,9 +27,14 @@ export function buildReconciliationIndexes(
   const paymentsByInvoiceId = new Map<string, PaymentRecord[]>();
   const paymentsByPaymentId = new Map<string, PaymentRecord>();
   const paymentsByCoreId = new Map<string, PaymentRecord[]>();
+  const paymentsByAmount = new Map<number, PaymentRecord[]>();
+  const paymentsByCustomerAndAmount = new Map<string, PaymentRecord[]>();
   const bankByPaymentId = new Map<string, BankRecord[]>();
   const bankBySettlementId = new Map<string, BankRecord>();
   const bankByCoreId = new Map<string, BankRecord[]>();
+  const bankByAmount = new Map<number, BankRecord[]>();
+  const bankByCustomerAndAmount = new Map<string, BankRecord[]>();
+  const bankWithNarration: BankRecord[] = [];
 
   for (const erp of erpRecords) {
     erpByInvoiceId.set(erp.invoice_id, erp);
@@ -66,6 +76,21 @@ export function buildReconciliationIndexes(
         paymentsByCoreId.set(corePay, existingCore);
       }
     }
+
+    // Amount Indexing (rounded to 2 decimals)
+    const roundedAmt = Math.round(pay.amount * 100) / 100;
+    const existingByAmt = paymentsByAmount.get(roundedAmt) || [];
+    existingByAmt.push(pay);
+    paymentsByAmount.set(roundedAmt, existingByAmt);
+
+    // Customer + Amount Indexing (if customer available in raw)
+    const custId = pay.raw ? String(pay.raw['customer_id'] || pay.raw['cust_id'] || pay.raw['customer'] || '').trim().toUpperCase() : '';
+    if (custId) {
+      const key = `${custId}_${roundedAmt}`;
+      const existingByCustAmt = paymentsByCustomerAndAmount.get(key) || [];
+      existingByCustAmt.push(pay);
+      paymentsByCustomerAndAmount.set(key, existingByCustAmt);
+    }
   }
 
   for (const bank of bankRecords) {
@@ -102,6 +127,26 @@ export function buildReconciliationIndexes(
         bankByCoreId.set(coreSet, existingCore);
       }
     }
+
+    // Amount Indexing
+    const roundedAmt = Math.round(bank.amount * 100) / 100;
+    const existingByAmt = bankByAmount.get(roundedAmt) || [];
+    existingByAmt.push(bank);
+    bankByAmount.set(roundedAmt, existingByAmt);
+
+    // Customer + Amount Indexing for Bank (if available in raw or particulars)
+    const custId = bank.raw ? String(bank.raw['customer_id'] || bank.raw['cust_id'] || bank.raw['customer'] || '').trim().toUpperCase() : '';
+    if (custId) {
+      const key = `${custId}_${roundedAmt}`;
+      const existingByCustAmt = bankByCustomerAndAmount.get(key) || [];
+      existingByCustAmt.push(bank);
+      bankByCustomerAndAmount.set(key, existingByCustAmt);
+    }
+
+    // Narration Indexing
+    if (bank.narration && bank.narration.length > 2) {
+      bankWithNarration.push(bank);
+    }
   }
 
   return {
@@ -110,8 +155,13 @@ export function buildReconciliationIndexes(
     paymentsByInvoiceId,
     paymentsByPaymentId,
     paymentsByCoreId,
+    paymentsByAmount,
+    paymentsByCustomerAndAmount,
     bankByPaymentId,
     bankBySettlementId,
     bankByCoreId,
+    bankByAmount,
+    bankByCustomerAndAmount,
+    bankWithNarration,
   };
 }
