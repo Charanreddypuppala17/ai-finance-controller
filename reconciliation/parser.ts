@@ -254,14 +254,23 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['gw_fee'] ??
       normalized['charge'] ??
       normalized['charges'] ??
+      normalized['charge_amount'] ??
       normalized['processing_fee'] ??
       normalized['commission'] ??
+      normalized['commission_amount'] ??
       normalized['mdr'] ??
       normalized['fee_amount'] ??
       normalized['fees'] ??
       normalized['tax'] ??
       normalized['service_tax'] ??
-      normalized['gst'];
+      normalized['gst'] ??
+      normalized['deduction'] ??
+      normalized['deductions'] ??
+      normalized['gateway_charge'] ??
+      normalized['pg_fee'] ??
+      normalized['convenience_fee'] ??
+      normalized['service_fee'] ??
+      normalized['merchant_fee'];
     if (fallback !== undefined) normalized['fee'] = fallback;
   }
 

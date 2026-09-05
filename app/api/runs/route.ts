@@ -79,8 +79,8 @@ export async function GET(req: Request) {
         }),
         prisma.reconciledTransaction.groupBy({
           by: ['exceptionType'],
-          where: { 
-            runId: targetRun.id, 
+          where: {
+            runId: targetRun.id,
             status: 'EXCEPTION',
             resolutionState: { not: 'RESOLVED' }
           },
