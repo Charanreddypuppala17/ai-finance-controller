@@ -31,6 +31,7 @@ export function matchAndClassifyTransactions(
   // Tiered Helper to find linked payments for an ERP invoice
   function findPaymentsForErp(erp: ErpRecord): { payments: PaymentRecord[]; method: MatchingMethod } {
     const invId = erp.invoice_id;
+    const orderId = erp.raw ? String(erp.raw['order_id'] || erp.raw['order_reference'] || erp.raw['order_no'] || erp.raw['orderid'] || erp.raw['reference_id'] || erp.raw['ref_id'] || '').trim() : '';
 
     // Tier 1: Exact ID matching
     let pays = indexes.paymentsByInvoiceId.get(invId);
@@ -43,12 +44,33 @@ export function matchAndClassifyTransactions(
       return { payments: [paySingle], method: 'LEVEL_1_EXACT_IDENTIFIER' };
     }
 
+    if (orderId) {
+      pays = indexes.paymentsByInvoiceId.get(orderId);
+      if (pays && pays.length > 0) {
+        return { payments: pays, method: 'LEVEL_1_EXACT_IDENTIFIER' };
+      }
+      const paySingleOrd = indexes.paymentsByPaymentId.get(orderId);
+      if (paySingleOrd) {
+        return { payments: [paySingleOrd], method: 'LEVEL_1_EXACT_IDENTIFIER' };
+      }
+    }
+
     // Tier 2: Normalized Core ID match (e.g. TXN00305 inside ERP-TXN00305 / GW-TXN00305)
     const core = extractCoreIdentifier(invId);
     if (core && core.length >= 2) {
       pays = indexes.paymentsByCoreId.get(core);
       if (pays && pays.length > 0) {
         return { payments: pays, method: 'LEVEL_2_LINKED_REFERENCE' };
+      }
+    }
+
+    if (orderId) {
+      const ordCore = extractCoreIdentifier(orderId);
+      if (ordCore && ordCore.length >= 2) {
+        pays = indexes.paymentsByCoreId.get(ordCore);
+        if (pays && pays.length > 0) {
+          return { payments: pays, method: 'LEVEL_2_LINKED_REFERENCE' };
+        }
       }
     }
 
@@ -95,13 +117,21 @@ export function matchAndClassifyTransactions(
   // Tiered Helper for Direct ERP to Bank matching (bypassed gateway / direct deposit / 2-way reconciliation)
   function findBankForErpDirect(erp: ErpRecord): { banks: BankRecord[]; method: MatchingMethod } {
     const invId = erp.invoice_id;
+    const orderId = erp.raw ? String(erp.raw['order_id'] || erp.raw['order_reference'] || erp.raw['order_no'] || erp.raw['orderid'] || erp.raw['reference_id'] || erp.raw['ref_id'] || '').trim() : '';
 
-    // Tier 1: Direct payment_id / settlement_id exact match with invoice_id
+    // Tier 1: Direct payment_id / settlement_id exact match with invoice_id or order_id
     let banks = indexes.bankByPaymentId.get(invId);
     if (banks && banks.length > 0) return { banks, method: 'LEVEL_1_EXACT_IDENTIFIER' };
 
     const bankSingle = indexes.bankBySettlementId.get(invId);
     if (bankSingle) return { banks: [bankSingle], method: 'LEVEL_1_EXACT_IDENTIFIER' };
+
+    if (orderId) {
+      banks = indexes.bankByPaymentId.get(orderId);
+      if (banks && banks.length > 0) return { banks, method: 'LEVEL_1_EXACT_IDENTIFIER' };
+      const bankSingleOrd = indexes.bankBySettlementId.get(orderId);
+      if (bankSingleOrd) return { banks: [bankSingleOrd], method: 'LEVEL_1_EXACT_IDENTIFIER' };
+    }
 
     // Tier 2: Core ID match (e.g. 10001 or TXN00305)
     const coreErp = extractCoreIdentifier(invId);
@@ -110,8 +140,16 @@ export function matchAndClassifyTransactions(
       if (banks && banks.length > 0) return { banks, method: 'LEVEL_2_LINKED_REFERENCE' };
     }
 
+    if (orderId) {
+      const ordCore = extractCoreIdentifier(orderId);
+      if (ordCore && ordCore.length >= 2) {
+        banks = indexes.bankByCoreId.get(ordCore);
+        if (banks && banks.length > 0) return { banks, method: 'LEVEL_2_LINKED_REFERENCE' };
+      }
+    }
+
     // Tier 3: Narration & Description search in bank statements
-    const searchTokens = [invId, coreErp, erp.customer_id].filter(t => t && t.length >= 3 && t !== 'UNKNOWN');
+    const searchTokens = [invId, orderId, coreErp].filter(t => t && t.length >= 3);
     for (const bank of indexes.bankWithNarration) {
       if (processedBankIds.has(bank.settlement_id)) continue;
       const upperNarration = (bank.narration || '').toUpperCase();
@@ -164,6 +202,9 @@ export function matchAndClassifyTransactions(
 
   // Tiered Helper to find linked bank records for a payment & ERP invoice
   function findBankForPayment(pay: PaymentRecord, erp: ErpRecord): { banks: BankRecord[]; method: MatchingMethod } {
+    const payOrderId = pay.raw ? String(pay.raw['order_reference'] || pay.raw['order_id'] || pay.raw['order_no'] || pay.raw['orderid'] || pay.raw['reference_id'] || '').trim() : '';
+    const erpOrderId = erp.raw ? String(erp.raw['order_id'] || erp.raw['order_reference'] || erp.raw['order_no'] || erp.raw['orderid'] || '').trim() : '';
+
     // Tier 1: Direct payment_id / invoice_id / settlement_id exact match
     let banks = indexes.bankByPaymentId.get(pay.payment_id);
     if (banks && banks.length > 0) return { banks, method: 'LEVEL_1_EXACT_IDENTIFIER' };
@@ -176,6 +217,20 @@ export function matchAndClassifyTransactions(
 
     const bankSingleByInv = indexes.bankBySettlementId.get(pay.invoice_id);
     if (bankSingleByInv) return { banks: [bankSingleByInv], method: 'LEVEL_1_EXACT_IDENTIFIER' };
+
+    if (payOrderId) {
+      banks = indexes.bankByPaymentId.get(payOrderId);
+      if (banks && banks.length > 0) return { banks, method: 'LEVEL_1_EXACT_IDENTIFIER' };
+      const bSingle = indexes.bankBySettlementId.get(payOrderId);
+      if (bSingle) return { banks: [bSingle], method: 'LEVEL_1_EXACT_IDENTIFIER' };
+    }
+
+    if (erpOrderId && erpOrderId !== payOrderId) {
+      banks = indexes.bankByPaymentId.get(erpOrderId);
+      if (banks && banks.length > 0) return { banks, method: 'LEVEL_1_EXACT_IDENTIFIER' };
+      const bSingle = indexes.bankBySettlementId.get(erpOrderId);
+      if (bSingle) return { banks: [bSingle], method: 'LEVEL_1_EXACT_IDENTIFIER' };
+    }
 
     // Tier 2: Core ID matching
     const corePay = extractCoreIdentifier(pay.payment_id);
@@ -194,6 +249,14 @@ export function matchAndClassifyTransactions(
     if (coreErp && coreErp.length >= 2 && coreErp !== corePay && coreErp !== coreInv) {
       banks = indexes.bankByCoreId.get(coreErp);
       if (banks && banks.length > 0) return { banks, method: 'LEVEL_2_LINKED_REFERENCE' };
+    }
+
+    if (payOrderId) {
+      const corePayOrd = extractCoreIdentifier(payOrderId);
+      if (corePayOrd && corePayOrd.length >= 2 && corePayOrd !== corePay && corePayOrd !== coreInv) {
+        banks = indexes.bankByCoreId.get(corePayOrd);
+        if (banks && banks.length > 0) return { banks, method: 'LEVEL_2_LINKED_REFERENCE' };
+      }
     }
 
     // Tier 3: Narration & Description substring search

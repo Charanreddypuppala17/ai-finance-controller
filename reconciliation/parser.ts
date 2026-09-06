@@ -56,6 +56,9 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
   if (!normalized['amount']) {
     const fallback =
       normalized['amount'] ??
+      normalized['transaction_amount'] ??
+      normalized['txn_amount'] ??
+      normalized['trans_amount'] ??
       normalized['invoice_amount'] ??
       normalized['inv_amount'] ??
       normalized['invoice_amt'] ??
@@ -107,6 +110,8 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['order_number'] ??
       normalized['order_no'] ??
       normalized['order'] ??
+      normalized['order_reference'] ??
+      normalized['order_ref'] ??
       normalized['ord_id'] ??
       normalized['ord_no'] ??
       normalized['transaction_id'] ??
@@ -196,6 +201,11 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
   if (!normalized['payment_id']) {
     const fallback =
       normalized['payment_id'] ??
+      normalized['gateway_txn_id'] ??
+      normalized['gateway_txnid'] ??
+      normalized['gateway_transaction_id'] ??
+      normalized['gateway_trans_id'] ??
+      normalized['gtw_txn_id'] ??
       normalized['pay_id'] ??
       normalized['paymentid'] ??
       normalized['payment_number'] ??

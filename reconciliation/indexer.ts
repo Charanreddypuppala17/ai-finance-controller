@@ -40,6 +40,15 @@ export function buildReconciliationIndexes(
     erpByInvoiceId.set(erp.invoice_id, erp);
     const core = extractCoreIdentifier(erp.invoice_id);
     if (core) erpByCoreId.set(core, erp);
+
+    if (erp.raw) {
+      const ordId = String(erp.raw['order_id'] || erp.raw['order_reference'] || erp.raw['order_no'] || erp.raw['orderid'] || '').trim();
+      if (ordId) {
+        erpByInvoiceId.set(ordId, erp);
+        const ordCore = extractCoreIdentifier(ordId);
+        if (ordCore) erpByCoreId.set(ordCore, erp);
+      }
+    }
   }
 
   for (const pay of paymentRecords) {
@@ -47,8 +56,10 @@ export function buildReconciliationIndexes(
 
     // Index by primary invoice_id
     const existingByInv = paymentsByInvoiceId.get(pay.invoice_id) || [];
-    existingByInv.push(pay);
-    paymentsByInvoiceId.set(pay.invoice_id, existingByInv);
+    if (!existingByInv.includes(pay)) {
+      existingByInv.push(pay);
+      paymentsByInvoiceId.set(pay.invoice_id, existingByInv);
+    }
 
     // Also index payment_id as invoice_id if different
     if (pay.payment_id !== pay.invoice_id) {
@@ -56,6 +67,26 @@ export function buildReconciliationIndexes(
       if (!existingByPay.includes(pay)) {
         existingByPay.push(pay);
         paymentsByInvoiceId.set(pay.payment_id, existingByPay);
+      }
+    }
+
+    // Index order_reference from raw
+    if (pay.raw) {
+      const ordRef = String(pay.raw['order_reference'] || pay.raw['order_ref'] || pay.raw['order_id'] || pay.raw['order_no'] || pay.raw['orderid'] || '').trim();
+      if (ordRef) {
+        const existing = paymentsByInvoiceId.get(ordRef) || [];
+        if (!existing.includes(pay)) {
+          existing.push(pay);
+          paymentsByInvoiceId.set(ordRef, existing);
+        }
+        const ordCore = extractCoreIdentifier(ordRef);
+        if (ordCore) {
+          const existingCore = paymentsByCoreId.get(ordCore) || [];
+          if (!existingCore.includes(pay)) {
+            existingCore.push(pay);
+            paymentsByCoreId.set(ordCore, existingCore);
+          }
+        }
       }
     }
 
@@ -98,8 +129,10 @@ export function buildReconciliationIndexes(
 
     // Index by payment_id
     const existingByPay = bankByPaymentId.get(bank.payment_id) || [];
-    existingByPay.push(bank);
-    bankByPaymentId.set(bank.payment_id, existingByPay);
+    if (!existingByPay.includes(bank)) {
+      existingByPay.push(bank);
+      bankByPaymentId.set(bank.payment_id, existingByPay);
+    }
 
     // Also index settlement_id as payment_id if different
     if (bank.settlement_id !== bank.payment_id) {
@@ -107,6 +140,26 @@ export function buildReconciliationIndexes(
       if (!existingBySet.includes(bank)) {
         existingBySet.push(bank);
         bankByPaymentId.set(bank.settlement_id, existingBySet);
+      }
+    }
+
+    // Index reference_id from raw bank record
+    if (bank.raw) {
+      const refId = String(bank.raw['reference_id'] || bank.raw['ref_id'] || bank.raw['reference_no'] || bank.raw['ref_no'] || bank.raw['reference'] || bank.raw['gateway_txn_id'] || bank.raw['gateway_reference'] || '').trim();
+      if (refId) {
+        const existing = bankByPaymentId.get(refId) || [];
+        if (!existing.includes(bank)) {
+          existing.push(bank);
+          bankByPaymentId.set(refId, existing);
+        }
+        const refCore = extractCoreIdentifier(refId);
+        if (refCore) {
+          const existingCore = bankByCoreId.get(refCore) || [];
+          if (!existingCore.includes(bank)) {
+            existingCore.push(bank);
+            bankByCoreId.set(refCore, existingCore);
+          }
+        }
       }
     }
 
