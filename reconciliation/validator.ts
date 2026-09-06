@@ -86,6 +86,9 @@ export function validateBankRecords(rawRows: Record<string, any>[]): { valid: Ba
     if (!row.payment_id) {
       row.payment_id = row.settlement_id;
     }
+    if (row.bank_amount !== undefined && row.bank_amount !== null && String(row.bank_amount).trim() !== '') {
+      row.amount = row.bank_amount;
+    }
     const res = bankSchema.safeParse(row);
     if (res.success) {
       valid.push({ ...res.data, raw: row });

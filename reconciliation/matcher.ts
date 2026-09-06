@@ -18,8 +18,8 @@ export function matchAndClassifyTransactions(
   indexes: ReconciliationIndexes,
   options: ReconciliationToleranceOptions = {}
 ): ReconciledTransactionResult[] {
-  const dateToleranceDays = options.dateToleranceDays ?? 2;
   const amountTolerance = options.amountTolerance ?? 0.01;
+  const dateToleranceDays = options.dateToleranceDays ?? 3;
 
   const results: ReconciledTransactionResult[] = [];
   const processedPayIds = new Set<string>();
@@ -58,9 +58,13 @@ export function matchAndClassifyTransactions(
       const key = `${erp.customer_id}_${roundedAmt}`;
       const custPays = indexes.paymentsByCustomerAndAmount.get(key);
       if (custPays && custPays.length > 0) {
-        const available = custPays.filter(p => !processedPayIds.has(p.payment_id));
+        const available = custPays.filter(p => {
+          if (processedPayIds.has(p.payment_id)) return false;
+          if (p.payment_id.startsWith('GW_ONLY_') || p.payment_id.startsWith('GW-ONLY-') || p.payment_id.startsWith('PAY-ROW-')) return false;
+          return true;
+        });
         const dateMatched = available.filter(
-          p => calculateDateDiffDays(erp.invoice_date, p.payment_date) <= dateToleranceDays + 2
+          p => calculateDateDiffDays(erp.invoice_date, p.payment_date) <= dateToleranceDays
         );
         if (dateMatched.length > 0) {
           return { payments: [dateMatched[0]], method: 'LEVEL_3_AMOUNT_COMPARISON' };
@@ -72,9 +76,13 @@ export function matchAndClassifyTransactions(
     const roundedAmt = Math.round(erp.amount * 100) / 100;
     const sameAmountPays = indexes.paymentsByAmount.get(roundedAmt);
     if (sameAmountPays && sameAmountPays.length > 0) {
-      const available = sameAmountPays.filter(p => !processedPayIds.has(p.payment_id));
+      const available = sameAmountPays.filter(p => {
+        if (processedPayIds.has(p.payment_id)) return false;
+        if (p.payment_id.startsWith('GW_ONLY_') || p.payment_id.startsWith('GW-ONLY-') || p.payment_id.startsWith('PAY-ROW-')) return false;
+        return true;
+      });
       const dateMatched = available.filter(
-        p => calculateDateDiffDays(erp.invoice_date, p.payment_date) <= dateToleranceDays + 2
+        p => calculateDateDiffDays(erp.invoice_date, p.payment_date) <= dateToleranceDays
       );
       if (dateMatched.length === 1) {
         return { payments: [dateMatched[0]], method: 'LEVEL_4_DATE_TOLERANCE' };
@@ -120,9 +128,13 @@ export function matchAndClassifyTransactions(
       const key = `${erp.customer_id}_${roundedAmt}`;
       const custBanks = indexes.bankByCustomerAndAmount.get(key);
       if (custBanks && custBanks.length > 0) {
-        const available = custBanks.filter(b => !processedBankIds.has(b.settlement_id));
+        const available = custBanks.filter(b => {
+          if (processedBankIds.has(b.settlement_id)) return false;
+          if (b.settlement_id.startsWith('BANK_ONLY_') || b.settlement_id.startsWith('BANK-ONLY-') || b.settlement_id.startsWith('BNK-ROW-')) return false;
+          return true;
+        });
         const dateMatched = available.filter(
-          b => calculateDateDiffDays(erp.invoice_date, b.settlement_date) <= dateToleranceDays + 3
+          b => calculateDateDiffDays(erp.invoice_date, b.settlement_date) <= dateToleranceDays
         );
         if (dateMatched.length > 0) {
           return { banks: [dateMatched[0]], method: 'LEVEL_3_AMOUNT_COMPARISON' };
@@ -134,9 +146,13 @@ export function matchAndClassifyTransactions(
     const roundedAmt = Math.round(erp.amount * 100) / 100;
     const sameAmountBanks = indexes.bankByAmount.get(roundedAmt);
     if (sameAmountBanks && sameAmountBanks.length > 0) {
-      const available = sameAmountBanks.filter(b => !processedBankIds.has(b.settlement_id));
+      const available = sameAmountBanks.filter(b => {
+        if (processedBankIds.has(b.settlement_id)) return false;
+        if (b.settlement_id.startsWith('BANK_ONLY_') || b.settlement_id.startsWith('BANK-ONLY-') || b.settlement_id.startsWith('BNK-ROW-')) return false;
+        return true;
+      });
       const dateMatched = available.filter(
-        b => calculateDateDiffDays(erp.invoice_date, b.settlement_date) <= dateToleranceDays + 3
+        b => calculateDateDiffDays(erp.invoice_date, b.settlement_date) <= dateToleranceDays
       );
       if (dateMatched.length === 1) {
         return { banks: [dateMatched[0]], method: 'LEVEL_4_DATE_TOLERANCE' };
@@ -204,9 +220,13 @@ export function matchAndClassifyTransactions(
     const netPayAmt = Math.round((pay.amount - pay.fee) * 100) / 100;
     const netBankCandidates = indexes.bankByAmount.get(netPayAmt);
     if (netBankCandidates && netBankCandidates.length > 0) {
-      const available = netBankCandidates.filter(b => !processedBankIds.has(b.settlement_id));
+      const available = netBankCandidates.filter(b => {
+        if (processedBankIds.has(b.settlement_id)) return false;
+        if (b.settlement_id.startsWith('BANK_ONLY_') || b.settlement_id.startsWith('BANK-ONLY-') || b.settlement_id.startsWith('BNK-ROW-')) return false;
+        return true;
+      });
       const dateMatched = available.filter(
-        b => calculateDateDiffDays(pay.payment_date, b.settlement_date) <= dateToleranceDays + 3
+        b => calculateDateDiffDays(pay.payment_date, b.settlement_date) <= dateToleranceDays
       );
       if (dateMatched.length === 1) {
         return { banks: [dateMatched[0]], method: 'LEVEL_3_AMOUNT_COMPARISON' };
@@ -217,9 +237,13 @@ export function matchAndClassifyTransactions(
     if (grossAmt !== netPayAmt) {
       const grossBankCandidates = indexes.bankByAmount.get(grossAmt);
       if (grossBankCandidates && grossBankCandidates.length > 0) {
-        const available = grossBankCandidates.filter(b => !processedBankIds.has(b.settlement_id));
+        const available = grossBankCandidates.filter(b => {
+          if (processedBankIds.has(b.settlement_id)) return false;
+          if (b.settlement_id.startsWith('BANK_ONLY_') || b.settlement_id.startsWith('BANK-ONLY-') || b.settlement_id.startsWith('BNK-ROW-')) return false;
+          return true;
+        });
         const dateMatched = available.filter(
-          b => calculateDateDiffDays(pay.payment_date, b.settlement_date) <= dateToleranceDays + 3
+          b => calculateDateDiffDays(pay.payment_date, b.settlement_date) <= dateToleranceDays
         );
         if (dateMatched.length === 1) {
           return { banks: [dateMatched[0]], method: 'LEVEL_3_AMOUNT_COMPARISON' };
@@ -238,9 +262,61 @@ export function matchAndClassifyTransactions(
     const { payments: linkedPayments, method: payMatchingMethod } = findPaymentsForErp(erp);
 
     if (linkedPayments.length === 0) {
-      // Check for Direct Bank Match (Direct Wire / Deposit / 2-Way Upload)
+      const is3Source = paymentRecords.length > 0;
       const { banks: directBanks, method: directBankMethod } = findBankForErpDirect(erp);
 
+      // In 3-Source Reconciliation (ERP + Gateway + Bank), a missing gateway record is an EXCEPTION
+      if (is3Source) {
+        const bank = directBanks.length > 0 ? directBanks[0] : undefined;
+        if (bank) {
+          processedBankIds.add(bank.settlement_id);
+          if (bank.payment_id) processedPayIds.add(bank.payment_id);
+        }
+
+        results.push({
+          transaction_id: `TXN-${String(txnIndex++).padStart(3, '0')}`,
+          source_record_ids: {
+            invoice_id: invId,
+            settlement_id: bank ? bank.settlement_id : undefined,
+          },
+          status: 'EXCEPTION',
+          exception_type: 'MISSING_PAYMENT_RECORD',
+          erp_amount: erp.amount,
+          payment_amount: 0,
+          bank_amount: bank ? bank.amount : 0,
+          fee_amount: 0,
+          difference: erp.amount,
+          date_difference_days: 0,
+          matching_method: 'LEVEL_5_EXCEPTION_CLASSIFICATION',
+          confidence_score: 0.95,
+          resolution_state: 'OPEN',
+          evidence: {
+            matchedIdentifiers: { invoiceId: invId, settlementId: bank?.settlement_id },
+            checks: {
+              erpToPaymentMatch: false,
+              paymentToBankMatch: false,
+              amountEquals: false,
+              feeEqualsNetDifference: false,
+              dateWithinTolerance: false,
+              isDuplicate: false,
+            },
+            amounts: {
+              erpAmount: erp.amount,
+              paymentAmount: 0,
+              bankAmount: bank ? bank.amount : 0,
+              feeAmount: 0,
+              netBankDifference: erp.amount,
+            },
+            dates: { invoiceDate: erp.invoice_date, settlementDate: bank?.settlement_date },
+            summary: bank
+              ? `Invoice ${invId} (₹${erp.amount.toLocaleString()}) was deposited in bank (${bank.settlement_id}) but missing payment gateway record.`
+              : `Invoice ${invId} (₹${erp.amount.toLocaleString()}) exists in ERP, but no payment gateway or bank settlement record was found.`,
+          },
+        });
+        continue;
+      }
+
+      // Pure 2-Source (ERP + Bank only) Direct Match Handling
       if (directBanks.length === 1) {
         const bank = directBanks[0];
         processedBankIds.add(bank.settlement_id);
@@ -645,7 +721,15 @@ export function matchAndClassifyTransactions(
   // Secondary Loop: Process any genuine Payment records that were not linked to an ERP Invoice
   for (const pay of paymentRecords) {
     if (processedPayIds.has(pay.payment_id)) continue;
-    if (pay.payment_id.startsWith('PAY-ROW-') || pay.amount === 0) continue;
+    if (
+      pay.payment_id.startsWith('PAY-ROW-') ||
+      pay.payment_id.includes('GW_ONLY') ||
+      pay.payment_id.includes('GW-ONLY') ||
+      (pay.invoice_id && (pay.invoice_id.includes('GW_ONLY') || pay.invoice_id.includes('GW-ONLY'))) ||
+      pay.amount === 0
+    ) {
+      continue;
+    }
     processedPayIds.add(pay.payment_id);
 
     // Check if this unbilled payment links to a bank settlement
@@ -750,7 +834,15 @@ export function matchAndClassifyTransactions(
   // Tertiary Loop: Unassigned Bank records not matched to any ERP/Payment
   for (const bank of bankRecords) {
     if (processedBankIds.has(bank.settlement_id)) continue;
-    if (bank.settlement_id.startsWith('BNK-ROW-') || bank.amount === 0) continue;
+    if (
+      bank.settlement_id.startsWith('BNK-ROW-') ||
+      bank.settlement_id.includes('BANK_ONLY') ||
+      bank.settlement_id.includes('BANK-ONLY') ||
+      (bank.payment_id && (bank.payment_id.includes('BANK_ONLY') || bank.payment_id.includes('BANK-ONLY'))) ||
+      bank.amount === 0
+    ) {
+      continue;
+    }
     processedBankIds.add(bank.settlement_id);
 
     results.push({
