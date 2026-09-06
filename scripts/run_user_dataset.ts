@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { reconcileDatasets } from '../reconciliation/reconcile';
 
-const payCsv = `gateway_txn_id,order_reference,merchant_name,transaction_amount,currency,transaction_date,gateway_fee,net_settlement_amount,payment_status
+export const payCsv = `gateway_txn_id,order_reference,merchant_name,transaction_amount,currency,transaction_date,gateway_fee,net_settlement_amount,payment_status
 GTW-900000,ORD-70000,AcmeTechnologies,18500,INR,2026-08-20,277.5,18222.5,SUCCESS
 GTW-900001,ORD-70001,NOVA RETAIL,75000,INR,2026-08-08,1125.0,73875.0,SUCCESS
 GTW-900002,ORD-70002,VERTEX SOLUTIONS,9999,INR,2026-08-07,179.98,9819.02,SUCCESS
@@ -203,7 +203,7 @@ GTW-900197,ORD-70197,FUSION ELECTRONICS,9999,INR,2026-08-08,249.98,9749.02,SUCCE
 GTW-900198,ORD-70198,RAPIDSHIP,1250,INR,2026-08-30,22.5,1227.5,SUCCESS
 GTW-900199,ORD-70199,EVERGREEN ENERGY,9999,INR,2026-08-24,179.98,9819.02,SUCCESS`;
 
-const erpCsv = `invoice_id,order_id,customer_name,invoice_amount,currency,invoice_date,due_date,status
+export const erpCsv = `invoice_id,order_id,customer_name,invoice_amount,currency,invoice_date,due_date,status
 INV-10001,ORD-70000,Acme Technologies,18500,INR,2026-08-20,2026-08-27,PAID
 INV-10002,ORD-70001,Nova Retail,75000,INR,2026-08-08,2026-08-15,PAID
 INV-10003,ORD-70002,Vertex Solutions,9999,INR,2026-08-07,2026-08-14,PAID
@@ -405,7 +405,7 @@ INV-10198,ORD-70197,Fusion Electronics,9999,INR,2026-08-07,2026-08-14,PAID
 INV-10199,ORD-70198,RapidShip,1250,INR,2026-08-30,2026-09-06,PAID
 INV-10200,ORD-70199,Evergreen Energy,9999,INR,2026-08-23,2026-08-30,PAID`;
 
-const bankCsv = `bank_txn_id,utr_number,narration,reference_id,credit_amount,currency,transaction_date,bank_account,transaction_type
+export const bankCsv = `bank_txn_id,utr_number,narration,reference_id,credit_amount,currency,transaction_date,bank_account,transaction_type
 BANK-800000,UTR0820000000,ACME TECHNOLOGIES,GTW-900000,18222.5,INR,2026-08-22,HDFC-REVALTO-001,CREDIT
 BANK-800001,UTR0808000001,Nova Retail,GTW-900001,73875.0,INR,2026-08-11,HDFC-REVALTO-001,CREDIT
 BANK-800002,UTR0807000002,Vertex Solutions,GTW-900002,9819.02,INR,2026-08-09,HDFC-REVALTO-001,CREDIT

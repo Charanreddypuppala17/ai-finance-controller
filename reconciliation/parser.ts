@@ -56,9 +56,20 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
   if (!normalized['amount']) {
     const fallback =
       normalized['amount'] ??
+      normalized['net_settlement_amount'] ??
+      normalized['net_settlement_amt'] ??
+      normalized['net_settlement'] ??
+      normalized['settlement_amount'] ??
+      normalized['settlement_amt'] ??
+      normalized['settled_amount'] ??
+      normalized['settled_amt'] ??
+      normalized['settle_amount'] ??
+      normalized['settle_amt'] ??
+      normalized['settled'] ??
       normalized['transaction_amount'] ??
       normalized['txn_amount'] ??
       normalized['trans_amount'] ??
+      normalized['tx_amount'] ??
       normalized['invoice_amount'] ??
       normalized['inv_amount'] ??
       normalized['invoice_amt'] ??
@@ -68,11 +79,27 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['credit_amount'] ??
       normalized['credit_amt'] ??
       normalized['credit'] ??
+      normalized['cr_amount'] ??
+      normalized['cr_amt'] ??
+      normalized['cr'] ??
       normalized['deposit_amount'] ??
       normalized['deposit_amt'] ??
       normalized['deposit'] ??
-      normalized['settlement_amount'] ??
+      normalized['deposit_inr'] ??
+      normalized['credit_inr'] ??
+      normalized['amount_inr'] ??
+      normalized['inr_amount'] ??
+      normalized['paid_in'] ??
+      normalized['money_in'] ??
+      normalized['inward_amount'] ??
+      normalized['inward'] ??
+      normalized['received_amount'] ??
+      normalized['received_amt'] ??
+      normalized['rcvd_amount'] ??
+      normalized['rcvd_amt'] ??
       normalized['payout_amount'] ??
+      normalized['payout_amt'] ??
+      normalized['payout'] ??
       normalized['total_amount'] ??
       normalized['total_amt'] ??
       normalized['total'] ??
@@ -86,7 +113,35 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['price'] ??
       normalized['val'] ??
       normalized['value'];
-    if (fallback !== undefined) normalized['amount'] = fallback;
+    if (fallback !== undefined) {
+      normalized['amount'] = fallback;
+    } else {
+      // Dynamic fallback for any column containing amount/credit/deposit/settle/payout
+      for (const [k, v] of Object.entries(normalized)) {
+        if (v !== undefined && v !== null && String(v).trim() !== '') {
+          const lowerK = k.toLowerCase();
+          if (
+            (lowerK.includes('amount') ||
+              lowerK.includes('amt') ||
+              lowerK.includes('credit') ||
+              lowerK.includes('deposit') ||
+              lowerK.includes('settle') ||
+              lowerK.includes('payout') ||
+              lowerK.includes('gross') ||
+              lowerK.includes('total') ||
+              lowerK === 'cr' ||
+              lowerK === 'val' ||
+              lowerK === 'value') &&
+            !lowerK.includes('fee') &&
+            !lowerK.includes('tax') &&
+            !lowerK.includes('charge')
+          ) {
+            normalized['amount'] = v;
+            break;
+          }
+        }
+      }
+    }
   }
 
   // 2. ERP mappings
@@ -418,14 +473,33 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
     normalized['credit_amount'] ??
     normalized['credit_amt'] ??
     normalized['credit'] ??
+    normalized['cr_amount'] ??
+    normalized['cr_amt'] ??
+    normalized['cr'] ??
     normalized['deposit_amount'] ??
     normalized['deposit_amt'] ??
     normalized['deposit'] ??
+    normalized['net_settlement_amount'] ??
+    normalized['net_settlement_amt'] ??
+    normalized['net_settlement'] ??
     normalized['settlement_amount'] ??
+    normalized['settlement_amt'] ??
+    normalized['settled_amount'] ??
+    normalized['settled_amt'] ??
+    normalized['settle_amount'] ??
+    normalized['settle_amt'] ??
     normalized['payout_amount'] ??
+    normalized['payout_amt'] ??
+    normalized['payout'] ??
     normalized['net_amount'] ??
     normalized['net_amt'] ??
-    normalized['amount'];
+    normalized['paid_in'] ??
+    normalized['money_in'] ??
+    normalized['inward_amount'] ??
+    normalized['received_amount'] ??
+    normalized['amount'] ??
+    normalized['transaction_amount'] ??
+    normalized['txn_amount'];
   if (bankAmountFallback !== undefined) {
     normalized['bank_amount'] = bankAmountFallback;
   }
