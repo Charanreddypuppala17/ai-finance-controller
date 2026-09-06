@@ -240,6 +240,35 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
     if (fallback !== undefined) normalized['payment_id'] = String(fallback).trim();
   }
 
+  if (!normalized['invoice_id']) {
+    const fallback =
+      normalized['invoice_id'] ??
+      normalized['inv_id'] ??
+      normalized['invoice_no'] ??
+      normalized['invoiceno'] ??
+      normalized['invoice_number'] ??
+      normalized['order_reference'] ??
+      normalized['order_ref'] ??
+      normalized['order_id'] ??
+      normalized['orderid'] ??
+      normalized['order_no'] ??
+      normalized['orderno'] ??
+      normalized['order_number'] ??
+      normalized['order'] ??
+      normalized['bill_no'] ??
+      normalized['bill_id'] ??
+      normalized['reference_id'] ??
+      normalized['ref_id'] ??
+      normalized['reference_no'] ??
+      normalized['ref_no'] ??
+      normalized['reference'] ??
+      normalized['erp_reference'] ??
+      normalized['erp_ref'] ??
+      normalized['doc_no'] ??
+      normalized['voucher_no'];
+    if (fallback !== undefined) normalized['invoice_id'] = String(fallback).trim();
+  }
+
   if (!normalized['payment_date']) {
     const fallback =
       normalized['payment_date'] ??
@@ -291,16 +320,19 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['settlement_no'] ??
       normalized['settlementno'] ??
       normalized['settlement_number'] ??
-      normalized['bank_reference'] ??
-      normalized['bank_ref'] ??
-      normalized['payout_id'] ??
-      normalized['payout_no'] ??
-      normalized['payout_reference'] ??
+      normalized['bank_txn_id'] ??
+      normalized['bank_txnid'] ??
+      normalized['bank_transaction_id'] ??
       normalized['utr_number'] ??
       normalized['utr_no'] ??
       normalized['utr'] ??
       normalized['rrn_no'] ??
       normalized['rrn'] ??
+      normalized['bank_reference'] ??
+      normalized['bank_ref'] ??
+      normalized['payout_id'] ??
+      normalized['payout_no'] ??
+      normalized['payout_reference'] ??
       normalized['journal_id'] ??
       normalized['journal_no'] ??
       normalized['statement_id'] ??
@@ -308,6 +340,8 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['ref_no'] ??
       normalized['reference_no'] ??
       normalized['reference_number'] ??
+      normalized['reference_id'] ??
+      normalized['ref_id'] ??
       normalized['reference'] ??
       normalized['ref'] ??
       normalized['transaction_id'] ??
@@ -323,19 +357,31 @@ export function normalizeRowKeys(row: Record<string, any>): Record<string, any> 
       normalized['payment_id'] ??
       normalized['pay_id'] ??
       normalized['paymentid'] ??
-      normalized['payment_reference'] ??
-      normalized['payment_ref'] ??
+      normalized['reference_id'] ??
+      normalized['ref_id'] ??
+      normalized['reference_no'] ??
+      normalized['ref_no'] ??
+      normalized['reference'] ??
+      normalized['ref'] ??
+      normalized['gateway_txn_id'] ??
+      normalized['gtw_txn_id'] ??
       normalized['gateway_reference'] ??
       normalized['gateway_ref'] ??
+      normalized['payment_reference'] ??
+      normalized['payment_ref'] ??
+      normalized['order_reference'] ??
+      normalized['order_ref'] ??
       normalized['order_id'] ??
       normalized['orderid'] ??
+      normalized['order_no'] ??
       normalized['invoice_id'] ??
       normalized['inv_id'] ??
+      normalized['invoice_no'] ??
+      normalized['bank_reference'] ??
+      normalized['bank_ref'] ??
       normalized['transaction_id'] ??
       normalized['txn_id'] ??
       normalized['txnid'] ??
-      normalized['bank_reference'] ??
-      normalized['bank_ref'] ??
       normalized['narration'] ??
       normalized['description'] ??
       normalized['remarks'] ??
