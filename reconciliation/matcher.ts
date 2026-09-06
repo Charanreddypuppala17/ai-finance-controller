@@ -702,7 +702,11 @@ export function matchAndClassifyTransactions(
     let summaryText = `Exact match across ERP invoice ${invId}, Payment ${pay.payment_id}, and Bank Settlement ${bank.settlement_id}.`;
 
     // Check 1: ERP amount vs Payment amount discrepancy (Customer Underpayment)
-    if (erpVsPayDiff > amountTolerance) {
+    // Support Format A (Gross Pay: pay.amount == erp.amount) & Format B (Net Pay: pay.amount + pay.fee == erp.amount)
+    const isExactErpAmount = erpVsPayDiff <= amountTolerance;
+    const isNetPlusFeeErpAmount = Math.abs(erp.amount - (pay.amount + pay.fee)) <= amountTolerance;
+
+    if (!isExactErpAmount && !isNetPlusFeeErpAmount) {
       status = 'EXCEPTION';
       exceptionType = 'AMOUNT_MISMATCH';
       matchingMethod = 'LEVEL_3_AMOUNT_COMPARISON';
@@ -716,7 +720,7 @@ export function matchAndClassifyTransactions(
       summaryText = `Bank settlement occurred ${dateDiffDays} days after payment (exceeding ${dateToleranceDays}-day tolerance window).`;
     }
     // Check 3: Fee vs Bank amount discrepancy
-    else if (bankDiff > amountTolerance) {
+    else if (isExactErpAmount && bankDiff > amountTolerance) {
       const isFeeMatch = Math.abs(pay.fee - bankDiff) <= amountTolerance;
       if (isFeeMatch && pay.fee > 0) {
         status = 'EXCEPTION';
@@ -729,6 +733,11 @@ export function matchAndClassifyTransactions(
         matchingMethod = 'LEVEL_3_AMOUNT_COMPARISON';
         summaryText = `Bank settlement amount (₹${bank.amount.toLocaleString()}) differs from payment amount (₹${pay.amount.toLocaleString()}) by ₹${bankDiff.toFixed(2)} (unexplained by fee of ₹${pay.fee.toLocaleString()}).`;
       }
+    } else if (isNetPlusFeeErpAmount && bankDiff > amountTolerance) {
+      status = 'EXCEPTION';
+      exceptionType = 'AMOUNT_MISMATCH';
+      matchingMethod = 'LEVEL_3_AMOUNT_COMPARISON';
+      summaryText = `Bank settlement amount (₹${bank.amount.toLocaleString()}) differs from net payment amount (₹${pay.amount.toLocaleString()}) by ₹${bankDiff.toFixed(2)}.`;
     }
 
     results.push({

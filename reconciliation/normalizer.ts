@@ -65,7 +65,13 @@ export function extractCoreIdentifier(id?: string): string {
   let prev = '';
   while (clean !== prev) {
     prev = clean;
-    clean = clean.replace(/^(ERP|GW|BNK|BANK|SET|INV|PAY|TXN|ORDER|ORD|BILL|DOC|VOUCHER|CHALLAN|CR|DR|DEP|TR|RF)[-_:\s]*/i, '');
+    clean = clean.replace(/^(ERP|GW|BNK|BANK|SET|INV|PAY|TXN|ORDER|ORD|BILL|DOC|VOUCHER|CHALLAN|CR|DR|DEP|TR|RF|REF|GWREF|BANKREF|ERPREF|ORDREF|SETTLE|UTR|RRN|REC|RECEIPT|PMT|TRANS|TX)[-_:\s]*/i, '');
+  }
+
+  // If there are still leading alphabetical characters followed by digits (e.g. GWREF0001 -> 0001)
+  const alphaNumMatch = clean.match(/^[A-Z]+[-_:\s]*(\d+)$/i);
+  if (alphaNumMatch && alphaNumMatch[1]) {
+    return alphaNumMatch[1];
   }
 
   return clean || String(id).trim().toUpperCase();
